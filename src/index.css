@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .blue{
+    --primary:;
+    --secondary:;
+    --ternary:;
+    --background:;
+    --text:;
+} */
+
+.blue{
+    
+    --secondary:59, 130, 246;
+    --background:255, 255, 255;
+    --backgrounds:226, 232, 240;
+    --text:17, 24, 39;
+}
+.purple{
+    
+    --secondary:132, 108, 249;
+    --background:255, 255, 255;
+    --text:17, 24, 39;
+}
+.dark{
+    
+    --secondary:59, 136, 242;
+    --background:13, 17, 28, 0.817;
+    --backgrounds:17, 24, 39;
+    --text:255, 255, 255;
+}
+.light{
+    --secondary:159, 136, 242;
+    --background:255, 255, 255;
+    --backgrounds:226, 232, 240;
+    --text:17, 24, 39;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-scrool::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+.no-scrool{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
