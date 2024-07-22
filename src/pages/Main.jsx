@@ -62,7 +62,7 @@ export const Main = () => {
         <div className="flex flex-col min-h-screen h-full  no-scrool justify-center items-center bg-backgrounds text-text w-full">
             <Nav  home={true}/>
             <SideBar top='Home' />
-            <div className="fixed right-4 z-20 bottom-2">
+            <div className="fixed right-4 z-30 bottom-2">
                 <div className="h-20">
                     <WishList size={14} sub={true} />
                 </div>
