@@ -25,15 +25,15 @@ function App() {
       <Route path='/auth/register/vendor' element={<VendorSignup/>} />
       <Route path='/auth/login' element={<Signin/>} />
       <Route path='/unauthorized' element={<Unauthorized />}/>
-      <Route path='/auth/login/vendor' element={<Signin/>} />
       <Route element={<RequireAuth allowedRoles={['Customer','Admin' ,'Vendor','Staff']} />}>
       <Route path='/your-profile' element={<Profile />}/>
       </Route>
       <Route path='/' element={<Main />} /> 
       {/* </Route> */}
-      <Route element={<RequireAuth allowedRoles={['Vendor','Admin','Staff']} />}>
+      <Route element={<RequireAuth allowedRoles={['Vendor','Admin']} />}>
       <Route path='/vendor/info' element={<GetInfo/>} />
       <Route path='/vendor' element={<VendorDashboard/>} />
+      <Route path='/auth/login/vendor' element={<Signin/>} />
       <Route path='/your-listings' element={<Listing/>}/>
       </Route>
       <Route element={<RequireAuth allowedRoles={['Admin','Staff']} />}>

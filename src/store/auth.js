@@ -18,6 +18,7 @@ export const authCheck = selector({
                 }
             });
             const data = await res.json();
+            console.log(data);
             if (data.success) {
                 console.log(data);
                 return data;

@@ -21,6 +21,7 @@ export const VendorSignup=()=>{
 
     useEffect(() => {
         document.body.classList = theme;
+        console.log(localStorage.getItem('token'));
       }, []);
     
       useEffect(() => {
@@ -64,32 +65,41 @@ export const VendorSignup=()=>{
         try {
             console.log(userName, email, phone, password,address);
       
-            const body = { userName, email, phone,address,role:'Vendor'};
+            const body = { userName, email, phone,password,address,role:'Vendor'};
             console.log(body);
             console.log(localStorage.getItem('token'))
             const req = await fetch('http://localhost:3000/user/signup', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization':localStorage.getItem('token')
+                'authorization':localStorage.getItem('token')
               },
               body: JSON.stringify(body)
             });
       
             const data = await req.json();
             console.log(data);
-      
-            if (data.error) {
-              setError(data.error);
-            } else {
+            if(data.token){
               setStatus('Registered');
-              // localStorage.setItem('token', data.token);
+              console.log('registered');
+              console.log(data.token);
+              localStorage.setItem('token', data.token);
               nav('/vendor' , {replace:true});
+            }
+            else if (data.error) {
+              setError(data.error);
+              console.log(data.error)
+            } else{
+              console.log(data.token);
             }
           } catch (e) {
             console.log(e);
           }
 
+        }
+        else{
+          setError('Terms & Conditions')
+          console.log('Terms & Conditions')
         }
     }
     return(

@@ -221,7 +221,7 @@ export const Form = ({ butText, type, handleSubmit }) => {
                             className={`border-gray-300 ${theme === 'dark' ? 'text-background' : 'text-text'} p-2 border rounded-lg block w-full`}
                         />
                     </div>
-                    {/* <div className='py-2'>
+                    <div className='py-2'>
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
@@ -230,7 +230,7 @@ export const Form = ({ butText, type, handleSubmit }) => {
                             onChange={(e) => setPassword(e.target.value)}
                             className={`border-gray-300 ${theme === 'dark' ? 'text-background' : 'text-text'} p-2 border rounded-lg block w-full`}
                         />
-                    </div> */}
+                    </div>
                     <div className='mb-6'>
                         <input
                             type="checkbox"

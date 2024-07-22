@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Form } from "../components/Form";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { eMail, pAssword, pathh, pHone, rolee, term, themeState, username } from "../store/atoms";
+import { Cart } from "../assets/Svg";
 
 export const Signup = () => {
     const nav = useNavigate();
@@ -112,7 +113,7 @@ export const Signup = () => {
                 </div>
                 <div className='w-full h-full flex justify-center items-center my-auto'>
                     <div className='lg:w-1/2 w-[300px]'>
-                        <div className='py-5 cursor-pointer text-primary' onClick={() => nav('/dashboard')}> logo </div>
+                        <div className='py-3 flex justify-center cursor-pointer text-primary text-4xl font-serif' onClick={() => nav('/dashboard')}> CoreCart <Cart/> </div>
                         <div>
                             <h1 className='py-4 font-bold text-2xl'>Hey, Hello 👋</h1>
                             <p className='text-text/60'>{role==='Vendor'?'Enter Vendor Details:':role=='Admin'?'Enter Admin Details:':'Create a new user account:'}</p>

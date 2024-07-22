@@ -26,10 +26,10 @@ export const Dashboard = () => {
     console.log(data);
 
     return (
-        <div className="flex justify-center items-center bg-backgrounds text-text w-screen h-full">
+        <div className="flex justify-center items-center bg-backgrounds text-text w-full min-h-screen h-full">
             <Nav />
             <SideBar top='Dashboard' />
-            <div className="w-full h-full pt-20 pb-4 pr-3 pl-14 grid grid-cols-3 gap-2">
+            <div className="w-full h-full pt-20 pb-4 pr-6 pl-16 grid grid-cols-3 gap-2">
                 <div className="bg-background/50 shadow-md  shadow-text/50 rounded-lg p-2">
                     <div className="text-xl flex flex-col h-full w-full font-bold text-text/70">
                         Total Orders:

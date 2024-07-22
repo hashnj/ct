@@ -6,6 +6,7 @@ import { Form } from "../components/Form";
 import { eMail, pAssword, pHone, rol, username } from "../store/atoms";
 import { useRecoilValue } from "recoil";
 import { auth } from "../store/auth";
+import { Cart } from "../assets/Svg";
 
 export const Signin = () => {
   const nav = useNavigate();
@@ -56,13 +57,14 @@ export const Signin = () => {
 
   useEffect(() => {
     if (error) {
+      setStatus('');
       toast.error(error, {
         position: "top-center",
         autoClose: 1000,
         closeButton: false,
         closeOnClick: true,
         hideProgressBar: true,
-        className: "bg-text/40 w-1/2 mx-auto",
+        className: "bg-text/40 text-text w-1/2 mx-auto",
         stacked: true,
         newestOnTop: true
       });
@@ -74,7 +76,7 @@ export const Signin = () => {
         closeButton: false,
         closeOnClick: true,
         hideProgressBar: true,
-        className: "bg-text/40 w-1/2 mx-auto"
+        className: "bg-text/40 text-text w-1/2 mx-auto"
       });
     }
   }, [error, statuss]);
@@ -92,25 +94,31 @@ export const Signin = () => {
 
   const handleSubmit = async () => {
     const b=validate(email);
-    // console.log(b);
     try {
       console.log(userName, email, phone, password, send);
 
       const body = { password: password };
 
       if (send === 'email') {
-        setStatus('Email Login')
+        if(!error){
+        setStatus('Trying Email Login')
+        }
         body.email = email;
         console.log(body.email);
       } else if (send === 'userName') {
+        if(!error){
         setStatus('Username Login')
+        }
         body.userName = userName;
         console.log(body.userName);
       } else if(send === 'phone'){
+        if(!error){
         setStatus('Phone number login')
+        }
         body.phone = phone;
       }
       console.log(body);
+      try{
       const req = await fetch('http://localhost:3000/user/login', {
         method: 'POST',
         headers: {
@@ -130,7 +138,12 @@ export const Signin = () => {
         localStorage.setItem('token', data.token);
         console.log(from);
         nav(from, { replace:true });
-
+      }else{
+        setError('Internal Setver Error!!! please try again');
+      }}
+      catch(e){
+        console.log(e);
+        setError(e);
       }
     } catch (e) {
       console.log(e);
@@ -157,10 +170,10 @@ export const Signin = () => {
       </div>
         <div className='w-full h-full flex justify-center items-center my-auto'>
           <div className='w-1/2 '>
-            <div className='py-5 cursor-pointer text-primary' onClick={() => {
+            <div className='py-5 flex justify-center cursor-pointer text-primary text-4xl font-serif' onClick={() => {
               nav('/dashboard')
             }} >
-              logo
+              CoreCart <Cart/>
             </div>
             <div>
               <h1 className='pt-4 font-bold text-2xl'>Hey, Hello 👋</h1>

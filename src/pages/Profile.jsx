@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { rol, themeState } from "../store/atoms";
 import { useRecoilValue } from "recoil";
 import { authCheck } from "../store/auth";
+import { FaArrowLeft } from "react-icons/fa";
 
 export const Profile=()=>{
     const theme=useRecoilValue(themeState);
@@ -16,7 +17,9 @@ export const Profile=()=>{
     const [npassword,setNpassword]=useState('');
     const [address,setAddress]=useState(info.info.addresses);
     useEffect(()=>{
+      if(theme){
         document.body.classList=theme
+      }
     },[theme])
     return(
                <div className="w-screen flex justify-center items-center h-screen bg-backgrounds text-text">
@@ -24,11 +27,12 @@ export const Profile=()=>{
                 <div className="m-5 flex flex-col h-full">
                     <div className="text-4xl h-1/5">
                     <div className="font-serif p-2 text-primary">Your Profile</div>
-                    <div className="mt-4 rounded-md font-thin text-text/50 flex justify-between ml-2 text-lg">
+                    <div className="text-lg font-extralight ml-3">{`${info.role}`}</div>
+                    <div className="rounded-md font-thin text-text/50 flex justify-between ml-2 text-lg">
                         {info.role=='Customer'?<button className="bg-backgrounds p-2" onClick={()=>{
                             nav('/auth/vendor/info')
                         }}>Become a Vendor</button>:<div></div>}
-                        {edit?<div></div>:<button className="mr-4 bg-backgrounds" onClick={()=>{setEdit(true)}}>Edit Profile</button>}
+                        {edit?<div></div>:<button className="mr-4 hover:text-primary active:text-text bg-backgrounds" onClick={()=>{setEdit(true)}}>Edit Profile</button>}
                     </div>
                     </div> 
                     <hr className="bg-text/10  h-px border-none"/>
@@ -112,33 +116,35 @@ export const Profile=()=>{
           </div>
       </div>):(<div className="h-3/5 overflow-y-scroll overflow-x-hidden no-scrool">
                         <div className="m-2 flex w-full flex-col">
-                        <div className="flex py-2 justify-between px-5 pr-10 w-full text-3xl text-text/70">
-                                <div>Access:</div>
-                                <div>{`${info.role}`}</div>
+                        <div className="flex py-2 justify-between  px-5 pr-10 w-full text-3xl text-text/70">
+                                
+                                
+                            </div>
+                            <div className="flex py-2 justify-between items-center px-5 pr-10 w-full text-3xl text-text/70">
+                                <div className="font-semibold">Username:</div>
+                                <div>{info.info.userName || info.info.userr.userName  }</div>
                             </div>
                             <div className="flex py-2 justify-between px-5 pr-10 w-full text-3xl text-text/70">
-                                <div>UserName:</div>
-                                <div>{info.info.userName}</div>
+                                <div className="font-semibold">Email:</div>
+                                <div>{info.info.email || info.info.userr.email}</div>
                             </div>
                             <div className="flex py-2 justify-between px-5 pr-10 w-full text-3xl text-text/70">
-                                <div>Email:</div>
-                                <div>{info.info.email}</div>
+                                <div className="font-semibold">Phone No:</div>
+                                <div>{info.info.phone || info.info.userr.phone}</div>
                             </div>
                             <div className="flex py-2 justify-between px-5 pr-10 w-full text-3xl text-text/70">
-                                <div>Phone No:</div>
-                                <div>{info.info.phone}</div>
-                            </div>
-                            <div className="flex py-2 justify-between px-5 pr-10 w-full text-3xl text-text/70">
-                                <div>Addresses:</div>
-                                <div>{info.info.addresses.length==0?'No Data':info.info.addresses}</div>
+                                <div className="font-semibold">Addresses:</div>
+                                <div>{info.info.addresses?(info.info.addresses.length==0?'No Data':info.info.addresses) : info.info.userr.addresses.length==0?'No data':'h' }</div>
                             </div>
                             
                             
                         </div>
                     </div>)} 
-                    <div className="h-1/5 flex flex-col justify-center text-primary/50 font-thin">
-                    CoreCart
-                    <button onClick={()=>nav(-1)} className="font-thin text-sm text-text flex ">{`<- `}<div className="underline"> back</div></button>
+                    <div className="h-1/6 pt-5 flex justify-center text-primary/80 px-6">
+                    <div className="w-full ">
+                    <button title="Back" onClick={()=>nav(-1)} className="text-2xl flex justify-center py-1 rounded-lg hover:bg-primary/70 text-text/70 bg-primary w-12 "><FaArrowLeft/></button>
+                    </div>
+                    <div title="Trademark LOL" className="mb-2 font-serif cursor-pointer h-8 text-xl flex justify-center items-center">CoreCart</div>
 
                     </div>
                     
