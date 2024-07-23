@@ -8,6 +8,7 @@ const AddProduct = () => {
         category: '',
         name: '',
         description: '',
+        mrp:'',
         price: '',
         stock: '',
         image: ''
@@ -87,7 +88,7 @@ const AddProduct = () => {
             <input
                 className="w-full bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
                 type="number"
-                name="mpr"
+                name="mrp"
                 placeholder="MRP"
                 value={product.mrp}
                 onChange={handleChange}
@@ -96,7 +97,7 @@ const AddProduct = () => {
             <input
                 className="w-full bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
                 type="number"
-                name="sell_price"
+                name="price"
                 placeholder="Your Price"
                 value={product.price}
                 onChange={handleChange}

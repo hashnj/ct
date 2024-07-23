@@ -74,53 +74,46 @@ export const Main = () => {
                 <div className="w-full mb-2 -z-3 pt-20  mt-4 sm:mt-0 h-auto">
                     <ImageScroller images={images} />
                 </div>
-                {/* <div className="py-6">
-                    <hr />
-                </div> */}
-                <div className={`w-full min-h-screen transition-all duration-300 flex h-full ${active?'':"px-5 sm:px-8 md:px-10 lg:px-20"}`}>
-                    
-                    
-                    {/* <div className={`w-2/5 md:w-1/4 rounded-md ml-4 mr-2 ${active?'mr-1':''}  bg-background ${filter?'h-10':'h-full'} sticky top-20 transition-all duration-300`} onClick={()=>{setFilter(s=>!s)}}> */}
-                    <div className={`w-2/5 md:w-1/4 rounded-md ml-3 transition-all duration-300 my-1 mr-2 ${filter?'absolute w-2/5 md:w-1/5':''} ${active?'mr-1':''}`}>
-                    <FilterComponent/>
-                    </div>
-                    {/* </div> */}
-                    
-
-                <div className={`grid bg-background transition-all  ${filter?'mt-20 w-full grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5':'grid-cols-1  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'} px-1 rounded-md sm:px-2 md:px-4 duration-300 mx-auto float-right min-h-screen  h-full ${active?'grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'  :   ' 2xl:grid-cols-4'}`}>
-                    {productData.map((product, index) => (
-                        <ProductCard
-                            key={index}
-                            image={product.images} 
-                            title={product.name} 
-                            description={product.description}
-                            vendor={product.vendor_id.business_name} 
-                            price={product.price} 
-                            mrp={product.mrp}
-                        />
-                    ))}
-                    {/* {productData.map((product, index) => (
-                        <ProductCard
-                            key={index}
-                            image={product.images} 
-                            title={product.name} 
-                            description={product.description}
-                            vendor={product.vendor_id.business_name} 
-                            price={product.price} 
-                        />
-                    ))}
-                    {productData.map((product, index) => (
-                        <ProductCard
-                            key={index}
-                            image={product.images} 
-                            title={product.name} 
-                            description={product.description}
-                            vendor={product.vendor_id.business_name} 
-                            price={product.price} 
-                        />
-                    ))} */}
-                </div>
                 
+                <div className={`w-full min-h-screen transition-all duration-300 flex h-full ${active?'':"px-5 sm:px-8 md:px-10 lg:px-20"}`}>
+                    <div className={`w-2/5 md:w-1/4 rounded-md ml-3 transition-all duration-300 my-1 mr-2 ${filter?'absolute w-2/5 md:w-1/5':''} ${active?'mr-1':''}`}>
+                        <FilterComponent/>
+                    </div>     
+
+                    <div className={`grid bg-background transition-all  ${filter?'mt-20 w-full grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5':'grid-cols-1  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'} px-1 rounded-md sm:px-2 md:px-4 duration-300 mx-auto float-right min-h-screen  h-full ${active?'grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'  :   ' 2xl:grid-cols-4'}`}>
+                        {productData.map((product, index) => (
+                            <ProductCard
+                                key={index}
+                                image={product.images} 
+                                title={product.name} 
+                                description={product.description}
+                                vendor={product.vendor_id?.business_name ||"Admin"} 
+                                price={product.price} 
+                                mrp={product.mrp}
+                            />
+                        ))}
+                        {productData.map((product, index) => (
+                            <ProductCard
+                                key={index}
+                                image={product.images} 
+                                title={product.name} 
+                                description={product.description}
+                                vendor={product.vendor_id?.business_name ||"Admin"} 
+                                price={product.price} 
+                                mrp={product.mrp}
+                            />
+                        ))}
+                        {productData.map((product, index) => (
+                            <ProductCard
+                                key={index}
+                                image={product.images} 
+                                title={product.name} 
+                                description={product.description}
+                                vendor={product.vendor_id?.business_name ||"Admin"} 
+                                price={product.price} 
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
             <div>

@@ -1,10 +1,11 @@
-import { useRecoilState, useRecoilValueLoadable } from "recoil"
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil"
 import { products } from "../store/products"
 import { useEffect, useState } from "react";
 import { Edit } from "../assets/Svg";
 import { edit } from "../store/listing";
 import { EditV } from "../store/edit";
 import { authCheck } from "../store/auth";
+import { sideBar } from "../store/dash";
 
 export const PnL=()=>{
     const data =useRecoilValueLoadable(products);
@@ -15,7 +16,7 @@ export const PnL=()=>{
     const [productDat, setProductDat] = useState([]);
     const [ed,setEd]=useRecoilState(edit);
     const [edt,setEdt]=useRecoilState(EditV);
-
+    const active = useRecoilValue(sideBar);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -74,7 +75,7 @@ export const PnL=()=>{
         
         <div className="text-xl text-text font-semibold">
                 <div className="mt-5">
-                    <table className="w-full text-sm md:text-lg lg:text-xl">
+                    <table className={`w-full ${active?'text-xs md:text-lg lg:text-xl':'text-sm md:text-base lg:text-xl'}`}>
                         <thead>
                         <tr className="border-b border-text/10 p-1">
                             <th className="border-r border-text/10">S.no.</th>
@@ -93,9 +94,10 @@ export const PnL=()=>{
                         <tbody className="border-b border-text/10">
                         {productDat.map((d,i)=>
                         <tr key={i}>
+                        {console.log(d)}
                             <td className="border-r border-text/10 text-center">{i+1}.</td>
                             <td className="border-r border-text/10 pl-2">{d.name}</td>
-                            <td className="border-r border-text/10 pl-2">{d.vendor_id.business_name}</td>
+                            <td className="border-r border-text/10 pl-2">{d.vendor_id?.business_name || "Admin"}</td>
                             <td className="border-r border-text/10 pl-2">{d.category_id.name}</td>
                             <td className="border-r border-text/10 pl-2">{d.category_id.name}</td>
                             <td className="border-r border-text/10 pl-2">{d.description} </td> 

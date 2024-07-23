@@ -19,7 +19,7 @@ export const pHone = atom({
 
 export const themeState = atom({
     key:'theme',
-    default:localStorage.getItem('theme')
+    default:localStorage?.getItem('theme')||(window.matchMedia("(prefers-color-scheme: dark)")?'dark':'light')
 })
 export const aDress = atom({
     key:'address',

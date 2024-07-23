@@ -59,6 +59,7 @@ export const EditItem = () => {
         e.preventDefault();
         if (itemType === 'product') {
             console.log('Product edited: ', { ...item, ...eitem });
+            try{
             const req=await fetch("http://localhost:3000/products/",{
                 method:'put',
             headers:{
@@ -67,8 +68,28 @@ export const EditItem = () => {
             },
             body:JSON.stringify({item})
         })
-        } else {
+        const data=await req.json();
+        console.log(data);
+    }
+    catch(e){
+        console.log(e);
+    }
+    } else {
             console.log('Category edited: ', { ...item, ...itemC });
+            try{
+            const req= await fetch('http://localhost:3000/categories',{
+                method:'put',
+                headers:{
+                    'Content-type':'application/json',
+                    'authorization':localStorage.getItem('token')
+                },
+                body:JSON.stringify({item,itemC})
+            })
+            const data=await req.json();
+            console.log(data);}
+            catch(e){
+                console.log(e);
+            }
         }
     };
 

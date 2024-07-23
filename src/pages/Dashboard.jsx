@@ -101,7 +101,11 @@ export const Dashboard = () => {
                             </div>
                             <div className="w-full flex flex-col justify-center items-center h-full">
                                 <div className="text-5xl py-10 text-primary/90">{data.categories.length || 0}</div>
-                                <div>Total Categories</div>
+                                <div>Categories</div>
+                            </div>
+                            <div className="w-full flex flex-col justify-center items-center h-full">
+                                <div className="text-5xl py-10 text-primary/90">{data.subCategories.length || 0}</div>
+                                <div>Sub-Categories</div>
                             </div>
                         </div>
                     </div>

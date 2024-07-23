@@ -7,21 +7,23 @@ import { authCheck } from "../store/auth";
 import { FaRegSun, FaSearch, FaSun } from "react-icons/fa";
 import { Bell, FillSun, Gear, Moon, Out, Profile, Sun } from "../assets/Svg";
 import { Search } from "./Search";
+import { themeState } from "../store/atoms";
 
 export const Nav = ({home}) => {
-  const [dark, setDark] = useState(false);
+  // const [dark, setDark] = useState(false);
   const [sidebar, setSidebar] = useRecoilState(sideBar);
   const nav = useNavigate();
   const info = useRecoilValue(authCheck);
+  const [theme,setTheme]=useRecoilState(themeState);
 
   useEffect(() => {
-    const theme = localStorage.getItem('theme');
     document.body.classList = theme;
-    setDark(theme === 'dark');
-  }, [dark]);
+  }, []);
+
+
 
   return (
-    <div className={`flex justify-between z-20 bg-background w-full py-3 px-4 border-b fixed top-0 left-0 ${dark ? 'border-gray-700' : 'border-gray-300'}`}>
+    <div className={`flex justify-between z-20 bg-background w-full py-3 px-4 border-b fixed top-0 left-0 ${theme=='dark' ? 'border-gray-700' : 'border-gray-300'}`}>
       <div className="flex items-center">
         <div className="text-4xl font-serif text-primary font-semibold cursor-pointer" onClick={()=>nav('/')}>CoreCart</div>
       </div>
@@ -52,7 +54,8 @@ export const Nav = ({home}) => {
                       className={`group flex items-center w-full px-2 py-2 text-sm rounded-md ${active ? 'bg-primary/20' : ''}`}
                       onClick={() => {
                         localStorage.setItem('theme', 'light');
-                        setDark(false);
+                        setTheme(localStorage.getItem('theme'))
+                        
                       }}>
                       <Sun />
                       Light
@@ -65,7 +68,7 @@ export const Nav = ({home}) => {
                       className={`group flex items-center w-full px-2 py-2 text-sm rounded-md ${active ? 'bg-primary/20' : ''}`}
                       onClick={() => {
                         localStorage.setItem('theme', 'dark');
-                        setDark(true);
+                        setTheme(localStorage.getItem('theme'))
                       }}>
                       <Moon/>
                       Dark
@@ -132,7 +135,8 @@ export const Nav = ({home}) => {
               className={`group flex items-center w-full px-2 py-2 text-sm rounded-md ${active ? 'bg-primary/20' : ''}`}
               onClick={() => {
                 localStorage.setItem('theme', 'light');
-                setDark(false);
+                setTheme(localStorage.getItem('theme'))
+
               }}>
               <Sun />
               Light
@@ -145,7 +149,8 @@ export const Nav = ({home}) => {
               className={`group flex items-center w-full px-2 py-2 text-sm rounded-md ${active ? 'bg-primary/20' : ''}`}
               onClick={() => {
                 localStorage.setItem('theme', 'dark');
-                setDark(true);
+                setTheme(localStorage.getItem('theme'))
+
               }}>
               <Moon/>
               Dark
