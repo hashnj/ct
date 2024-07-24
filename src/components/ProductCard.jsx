@@ -3,7 +3,7 @@ import { filterr } from "../store/filter"
 import { WishList } from "./WishList"
 import { Cartt } from "./Cart"
 
-export const ProductCard=({ image, title, description,mrp, price,vendor, vendoor ,discount })=>{
+export const ProductCard=({ image, title, description,mrp, price, id })=>{
     const [filter,setFilter]=useRecoilState(filterr)
     return (
         <>
@@ -12,7 +12,7 @@ export const ProductCard=({ image, title, description,mrp, price,vendor, vendoor
                 <img className="peer group-focus:bg-background/20 rounded-t-lg w-full mx-auto  h-40 sm:h-56 md:h-72 lg:h-64 xl:h-72 " src={image} alt={title} />
                 <div className="group-hover:flex flex-col hidden  absolute -top-0 right-0 height-20 width-4">
                 <div className="p-1">
-                <WishList size={10} sub={false}/> 
+                <WishList size={10} sub={false} title={title} id={id} /> 
                 </div>
                 <div className="p-1">
                 <Cartt size={10} sub={false}/>
@@ -24,15 +24,15 @@ export const ProductCard=({ image, title, description,mrp, price,vendor, vendoor
                 <div className="font-bold text-text text-xl flex justify-between mx-2 mb-2">
                     <div>{title}</div>
                         <div className="flex">
-                            <p className={`text-primary  ${mrp>price?'line-through text-red-500 pt-1  text-base':'text-xl'}  `}>${mrp>price ? mrp : price}</p>
+                            <p className={`text-primary  ${mrp>price?'line-through text-red-500 pt-1 pr-[6px]  text-base':'text-xl'}  `}>${mrp>price ? mrp : price}</p>
                             {price<mrp ?  <p className={`text-primary text-xl `}>${price}</p>:''}
                     </div>
                 </div>
                 <div className="flex justify-between mx-2">
-                <p className="text-text/60  text-base my-auto ">{description.substr(0,16)}{description.length>16?'...':''}</p>
-                {price<mrp? <div className="bg-red-600/80 px-1  rounded  text-white/80 h-6 my-auto">SALE</div>:''}
+                <p className="text-text/60  text-base mb-1">{description.substr(0,16)}{description.length>16?'...':''}</p>
+                {price<mrp? <div className="bg-red-700/80 px-1  rounded  text-white/80 h-6 my-auto">SALE</div>:''}
                 </div>
-                <p className="text-text/40 mx-2 mt-3 max-w-fit font-thin hover:text-primary flex text-sm underline-offset-2  underline mb-1" onClick={vendoor}>{vendor}</p>
+                {/* <p className="text-text/40 mx-2 mt-3 max-w-fit font-thin hover:text-primary flex text-sm underline-offset-2  underline mb-1" onClick={vendoor}>{vendor}</p> */}
             </div>
             </div>
         </div>

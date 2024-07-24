@@ -164,7 +164,8 @@ export const EditItem = () => {
                         <input
                             className="w-full p-2 mb-2 bg-backgrounds/50 border-text/5 rounded"
                             type="number"
-                            name="mrp"
+                            name="mrp" 
+                            step="0.01"
                             placeholder="MRP"
                             value={item.mpr}
                             onChange={handleChange}
@@ -175,6 +176,7 @@ export const EditItem = () => {
                             className="w-full p-2 mb-2 bg-backgrounds/50 border-text/5 rounded"
                             type="number"
                             name="price"
+                            step="0.01"
                             placeholder="Price"
                             value={item.price}
                             onChange={handleChange}

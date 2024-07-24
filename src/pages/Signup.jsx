@@ -98,14 +98,14 @@ export const Signup = () => {
             <ToastContainer />
             <div className='w-screen flex min-h-lvh bg-background text-text'>
                 <div className='w-full min-h-lvh hidden lg:flex justify-center items-center bg-gradient-to-br from-primary via-primary/30 to-primary'>
-                    <div className='bg-background/40 rounded-md p-16'>
+                    <div className='bg-backgrounds/40 rounded-md p-16'>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" className="text-background h-[78px] w-[78px] -ml-2 iconify iconify--heroicons" width="1em" height="1em" viewBox="0 0 24 24">
                                 <path fill="currentColor" fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643z" clipRule="evenodd"></path>
                             </svg>
                         </div>
                         <div>
-                            <div className='text-4xl font-bold text-gray-400 my-2'>Unlock <br /> Your Project</div>
+                            <div className='text-4xl font-bold text-gray-600 my-2'>Unlock <br /> Your Project</div>
                             <div className='text-4xl font-semibold my-3'>Performance</div>
                             <div className='text-2xl text-wrap mt-3'>You will never know everything. <br />But you will know more...</div>
                         </div>

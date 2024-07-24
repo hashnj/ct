@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Form } from "../components/Form";
-import { eMail, pAssword, pHone, rol, username } from "../store/atoms";
+import { eMail, pAssword, pHone, rol, themeState, username } from "../store/atoms";
 import { useRecoilValue } from "recoil";
 import { auth } from "../store/auth";
 import { Cart } from "../assets/Svg";
@@ -19,17 +19,13 @@ export const Signin = () => {
   const [error, setError] = useState('');
   const [statuss, setStatus] = useState('');
   const [rem, setRem] = useState(false);
-  const [theme, setTheme] = useState('');
+  const theme = useRecoilValue(themeState);
   const [send,setSend] =useState('');
   const role=useRecoilValue(rol);
 
   useEffect(() => {
     console.log(role);
-    const th = localStorage.getItem('theme');
-    document.body.classList = th;
-    setTheme(th);
-
-
+    document.body.classList = theme;
     
     if(auth.role==='Admin'){
       console.log(auth.role)
@@ -154,7 +150,7 @@ export const Signin = () => {
     <>
       <ToastContainer />
       <div className='w-screen flex min-h-lvh  bg-background text-text'>
-      <div className='w-full  min-h-lvh   hidden lg:flex  justify-center  items-center bg-gradient-to-br from-primary via-sky-400 to-primary'>
+      <div className='w-full  min-h-lvh   hidden lg:flex  justify-center  items-center bg-gradient-to-br from-primary via-primary/30 to-primary'>
         <div className='bg-backgrounds/40 rounded-md p-16'>
           <div className="">
           <svg xmlns="http://www.w3.org/2000/svg"  aria-hidden="true" role="img" className="text-background h-[78px] w-[78px] -ml-2 iconify iconify--heroicons" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643z" clipRule="evenodd"></path></svg>

@@ -64,7 +64,7 @@ export const Main = () => {
             <SideBar top='Home' />
             <div className="fixed right-4 z-30 bottom-2">
                 <div className="h-20">
-                    <WishList size={14} sub={true} />
+                    <WishList size={14} sub={true}  />
                 </div>
                 <div className="h-20">
                     <Cartt size={14} sub={true} />
@@ -80,8 +80,22 @@ export const Main = () => {
                         <FilterComponent/>
                     </div>     
 
-                    <div className={`grid bg-background transition-all  ${filter?'mt-20 w-full grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5':'grid-cols-1  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'} px-1 rounded-md sm:px-2 md:px-4 duration-300 mx-auto float-right min-h-screen  h-full ${active?'grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'  :   ' 2xl:grid-cols-4'}`}>
+                    <div className={`grid bg-background transition-all  ${filter?'mt-20 w-full grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5':'grid-cols-1  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'} px-1 rounded-md sm:px-2 md:px-4 duration-300 float-right min-h-screen  h-full ${active?'grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'  :   ' 2xl:grid-cols-4'}`}>
                         {productData.map((product, index) => (
+                            <ProductCard
+                                key={index}
+                                image={product.images} 
+                                title={product.name} 
+                                description={product.description}
+                                vendor={product.vendor_id?.business_name ||"Admin"} 
+                                price={product.price} 
+                                mrp={product.mrp}
+                                id={product._id}
+                            />
+                            
+                            
+                        ))}
+                        {/* {productData.map((product, index) => (
                             <ProductCard
                                 key={index}
                                 image={product.images} 
@@ -100,19 +114,8 @@ export const Main = () => {
                                 description={product.description}
                                 vendor={product.vendor_id?.business_name ||"Admin"} 
                                 price={product.price} 
-                                mrp={product.mrp}
                             />
-                        ))}
-                        {productData.map((product, index) => (
-                            <ProductCard
-                                key={index}
-                                image={product.images} 
-                                title={product.name} 
-                                description={product.description}
-                                vendor={product.vendor_id?.business_name ||"Admin"} 
-                                price={product.price} 
-                            />
-                        ))}
+                        ))} */}
                     </div>
                 </div>
             </div>

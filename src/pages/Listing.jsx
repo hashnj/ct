@@ -11,6 +11,7 @@ import { EditC, EditV } from "../store/edit";
 import { categories } from "../store/products";
 import { Edit } from "../assets/Svg";
 import { sideBar } from "../store/dash";
+import { themeState } from "../store/atoms";
 
 export const Listing = () => {
   const [ap, setAddP] = useRecoilState(addP);
@@ -23,7 +24,8 @@ export const Listing = () => {
   const [edt, setEdt] = useRecoilState(EditV);
   const [edtc,setEdtc] = useRecoilState(EditC);
   const category = useRecoilValueLoadable(categories);
-  const active = useRecoilValue(sideBar)
+  const active = useRecoilValue(sideBar);
+  const theme = useRecoilValue(themeState)
 
   useEffect(() => {
     if (show) {
@@ -41,8 +43,8 @@ export const Listing = () => {
   }, [show, category.state, category.contents]);
 
   useEffect(()=>{
-    console.log(edtc)
-  },[edtc])
+    document.body.classList=theme
+  },[theme])
 
   if (ap) {
     return <AddProduct />;
@@ -154,7 +156,7 @@ export const Listing = () => {
       )}
       <div className={`h-full transition-all duration-300 ${active?' w-3/5 lg:w-4/5 sm:ml-56 ' : ' w-4/5 md:w-5/6 '}   my-20 text-text `}>
         <div className="grid  sm:grid-cols-2 lg:grid-cols-4 gap-2 h-1/4">
-          <div className="p-4 m-2 bg-background rounded-xl hover:shadow-primary shadow-[0_0_5px]">
+          <div className="p-4 m-2 bg-background rounded-xl shadow-text/30 hover:shadow-primary shadow-[0_0_4px]">
             <div className="text-primary w-full flex flex-col justify-between  font-serif text-2xl md:text-3xl">
               <div className="text-center cursor-default">Add Products</div>
               <div
@@ -168,7 +170,7 @@ export const Listing = () => {
             </div>
             <div className="text-xl text-center text-text/60 font-semibold"></div>
           </div>
-          <div className="p-4 m-2 bg-background rounded-xl hover:shadow-primary  shadow-[0_0_5px]">
+          <div className="p-4 m-2 bg-background rounded-xl hover:shadow-primary shadow-text/30  shadow-[0_0_4px]">
             <div className="text-primary flex justify-between flex-col font-serif text-2xl md:text-3xl">
               <div className="text-center">Add Category</div>
               <div
@@ -183,7 +185,7 @@ export const Listing = () => {
             <div className="text-xl text-center text-text/60 font-semibold"></div>
           </div>
           <div 
-          className="p-4 m-2 text-primary cursor-pointer bg-background hover:bg-primary/40 hover:text-background hover:border-background/50 active:text-backgrounds active:border-2 active:border-text flex justify-between items-center rounded-xl shadow-text hover:shadow-primary shadow-[0_0_5px]"
+          className="p-4 m-2 text-primary cursor-pointer bg-background hover:bg-primary/80 shadow-text/30 hover:text-background hover:border-background/50 active:text-backgrounds active:border-2 active:border-text flex justify-between items-center rounded-xl  hover:shadow-primary shadow-[0_0_4px]"
           onClick={() => {
             setShow(true);
           }}>
@@ -195,7 +197,7 @@ export const Listing = () => {
               </div>
             </div>
           </div>
-          <div className="p-4 m-2 bg-background rounded-xl hover:shadow-primary shadow-[0_0_5px]">
+          <div className="p-4 m-2 bg-background rounded-xl hover:shadow-primary shadow-text/30 shadow-[0_0_4px]">
             <div className="text-primary flex flex-col justify-between items-center font-serif text-2xl md:text-3xl">
               <div className="text-center">Edit Listings</div>
               <div
@@ -222,7 +224,7 @@ export const Listing = () => {
         <div className="text-primary font-serif ml-4 mt-2 text-2xl md:text-3xl">
             Your Products And Listings
           </div>
-        <div className="p-4 m-2 bg-background h-1/2 rounded-xl shadow-primary/70 overflow-scroll no-scrool shadow-[0_0_7px]">
+        <div className="p-4 m-2 bg-background h-1/2 rounded-xl shadow-primary/35 overflow-scroll no-scrool shadow-[0_0_7px]">
           
           <PnL />
         </div>

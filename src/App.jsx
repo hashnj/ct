@@ -16,6 +16,7 @@ import { Listing } from './pages/Listing'
 import { Main } from './pages/Main'
 import { Profile } from './pages/Profile'
 import { Test } from './pages/Test'
+import WishPage from './pages/WishPage'
 
 function App() {
   return(
@@ -27,6 +28,7 @@ function App() {
       <Route path='/unauthorized' element={<Unauthorized />}/>
       <Route element={<RequireAuth allowedRoles={['Customer','Admin' ,'Vendor','Staff']} />}>
       <Route path='/your-profile' element={<Profile />}/>
+      <Route path='/wishlist' element={<WishPage />}/>
       </Route>
       <Route path='/' element={<Main />} /> 
       {/* </Route> */}

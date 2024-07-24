@@ -5,18 +5,18 @@ import { rol } from '../store/atoms';
 import auth from '../hooks/auth';
 import { FaHome, FaBars, FaThLarge, FaClipboardList, FaUserShield } from 'react-icons/fa';
 import { Tooltip } from 'react-tooltip';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const SideBar = ({ top }) => {
     const nav = useNavigate();
     const [active, setActive] = useRecoilState(sideBar);
     const a=auth();
-    const role = a.role;
+    const [role,setRole]=useState('');
     
     useEffect(()=>{
-
+        setRole(a.role);
         console.log(role);
-    },[rol])
+    },[role])
     console.log(role);
     const handleToggle = () => {
         setActive(!active);
