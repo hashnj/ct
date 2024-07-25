@@ -1,14 +1,14 @@
 import { atom, selector } from "recoil";
 
-export const wishListState = atom({
-    key: 'wishList',
-    default: []
+export const cartState = atom({
+    key:'cart',
+    default:[]
 });
 
-export const getWList = selector({
-    key: 'getList',
+export const getCart = selector({
+    key: 'getCart',
     get: async ({ get }) => {
-        const req = await fetch('http://localhost:3000/products/wish', {
+        const req = await fetch('http://localhost:3000/products/cart', {
             headers: {
                 'authorization': localStorage.getItem('token')
             }
@@ -18,11 +18,11 @@ export const getWList = selector({
     }
 });
 
-export const wList = selector({
-    key: 'active',
+export const cartUpdate = selector({
+    key: 'Update',
     get: async ({ get }) => {
-        const list = get(wishListState);
-        const req = await fetch('http://localhost:3000/products/wish', {
+        const list = get(cartState);
+        const req = await fetch('http://localhost:3000/products/cart', {
             method: 'post',
             headers: {
                 'Content-type': 'application/json',

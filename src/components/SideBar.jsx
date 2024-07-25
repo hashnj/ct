@@ -12,11 +12,13 @@ export const SideBar = ({ top }) => {
     const [active, setActive] = useRecoilState(sideBar);
     const a=auth();
     const [role,setRole]=useState('');
-    
+    console.log(a,role);
     useEffect(()=>{
+        if(a){
         setRole(a.role);
+        }
         console.log(role);
-    },[role])
+    },[a])
     console.log(role);
     const handleToggle = () => {
         setActive(!active);

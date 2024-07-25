@@ -17,6 +17,7 @@ import { Main } from './pages/Main'
 import { Profile } from './pages/Profile'
 import { Test } from './pages/Test'
 import WishPage from './pages/WishPage'
+import CartPage from './pages/CartPage'
 
 function App() {
   return(
@@ -29,6 +30,7 @@ function App() {
       <Route element={<RequireAuth allowedRoles={['Customer','Admin' ,'Vendor','Staff']} />}>
       <Route path='/your-profile' element={<Profile />}/>
       <Route path='/wishlist' element={<WishPage />}/>
+      <Route path='/your-cart' element={<CartPage />}/>
       </Route>
       <Route path='/' element={<Main />} /> 
       {/* </Route> */}

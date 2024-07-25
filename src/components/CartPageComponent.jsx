@@ -1,6 +1,6 @@
 import { IoIosRemoveCircle } from "react-icons/io";
 
-const WishPageComponent = ({ title, description, image, price }) => {
+const CartPageComponent = ({ title, description, image, price }) => {
   return (
     <div className="w-full flex my-3 justify-between p-6 items-center px-10 bg-text/50 rounded-md">
       <div className="flex justify-center items-center">
@@ -24,4 +24,4 @@ const WishPageComponent = ({ title, description, image, price }) => {
   );
 };
 
-export default WishPageComponent;
+export default CartPageComponent;

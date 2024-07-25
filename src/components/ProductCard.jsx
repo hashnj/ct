@@ -15,7 +15,7 @@ export const ProductCard=({ image, title, description,mrp, price, id })=>{
                 <WishList size={10} sub={false} title={title} id={id} /> 
                 </div>
                 <div className="p-1">
-                <Cartt size={10} sub={false}/>
+                <Cartt size={10} sub={false} id={id}/>
                 </div>
             </div>
             <div className="py-2 text-center w-full rounded-b-lg bg-gradient-to-br from-text/20 to-text/10 via-background border-t-2">
