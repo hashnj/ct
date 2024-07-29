@@ -8,6 +8,7 @@ export const FilterComponent = () => {
   const theme = useRecoilValue(themeState);
   const [filter, setFilter] = useRecoilState(filterr);
   const [price, setPrice] = useState(51);
+  const [pricee, setPricee] = useState(5);
 
   useEffect(() => {
     document.body.classList = theme;
@@ -23,17 +24,33 @@ export const FilterComponent = () => {
         Filter <IoFilterSharp />
       </h2>
       <div className={`space-y-4 transition-all duration-300 ${filter ? 'hidden' : 'block'}`}>
-        <div>
+        <div className=''>
           <h3 className="font-medium text-md text-primary mb-2">Filter by Price</h3>
+          <div className='relative'>
           <input 
             type="range" 
             value={price} 
             min="0" 
             max="1000" 
-            className="w-full accent-primary" 
-            onChange={(e) => { setPrice(e.target.value); }} 
+            className="w-full absolute z-2 mt-4 h-[1px] accent-primary no " 
+            onChange={(e) => {
+              setPrice(e.target.value)
+              console.log(e.target.value,1);
+  }}
           />
-          <div className="flex justify-between text-sm">
+          <input 
+            type="range" 
+            value={pricee} 
+            min="0" 
+            max="1000" 
+            className="w-full absolute z-2 mt-3 h-[1px] accent-primary no " 
+            onChange={(e) => {
+              setPrice(e.target.value)
+              console.log(e.target.value,2);
+             }} 
+          />
+          </div>
+          <div className="flex mt-7 justify-between text-sm">
             <span>$0</span>
             <span className='text-thin'>${price}</span>
             <span>$1000</span>

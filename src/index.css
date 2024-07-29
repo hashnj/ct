@@ -45,8 +45,10 @@ input::-webkit-inner-spin-button {
     display: none;
   }
   
-  /* Hide scrollbar for IE, Edge and Firefox */
-.no-scrool{
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+
+  .no-scrool{
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
 }
+
+

@@ -55,7 +55,11 @@ export const Main = () => {
     }
 
     if (error) {
-        return <div className="flex justify-center items-center h-screen">Error: {error}</div>;
+        return <div className="flex justify-center bg-background text-text/30 font-bold items-center text-3xl  h-screen">
+            <Nav/>
+            <div>Error: {error}</div>
+
+            </div>;
     }
 
     return (

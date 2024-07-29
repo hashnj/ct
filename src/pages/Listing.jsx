@@ -12,6 +12,7 @@ import { categories } from "../store/products";
 import { Edit } from "../assets/Svg";
 import { sideBar } from "../store/dash";
 import { themeState } from "../store/atoms";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export const Listing = () => {
   const [ap, setAddP] = useRecoilState(addP);
@@ -59,7 +60,7 @@ export const Listing = () => {
   }
 
   return (
-    <div className="w-screen min-h-screen  h-full relative text-text flex justify-center items-center bg-backgrounds">
+    <div className="w-screen min-h-screen bg-backgrounds  h-full relative text-text flex justify-center items-center">
       <Nav />
       <SideBar top="Your-Listings" />
       {show && (
@@ -71,7 +72,7 @@ export const Listing = () => {
             </div>
             <div className="h-full w-full pb-10 pt-2 scroll-smooth no-scrool overflow-scroll">
               {loading ? (
-                <div>Loading...</div>
+                <div className="bg-background "><AiOutlineLoading3Quarters className="animate-spin"/></div>
               ) : (
                 (categorie && categorie.categories && categorie.subCategories) ? (
                     <div>
@@ -154,8 +155,8 @@ export const Listing = () => {
           </div>
         </div>
       )}
-      <div className={`h-full transition-all duration-300 ${active?' w-3/5 lg:w-4/5 sm:ml-56 ' : ' w-4/5 md:w-5/6 '}   my-20 text-text `}>
-        <div className="grid  sm:grid-cols-2 lg:grid-cols-4 gap-2 h-1/4">
+      <div className={`h-full transition-all duration-300 ${active?' w-3/5 lg:w-4/5 sm:ml-56 ' : ' w-4/5 md:w-5/6 '} mt-14 md:mt-20 text-text `}>
+        <div className="grid  sm:grid-cols-2 lg:grid-cols-2 gap-2 h-1/4">
           <div className="p-4 m-2 bg-background rounded-xl shadow-text/30 hover:shadow-primary shadow-[0_0_4px]">
             <div className="text-primary w-full flex flex-col justify-between  font-serif text-2xl md:text-3xl">
               <div className="text-center cursor-default">Add Products</div>
@@ -184,19 +185,7 @@ export const Listing = () => {
             </div>
             <div className="text-xl text-center text-text/60 font-semibold"></div>
           </div>
-          <div 
-          className="p-4 m-2 text-primary cursor-pointer bg-background hover:bg-primary/80 shadow-text/30 hover:text-background hover:border-background/50 active:text-backgrounds active:border-2 active:border-text flex justify-between items-center rounded-xl  hover:shadow-primary shadow-[0_0_4px]"
-          onClick={() => {
-            setShow(true);
-          }}>
-            <div className=" flex justify-between  items-center mx-auto flex-col font-serif text-2xl md:text-3xl" >
-              <div
-                className="h-full  w-full text-center"
-              >
-                View Available Categories
-              </div>
-            </div>
-          </div>
+          {/* 
           <div className="p-4 m-2 bg-background rounded-xl hover:shadow-primary shadow-text/30 shadow-[0_0_4px]">
             <div className="text-primary flex flex-col justify-between items-center font-serif text-2xl md:text-3xl">
               <div className="text-center">Edit Listings</div>
@@ -219,10 +208,25 @@ export const Listing = () => {
               </div>
             </div>
             <div className="text-xl text-center text-text/60 font-semibold"></div>
-          </div>
+          </div> */}
         </div>
+        <div className="flex justify-between">
         <div className="text-primary font-serif ml-4 mt-2 text-2xl md:text-3xl">
             Your Products And Listings
+          </div>
+          <div 
+          className="p-2 mr-2 text-primary cursor-pointer bg-background hover:bg-primary/80 shadow-text/30 hover:text-background hover:border-background/50 active:text-backgrounds active:border-2 active:border-text flex justify-between items-center rounded-xl  hover:shadow-primary shadow-[0_0_4px]"
+          onClick={() => {
+            setShow(true);
+          }}>
+            <div className=" flex justify-between  items-center flex-col font-serif text-lg md:text-lg" >
+              <div
+                className="text-center"
+              >
+                Categories
+              </div>
+            </div>
+          </div>
           </div>
         <div className="p-4 m-2 bg-background h-1/2 rounded-xl shadow-primary/35 overflow-scroll no-scrool shadow-[0_0_7px]">
           

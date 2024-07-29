@@ -18,6 +18,7 @@ import { Profile } from './pages/Profile'
 import { Test } from './pages/Test'
 import WishPage from './pages/WishPage'
 import CartPage from './pages/CartPage'
+import ProductInfo from './pages/ProductInfo'
 
 function App() {
   return(
@@ -31,6 +32,7 @@ function App() {
       <Route path='/your-profile' element={<Profile />}/>
       <Route path='/wishlist' element={<WishPage />}/>
       <Route path='/your-cart' element={<CartPage />}/>
+      <Route path='/product/:id' element={<ProductInfo />}/>
       </Route>
       <Route path='/' element={<Main />} /> 
       {/* </Route> */}

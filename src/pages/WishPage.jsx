@@ -29,7 +29,7 @@ const WishPage = () => {
 
     useEffect(() => {
         if (list.state === 'hasValue') {
-            setN(list.contents.qry[0]);
+            setN(list.contents.qry[0].product_id);
             setWishList(list.contents.qry[0].product_id); 
         }
     }, [list,load]);
@@ -69,8 +69,9 @@ const WishPage = () => {
                     WishList
                 </div>
                 <div className="px-12 py-14 min-h-1/2 overflow-y-scroll no-scrool">
-                    {prod.contents.data.map((item, i) => {
-                        const isWishlisted = n.product_id?.includes(item._id);
+                {prod.contents.data.map((item,i) => {
+                const isWishlisted = wishList.includes(item._id);
+                        console.log(isWishlisted,wishList,item._id);
                         return isWishlisted ? (
                             <WishPageComponent 
                                 key={i} 

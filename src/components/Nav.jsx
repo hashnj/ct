@@ -1,7 +1,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { sideBar } from "../store/dash";
 import { authCheck } from "../store/auth";
 import { FaRegSun, FaSearch, FaSun } from "react-icons/fa";
@@ -13,12 +13,12 @@ export const Nav = ({home}) => {
   // const [dark, setDark] = useState(false);
   const [sidebar, setSidebar] = useRecoilState(sideBar);
   const nav = useNavigate();
-  const info = useRecoilValue(authCheck);
+  const info = useRecoilValueLoadable(authCheck);
   const [theme,setTheme]=useRecoilState(themeState);
 
   useEffect(() => {
     document.body.classList = theme;
-  }, []);
+  }, [theme]);
 
 
 

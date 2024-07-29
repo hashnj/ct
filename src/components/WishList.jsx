@@ -12,7 +12,7 @@ export const WishList = ({ size, sub, title, id }) => {
   const w = useRecoilValueLoadable(wList);
 
   useEffect(() => {
-    if (wlist.state === 'hasValue' && wlist.contents.qry[0].product_id) {
+    if (wlist.state === 'hasValue' && wlist.contents.qry && wlist.contents.qry[0].product_id) {
       setList(wlist.contents.qry[0].product_id);
     }
   }, [wlist]);
@@ -28,9 +28,8 @@ export const WishList = ({ size, sub, title, id }) => {
 
   return (
     <div className="flex w-14 flex-col justify-center items-center" onClick={() => { sub ? navigate() : handleClick(); }}>
-      <div className={`bg-primary peer text-background hover:bg-primary/80 hover:text-text/90 p-2 text-4xl flex items-center justify-center rounded-full size-${size}`}>
-        {!sub && isactive ? <FaHeart  /> : <FaRegHeart title="Wishlist"/>}
-        {/* {console.log(list)} */}
+      <div className={`bg-text/30 peer text-red-600 hover:bg-text/40  p-2 text-4xl flex items-center justify-center rounded-full size-${size}`}>
+        {!sub && isactive ? <FaHeart className="active:scale-75 hover:scale-95"  /> : <FaRegHeart className="active:scale-75 hover:scale-95" title="Wishlist"/>}
       </div>
       <div className={`hidden ${sub ? 'peer-hover:flex' : ''} text-text text-base`}>
         Wishlist
