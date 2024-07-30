@@ -9,6 +9,7 @@ export const getWList = selector({
     key: 'getList',
     get: async ({ get }) => {
         const req = await fetch('http://localhost:3000/products/wish', {
+            method:'get',
             headers: {
                 'authorization': localStorage.getItem('token')
             }

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { addC } from '../store/listing';
-import { FaArrowLeft } from 'react-icons/fa';
+import { ImCross } from 'react-icons/im';
+import { FaPlus } from 'react-icons/fa';
 
 const AddCategory = () => {
     const [category, setCategory] = useState({
@@ -49,11 +50,11 @@ const AddCategory = () => {
 
 
     return (
-    <div className='bg-backgrounds min-h-screen w-screen h-full flex text-text justify-center items-center'>
-        <form className="max-w-md mx-auto bg-background rounded-lg p-4" onSubmit={handleSubmit}>
-            <div className=' mb-5 -ml-1 flex '>
+    <div className='bg-backgrounds/10 absolute z-10  min-h-screen w-screen h-full flex text-text justify-center items-center'>
+        <form className="max-w-md mx-auto bg-background border-2 border-text/10 rounded-lg p-4" onSubmit={handleSubmit}>
+            <div className=' mb-5 mr-1 float-right flex '>
                 <div onClick={()=>{setAddC(false)}} className='border-text/10 border hover:bg-primary/70 active:bg-primary hover:text-background cursor-pointer bg-backgrounds/50 p-1 px-2 rounded-md text-lg font-semibold'>
-                    <FaArrowLeft/>
+                    <ImCross/>
                 </div>
             </div>
             <h2 className="text-xl font-bold mb-4">Add New Category</h2>
@@ -99,8 +100,8 @@ const AddCategory = () => {
                     <span className="ml-2">Is Sub-Category</span>
                 </label>
             </div>
-            <button className="w-full p-2 bg-primary font-semibold rounded" type="submit">
-                Add Category
+            <button className="w-full p-2 bg-primary font-semibold flex justify-center items-center rounded" type="submit">
+            <FaPlus className='size-5 pr-1'/>Add Category
             </button>
         </form>
     </div>

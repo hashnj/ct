@@ -1,18 +1,25 @@
 import { useEffect, useState } from "react";
 import { Nav } from "../components/Nav";
 import { SideBar } from "../components/SideBar";
-import { useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { detailsSelector } from "../store/detailsAtom"; 
 import { themeState } from "../store/atoms";
 import { sideBar } from "../store/dash";
 import { AiFillDelete } from "react-icons/ai";
 import { ImCross } from "react-icons/im";
+import { ShowCategories } from "../components/ShowCategories";
+import { addC, addP, Show } from "../store/listing";
+import AddCategory from "../components/AddCategory";
+import AddProduct from "../components/AddProduct";
 
 export const Dashboard = () => {
     const detailsLoadable = useRecoilValueLoadable(detailsSelector);
     const theme = useRecoilValue(themeState);
     const active = useRecoilValue(sideBar);
     const [del,setDel] = useState(false);
+    const [show,setShow]=useRecoilState(Show);
+    const [ap, setAddP] = useRecoilState(addP);
+  const [ac, setAddC] = useRecoilState(addC);
 
     useEffect(()=>{
         document.body.classList=theme;
@@ -34,7 +41,7 @@ export const Dashboard = () => {
     }
 
     const data = detailsLoadable.contents || {};
-    console.log(data);
+    // console.log(data);
 
     const handelDelete=async ()=>{
         const req=await fetch('http://localhost:3000/user/del',{
@@ -46,7 +53,10 @@ export const Dashboard = () => {
     }
 
     return (
-        <div className="flex flex-col justify-center relative items-center bg-backgrounds  text-text w-full min-h-screen h-full">
+        <div className={`flex flex-col justify-center relative items-center bg-backgrounds  text-text w-full min-h-screen ${show || ap || ac ?'overflow-hidden h-screen':'h-full'}`}>
+            {show && <ShowCategories/>}
+            {ap &&<AddProduct/>}
+            {ac &&<AddCategory/>}
             <Nav />
             <SideBar top='Dashboard' />
             <div className={`${active?'md:pl-72 ':''} transition-all  duration-300 w-full h-full pt-20  ${active?'mr-6':'px-5 sm:px-10 lg:mx-10 md:pl-24 md:pr-16'}  `}>
@@ -64,8 +74,9 @@ export const Dashboard = () => {
                         </div>
                     </div>
                 </div>}
+                
             <div className="text-2xl font-bold font-serif pt-2 pb-4 pl-2">Admin DashBoard</div>
-            <div className={`transition-all duration-300 w-full h-full  grid grid-cols-2 lg:frid-cols-3 xl:grid-cols-4 gap-6`}>
+            <div className={`transition-all duration-300 w-full h-full  grid grid-cols-2 lg:frid-cols-3 xl:grid-cols-4 gap-5`}>
                 
                 <div className="bg-background shadow-[0_0_4px]  shadow-text/5 rounded-lg min-w-[200px] p-2 pt-4 pl-4">
                     <div className="text-xl flex flex-col h-full min-h-[205px] md:min-h-[210px] w-full relative font-bold text-text/70">
@@ -78,8 +89,16 @@ export const Dashboard = () => {
                         </div> 
                         </div>
                         <div className="flex absolute bottom-1 ">
-                            <button className="md:px-4 p-3 font-thin text-text text-sm md:text-base float-end hover:text-text transition-all duration-300 rounded-md m-1 bg-text/10 hover:bg-primary">View Products</button>
-                            <button className="md:px-4 p-3 font-thin text-text text-sm md:text-base hover:text-primary transition-all duration-300 rounded-md m-1 bg-text/10 hover:bg-primary/10">Add Products</button>
+                            <button className="md:px-4 p-3 font-thin text-text text-sm md:text-base float-end hover:text-text transition-all duration-300 rounded-md m-1 bg-text/10 hover:bg-primary" 
+                            onClick={()=>{}}>
+                                View Products
+                                </button>
+                            <button className="md:px-4 p-3 font-thin text-text text-sm md:text-base hover:text-primary transition-all duration-300 rounded-md m-1 bg-text/10 hover:bg-primary/10" 
+                            onClick={()=>{
+                                setAddP(true)
+                            }}>
+                                Add Products
+                                </button>
                         </div>
                     </div>
                 </div>
@@ -94,10 +113,16 @@ export const Dashboard = () => {
                             </div> 
                         </div>
                         <div className="flex absolute bottom-1 ">
-                            <button className="md:px-4 p-3 text-text font-thin text-sm md:text-base float-end hover:text-text transition-all duration-300 rounded-md m-1 bg-text/10 hover:bg-primary">
+                            <button className="md:px-4 p-3 text-text font-thin text-sm md:text-base float-end hover:text-text transition-all duration-300 rounded-md m-1 bg-text/10 hover:bg-primary" 
+                            onClick={()=>{
+                                setShow(true);
+                            }}>
                             View Categories
                             </button>
-                            <button className="md:px-4 p-3 font-thin text-text text-sm md:text-base hover:text-primary transition-all duration-300 rounded-md m-1 bg-text/10 hover:bg-primary/10">
+                            <button className="md:px-4 p-3 font-thin text-text text-sm md:text-base hover:text-primary transition-all duration-300 rounded-md m-1 bg-text/10 hover:bg-primary/10" 
+                            onClick={()=>{
+                                setAddC(true);
+                            }}>
                             Add Categories
                             </button>
                         </div>
@@ -140,7 +165,7 @@ export const Dashboard = () => {
                             
                                 {data.users ? data.users.filter(user => user.role === 'Admin').length : 0}
                             </div>
-                            <div className="h-full">
+                            <div className="h-2/3">
                                 {data.users ? data.users.filter(user => user.role === 'Admin').map((admin, index) => (
                                     <div key={index} className='my-2 text-xl'>* {admin.userName}</div>
                                 )) : null}

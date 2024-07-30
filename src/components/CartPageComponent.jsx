@@ -1,6 +1,14 @@
 import { IoIosRemoveCircle } from "react-icons/io";
+import { useRecoilState } from 'recoil'
+import { cartState } from "../store/aCart";
+const CartPageComponent = ({ title, description, image, price, id }) => {
+  const [list,setList] = useRecoilState(cartState)
+  const isactive = list.includes(id)
+  const removeItem=()=>{
+    console.log(id)
+    setList(prev => isactive ? prev.filter(itemId => itemId !== id) : [...prev, id]);
 
-const CartPageComponent = ({ title, description, image, price }) => {
+  }
   return (
     <div className="w-full flex my-3 justify-between p-6 items-center px-10 bg-text/50 rounded-md">
       <div className="flex justify-center items-center">
@@ -17,7 +25,9 @@ const CartPageComponent = ({ title, description, image, price }) => {
           ${price}
         </div>
         <div className="text-3xl text-red-600">
-          <IoIosRemoveCircle />
+          <IoIosRemoveCircle className="cursor-pointer"  onClick={()=>{
+            removeItem()
+          }}/>
         </div>
       </div>
     </div>

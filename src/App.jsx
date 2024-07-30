@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import './App.css'
 import { Signup } from './pages/Signup'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -22,6 +22,8 @@ import ProductInfo from './pages/ProductInfo'
 
 function App() {
   return(
+    <Suspense fallback={<></>}>
+
     <BrowserRouter>
     <Routes>
       <Route path='/auth/register' element={<Signup/>} />
@@ -53,6 +55,7 @@ function App() {
       <Route path='*' element={<NotFound/>}/>
     </Routes>
     </BrowserRouter>
+    </Suspense>
   )
 }
 

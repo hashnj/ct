@@ -1,9 +1,15 @@
 import { useState } from 'react';
+import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { products } from '../store/products.js'
 
-export const Search=({ suggestions })=>{
+export const Search=({})=>{
         const [query, setQuery] = useState('');
         const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-    
+        const product =useRecoilValueLoadable(products)
+        
+        if(product.state === 'hasValue'){
+            const suggestions = product.contents.data.map(item => {return item.name})
+
         const handleChange = (e) => {
             const value = e.target.value;
             setQuery(value);
@@ -42,4 +48,5 @@ export const Search=({ suggestions })=>{
                 )}
             </div>
         );
+    }
     };

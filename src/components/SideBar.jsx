@@ -12,14 +12,11 @@ export const SideBar = ({ top }) => {
     const [active, setActive] = useRecoilState(sideBar);
     const a=auth();
     const [role,setRole]=useState('');
-    console.log(a,role);
     useEffect(()=>{
         if(a){
         setRole(a.role);
         }
-        console.log(role);
     },[a])
-    console.log(role);
     const handleToggle = () => {
         setActive(!active);
     };
@@ -60,15 +57,6 @@ export const SideBar = ({ top }) => {
                         {!active && <Tooltip id="admin-tooltip" content="Admin Dashboard" />}
                     </div>
                 )}
-                {/* {role=='Customer' && active&& <div className='w-full flex-col  py-2 flex justify-center bg-background rounded-lg transition-colors duration-200'>
-                    <><div className='py-2 border-b border-text/40 w-full mx-1  text-center'>
-                        <div className='font-serif text-2xl'> Filter </div>
-                        </div>
-                        <div className=' group mx-2'>
-                            <Search />
-                            <div className='border-t peer w-full peer-focus:border-t-4 peer-focus:border-text'></div>
-                        </div>
-                        </></div>} */}
             </div>
         </div>
     );

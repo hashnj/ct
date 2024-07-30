@@ -51,4 +51,7 @@ input::-webkit-inner-spin-button {
     scrollbar-width: none;  
 }
 
+:invalid {
+    color: rgb(156, 163, 175);
+  }
 

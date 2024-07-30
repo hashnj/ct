@@ -9,7 +9,7 @@ export const Cartt=({size,sub,id})=>{
     const [list, setList] = useRecoilState(cartState);
     const isactive = list.includes(id);
     const ll = useRecoilValueLoadable(getCart);
-      const w = useRecoilValueLoadable(cartUpdate);
+    const w = useRecoilValueLoadable(cartUpdate);
 
     const nav=useNavigate();
 
@@ -40,7 +40,7 @@ export const Cartt=({size,sub,id})=>{
 
 
     return(
-        <div className="flex w-14 flex-col justify-center items-center " onClick={() => { sub ? navigate() : handleClick(); }}>
+        <div className="flex w-14 flex-col justify-center items-center " onClick={() => { sub ? navigate() : handleClick() }}>
         <div value='Wishlist' className={`bg-text/30 peer text-gray-800 hover:bg-text/40 p-2 hover:text-gray-950/80 size-${size} text-4xl flex items-center justify-center rounded-full`} >
             {!sub & !isactive?<FaCartPlus className={`active:scale-75 size-${size} hover:scale-95`} title="Add to Cart"/>:<FaCartArrowDown className="hover:scale-95 active:scale-75"/>}
         </div>

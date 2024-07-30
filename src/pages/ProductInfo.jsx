@@ -1,4 +1,4 @@
-import { useRecoilValue, useRecoilValueLoadable } from "recoil"
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil"
 import { themeState } from "../store/atoms"
 import { useEffect } from "react"
 import { Nav } from '../components/Nav'
@@ -7,12 +7,16 @@ import { Cart } from "../assets/Svg"
 import { useParams } from "react-router-dom"
 import { products } from "../store/products"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
+import { wishListState } from "../store/wList"
 
 const ProductInfo = () => {
 
+    
     const theme = useRecoilValue(themeState);
     const prod = useRecoilValueLoadable(products);
     const { id } = useParams();
+    const [list, setList] = useRecoilState(wishListState);
+    const isactive = list.includes(id);
 
     useEffect(()=>{
         document.body.classList=theme;
@@ -23,6 +27,11 @@ const ProductInfo = () => {
         console.log(prod.contents.data.find((product) => product._id === id));
         }
     },[prod])
+
+    const handleClick = () => {
+        setList(prev => isactive ? prev.filter(itemId => itemId !== id) : [...prev, id]);
+        console.log(list);
+      };
 
 
     if(prod.state === 'loading'){
@@ -81,7 +90,9 @@ const ProductInfo = () => {
                     </div>       
                     <div className="mt-8">
                         <div className="flex flex-col text-xl items-center mb-6 justify-center">
-                            <button className="w-11/12 transition-all duration-700 flex p-3 lg:p-4 bg-red-600 hover:bg-red-500 active:bg-red-700 m-2 justify-center items-center rounded-xl"><div>Wishlist &nbsp;</div> <FaRegHeart/></button>    
+                            <button className="w-11/12 transition-all duration-700 flex p-3 lg:p-4 bg-red-600 hover:bg-red-500 active:bg-red-700 m-2 justify-center items-center rounded-xl" onClick={()=>{
+                                handleClick()
+                            }}><div>Wishlist &nbsp;</div> <FaRegHeart/></button>    
                             <button className="w-11/12 transition-all duration-700 p-3 lg:p-4 border border-primary/40 hover:border-primary m-2 rounded-xl flex justify-center items-center bg-text/5 ">Add to Cart &nbsp; <Cart size={6}/></button>    
                             <button className="w-11/12 transition-all duration-700 p-3 lg:p-4 bg-primary/60 border border-primary/10 hover:bg-primary hover:border-primary m-2 rounded-lg">Buy Now</button>    
                         </div>

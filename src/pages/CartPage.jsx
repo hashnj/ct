@@ -2,12 +2,11 @@ import { FaArrowLeft } from "react-icons/fa";
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import CartPageComponent from "../components/CartPageComponent";
 import { useEffect, useState } from "react";
-import { wishListState, getWList, wList } from "../store/wList";
 import { useRecoilValue, useRecoilState, useRecoilValueLoadable } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { products } from "../store/products";
 import { themeState } from "../store/atoms";
-import { getCart } from "../store/aCart";
+import { cartState, cartUpdate, getCart } from "../store/aCart";
 
 const CartPage = () => {
     const navigate = useNavigate();
@@ -18,6 +17,8 @@ const CartPage = () => {
     const [load, setLoad] = useState(true);
     let loadInterval;
     const [n,setN]=useState();
+    const cU = useRecoilValueLoadable(cartUpdate);
+    const [listt, setList] = useRecoilState(cartState);
 
     useEffect(() => {
         document.body.classList = theme;
@@ -26,9 +27,17 @@ const CartPage = () => {
     useEffect(() => {
         if (list.state === 'hasValue') {
             setN(list.contents.qry[0]);
-            // setWishList(list.contents.qry[0].product_id); 
+            setList(list.contents.qry[0].product_id); 
         }
     }, [list,load]);
+
+
+    useEffect(()=>{
+        if(cU.state == 'hasValue'){
+        console.log(cU)
+        }
+    },[listt])
+
 
     useEffect(() => {
         loadInterval = setInterval(() => {
@@ -71,7 +80,7 @@ const CartPage = () => {
                 </div>
                 <div className="px-12 py-14 overflow-y-scroll no-scrool">
                     {prod.contents.data.map((item, i) => {
-                        const isAdded = n.product_id?.includes(item._id);
+                        const isAdded = listt?.includes(item._id);
                         return isAdded ? (
                             <CartPageComponent 
                                 key={i} 
@@ -79,6 +88,7 @@ const CartPage = () => {
                                 description={item.description} 
                                 price={item.price}
                                 image={item.images}
+                                id={item._id}
                             />
                         ) : null;
                     })}

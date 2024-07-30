@@ -10,12 +10,12 @@ export const ProductCard=({ image, title, description,mrp, price, id })=>{
     return (
         <>
         <div 
-         className={`max-w-xs rounded-lg bg-background ${filter?'mx-3 md:mx-5 md:w-full lg:mx-4 ':''} group cursor-pointer  overflow-hidden hover:shadow-primary/40 hover:shadow-[0_0_10px] m-4 `}>
+         className={`max-w-xs rounded-lg max-h-fit bg-background ${filter?'mx-3 md:mx-5 md:w-full lg:mx-4 ':''} group cursor-pointer  overflow-hidden hover:shadow-primary/40 hover:shadow-[0_0_10px] m-4 `}>
             <div className="my-auto relative">
                 <img onClick={()=>{
-            nav(`/product/${id}`)
-         }}
-          className="peer group-focus:bg-background/20 rounded-t-lg w-full mx-auto  h-40 sm:h-56 md:h-72 lg:h-64 xl:h-72 " src={image} alt={title} />
+                    nav(`/product/${id}`)
+                    }}
+                    className="peer group-focus:bg-background/20 rounded-t-lg w-full max-h-72 mx-auto  h-40 sm:h-56 md:h-72 lg:h-64 xl:h-72 " src={image} alt={title} />
                 <div className="group-hover:flex flex-col hidden  absolute -top-0 right-0 height-20 width-4">
                 <div className="p-1">
                 <WishList size={10} sub={false} title={title} id={id} /> 

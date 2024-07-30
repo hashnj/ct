@@ -16,32 +16,28 @@ const WishPage = () => {
     const list = useRecoilValueLoadable(getWList);
     const slist = useRecoilValueLoadable(wList);
 
-    const [n, setN] = useState({});
     const [load, setLoad] = useState(true);
-    let loadInterval;
 
     useEffect(() => {
         document.body.classList = theme;
-        if(wList.state==='hasValue'){
+        if (wList.state === 'hasValue') {
             console.log(wList);
         }
-    }, [theme,wList]);
+    }, [theme, wList]);
 
     useEffect(() => {
         if (list.state === 'hasValue') {
-            setN(list.contents.qry[0].product_id);
-            setWishList(list.contents.qry[0].product_id); 
+            console.log(list)
+            setWishList(list.contents.qry[0]?.product_id || []);
         }
-    }, [list,load]);
+    }, [list]);
 
     useEffect(() => {
-        loadInterval = setInterval(() => {
+        const loadInterval = setInterval(() => {
             setLoad(false);
-        
-        }, 300);
-        return () => {
-            clearInterval(loadInterval);
-        };
+        }, 200);
+
+        return () => clearInterval(loadInterval);
     }, []);
 
     if (list.state === 'loading' || prod.state === 'loading' || load) {
@@ -61,24 +57,25 @@ const WishPage = () => {
             <div className="bg-background rounded-md w-full min-h-screen h-full">
                 <div 
                     onClick={() => navigate('/')} 
-                    className='border-text/50 w-12 flex justify-center relative top-12 left-12 border hover:bg-primary/70 active:bg-primary hover:text-background cursor-pointer bg-primary p-1 px-2 rounded-md text-lg font-semibold'
+                    className="border-text/50 w-12 flex justify-center relative top-12 left-12 border hover:bg-primary/70 active:bg-primary hover:text-background cursor-pointer bg-primary p-1 px-2 rounded-md text-lg font-semibold"
                 >
                     <FaArrowLeft />
                 </div>
-                <div className='flex w-full justify-center text-4xl font-extrabold font-serif text-primary'>
+                <div className="flex w-full justify-center text-4xl font-extrabold font-serif text-primary">
                     WishList
                 </div>
                 <div className="px-12 py-14 min-h-1/2 overflow-y-scroll no-scrool">
-                {prod.contents.data.map((item,i) => {
-                const isWishlisted = wishList.includes(item._id);
-                        console.log(isWishlisted,wishList,item._id);
+                    {prod.contents.data.map((item) => {
+                        const isWishlisted = wishList?.includes(item._id);
+                        console.log(isWishlisted, wishList, item._id);
                         return isWishlisted ? (
                             <WishPageComponent 
-                                key={i} 
+                                key={item._id} 
                                 title={item.name} 
                                 description={item.description} 
                                 price={item.price}
                                 image={item.images}
+                                id={item._id}
                             />
                         ) : null;
                     })}
@@ -87,7 +84,7 @@ const WishPage = () => {
         );
     }
 
-    return null; 
+    return null;
 };
 
 export default WishPage;

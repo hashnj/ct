@@ -94,8 +94,8 @@ export const EditItem = () => {
     };
 
     return (
-        <div className='bg-backgrounds min-h-screen w-screen h-full flex text-text justify-center items-center'>
-            <form className="max-w-md mx-auto bg-background rounded-lg p-4" onSubmit={handleSubmit}>
+        <div className='bg-backgrounds/70  absolute top-0 left-0 min-h-screen w-screen h-full flex text-text justify-center items-center'>
+            <form className="max-w-md mx-auto z-30 bg-background rounded-lg p-4" onSubmit={handleSubmit}>
                 <div className='mb-5 -ml-1 flex '>
                     <div onClick={() => {
                                     setItemType('product');
@@ -256,7 +256,7 @@ export const EditItem = () => {
                     Edit {itemType === 'product' ? 'Product' : 'Category'}
                 </button>
             </form>
-        </div>
+         </div>
     );
 };
 

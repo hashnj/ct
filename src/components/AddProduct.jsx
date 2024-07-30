@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { addP } from '../store/listing';
-import { useRecoilState } from 'recoil';
-import { FaArrowLeft } from 'react-icons/fa';
+import { useRecoilState, useRecoilValueLoadable } from 'recoil';
+import { FaArrowLeft, FaPlus } from 'react-icons/fa';
+import { ImCross } from 'react-icons/im';
+import { categories } from '../store/products';
 
 const AddProduct = () => {
     const [product, setProduct] = useState({
@@ -13,6 +15,7 @@ const AddProduct = () => {
         stock: '',
         image: ''
     });
+    const category = useRecoilValueLoadable(categories);
 
     const [ap,setAddP]=useRecoilState(addP)
 
@@ -49,25 +52,27 @@ const AddProduct = () => {
             location.reload();
         }
     };
-    
+
+
+    if (category.state === 'loading') {
+        return <div>Loading...</div>;
+    }
+
+    if (category.state === 'hasError') {
+        return <div>Error loading data.</div>;
+    }
+
+    if (category.state === 'hasValue') {
+
     return (
-    <div className='bg-backgrounds min-h-screen w-screen h-full overflow-scrool no-scroll flex text-text justify-center items-center'>
-        <form className="max-w-md bg-background rounded-lg mx-auto p-4" onSubmit={handleSubmit}>
-        <div className=' mb-5 -ml-1 flex '>
+    <div className='absolute z-10 bg-backgrounds/10 min-h-screen w-screen h-full overflow-scrool no-scroll flex text-text justify-center items-center'>
+        <form className="max-w-md border-2 border-text/10 bg-background rounded-lg mx-auto p-6" onSubmit={handleSubmit}>
+        <div className=' mb-5 mr-1 flex float-right '>
             <div onClick={()=>{setAddP(false)}} className='border-text/10 border hover:bg-primary/70 active:bg-primary hover:text-background cursor-pointer bg-backgrounds/50 p-1 px-2 rounded-md text-lg font-semibold'>
-                <FaArrowLeft/></div>
+                <ImCross/></div>
         </div>
             
             <h2 className="text-xl font-bold mb-4">Add New Product</h2>
-            <input
-                className="w-full bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
-                type="text"
-                name="category"
-                placeholder="Category"
-                value={product.category}
-                onChange={handleChange}
-                required
-            />
             <input
                 className="w-full bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
                 type="text"
@@ -85,8 +90,9 @@ const AddProduct = () => {
                 onChange={handleChange}
                 required
             />
+            <div className='w-full flex justify-between items-center '>
             <input
-                className="w-full bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
+                className="w-[49%]  bg-backgrounds/50 p-2 mb-2  border-text/5 rounded"
                 type="number"
                 name="mrp"
                 placeholder="MRP"
@@ -94,6 +100,18 @@ const AddProduct = () => {
                 onChange={handleChange}
                 required
             />
+            <select
+                className="w-[49%]  bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
+                type="text"
+                name="category"
+                placeholder="Select Category"
+                value={product.category}
+                onChange={handleChange}
+                required
+            >
+                <option className='text-text/30 ' disabled selected value="">Select Category</option>
+            </select>
+            </div>
             <input
                 className="w-full bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
                 type="number"
@@ -121,12 +139,13 @@ const AddProduct = () => {
                 onChange={handleChange}
                 required
             />
-            <button className="w-full p-2 bg-primary  text-text rounded" type="submit">
-                Add Product
+            <button className="w-full p-2 bg-primary flex justify-center items-center text-text rounded" type="submit">
+                <FaPlus className='size-5 pr-1'/> Add Product
             </button>
         </form>
         </div>
     );
+}
 };
 
 export default AddProduct;

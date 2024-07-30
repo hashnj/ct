@@ -21,7 +21,7 @@ export const Nav = ({home}) => {
   }, [theme]);
 
 
-
+if(info.state === 'hasValue'){
   return (
     <div className={`flex justify-between z-20 bg-background w-full py-3 px-4 border-b fixed top-0 left-0 ${theme=='dark' ? 'border-gray-700' : 'border-gray-300'}`}>
       <div className="flex items-center">
@@ -30,7 +30,7 @@ export const Nav = ({home}) => {
       {home && <div className="w-4/5 px-2 sm:px-4 md:px-12 lg:px-52 xl:px-72  mx-auto">
       <div className="w-full rounded-xl border-primary flex border">
         <div className="w-12 flex justify-center items-center pointer-events-none"> <FaSearch/></div>
-        <Search suggestions={['Nikhilesh','jj','NikhileshNikhilesh']}/>        
+        <Search />        
       </div>
       </div>}
       <div className="flex items-center  space-x-4">
@@ -103,8 +103,9 @@ export const Nav = ({home}) => {
                     <Profile/>
                     </div>
                   <div>
-                      <div className="text-lg">{info?.info?.userName || info?.info?.userr?.userName}</div>
-                      <div>{info?.info?.email || info?.info?.userr?.email}</div>
+                    {console.log(info.contents.info)}
+                      <div className="text-lg">{info.contents?.info?.userName || info.contents?.info?.userr?.userName}</div>
+                      <div>{info.contents?.info?.email || info.contents?.info?.userr?.email}</div>
                     </div>
                   </div>
                 </MenuItem>
@@ -184,6 +185,7 @@ export const Nav = ({home}) => {
       </div>
     </div>
   );
+}
 };
 
 
