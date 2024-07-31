@@ -13,7 +13,16 @@ import { WishList } from "../components/WishList";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { themeState } from "../store/atoms";
 
-export const Main = () => {
+const images = [
+    'https://jumbotail.com/wp-content/uploads/2019/07/wide-range-of-products-500px.jpg',
+    'https://jumbotail.com/wp-content/uploads/2019/07/wide-range-of-products-500px.jpg',
+    'https://jumbotail.com/wp-content/uploads/2019/07/wide-range-of-products-500px.jpg',
+    'https://jumbotail.com/wp-content/uploads/2019/07/wide-range-of-products-500px.jpg',
+    'https://jumbotail.com/wp-content/uploads/2019/07/wide-range-of-products-500px.jpg',
+];
+
+
+export const Product=()=>{
     const [productData, setProductData] = useState([]);
     const [active, setActive] = useRecoilState(sideBar);
     const [filter, setFilter] = useRecoilState(filterr);
@@ -62,10 +71,13 @@ export const Main = () => {
                     <Cartt size={14} sub={true} />
                 </div>
             </div>
-            <div className={`w-full h-full pt-20 transition-all duration-300 ${active ? 'pl-64' : 'w-full'} no-scroll`}>
-                <div className={`w-full flex-col min-h-screen transition-all duration-300 flex h-full ${active ? '' : "px-5 sm:px-8 md:px-10 lg:px-20"}`}>
-                    <div className={`w-full pr-16 md:w-1/4 sticky top-20 rounded-md  ml-3 transition-all duration-300 my-1 mr-2  ${active ? 'mr-1 pr-72' : ''}`}>
-                        <div className=""></div>
+            <div className={`w-full h-full transition-all duration-300 ${active ? 'pl-64' : 'w-full'} no-scroll`}>
+                <div className="w-full mb-2 -z-3 pt-20 mt-4 sm:mt-0 h-auto">
+                    <ImageScroller images={images} />
+                </div>
+                <div className={`w-full min-h-screen transition-all duration-300 flex h-full ${active ? '' : "px-5 sm:px-8 md:px-10 lg:px-20"}`}>
+                    <div className={`w-2/5 md:w-1/4 rounded-md ml-3 transition-all duration-300 my-1 mr-2 ${filter ? 'absolute w-2/5 md:w-1/5' : ''} ${active ? 'mr-1' : ''}`}>
+                        <FilterComponent />
                     </div>
                     <div className={`grid bg-background transition-all ${filter ? 'mt-20 w-full grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5' : 'grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'} px-1 rounded-md sm:px-2 md:px-4 duration-300 float-right min-h-screen h-full ${active ? 'grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4' : '2xl:grid-cols-4'}`}>
                         {productData.map((product, index) => (

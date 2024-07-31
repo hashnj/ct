@@ -10,7 +10,7 @@ const WishPageComponent = ({ title, description, image, price,id }) => {
     setList(prev => isactive ? prev.filter(itemId => itemId !== id) : [...prev, id]);
   }
   return (
-    <div className="w-full flex my-3 justify-between p-6 items-center px-10 bg-text/50 rounded-md">
+    <div className="w-full grid my-3 grid-cols-4 justify-between p-6 items-center px-10 bg-text/50 rounded-md">
       <div className="flex justify-center items-center">
         <div className="size-16 flex justify-center items-center overflow-hidden rounded-full">
           <img src={image} alt="" />

@@ -17,7 +17,7 @@ export const ShowCategories = () =>{
   const [ac, setAddC] = useRecoilState(addC);
   const [ed, setEd] = useRecoilState(edit);
   const [show,setShow] = useRecoilState(Show);
-
+  const [ cat , setCat ] = useState(true);
 
   useEffect(()=>{
     document.body.classList=theme
@@ -41,24 +41,38 @@ if(category.state === 'hasError'){
 }
 if(category.state === 'hasValue'){
     return (
-        <div className="absolute z-20 cursor-default text-text top-0 p-36 w-screen h-screen flex justify-center items-center bg-backgrounds/40">
+        <div className="absolute z-10  cursor-default text-text top-0 p-36 w-screen h-screen flex justify-center items-center backdrop-blur-sm">
             {ed && <div>
                 <div className="z-10" onClick={()=>{
                 setEd(false)
             }}> </div> 
             <EditItem/></div>}
-          <div className="bg-backgrounds absolute rounded-lg w-4/5 lg:w-3/5 h-4/5 p-8 overflow-hidden  ">
-            <div className="text-3xl flex justify-between font-semibold  border-b-2 mx-4 border-primary/60 pb-6 ">
-              <div className="w-full text-center underline">Categories Available</div>
+          <div className="bg-background border-2 border-text/10 absolute rounded-lg w-4/5 lg:w-3/5 h-4/5 overflow-hidden  ">
+            <div className="text-2xl p-4 flex justify-between font-semibold  border-b-2 border-text/10 ">
+              <div className="w-full text-3xl">Categories Available</div>
               <div 
-                className="cursor-pointer hover:text-primary active:text-text bg-text/5  shadow-text  border-inset hover:border m-px hover:m-0 rounded p-2 hover:drop-shadow-[0_0_4px_rgba(0,0,0,0.5)] hover:bg-primary/10 "
+                className="cursor-pointer text-text/80 hover:text-text active:text-text/50 hover:bg-text/20  rounded p-2"
                 onClick={() => setShow(false)}>
                     <ImCross className="size-6"/>
               </div>
               </div>
-              <div className="h-full w-full pb-10 pt-2 scroll-smooth no-scrool overflow-scroll">
+              <div className="h-4/5 w-full p-4 scroll-smooth no-scrool overflow-scroll">
                     <div>
-                    <table className="w-full">
+                        <div className="flex text-2xl mb-4 h-12 w-full justify-center items-center">
+                          See : &nbsp; 
+                          <div 
+                            className={`${cat?'text-text underline bg-primary/70 p-2 rounded':'text-text/70'} transition-all duration-300`} 
+                            onClick={()=>{setCat(c=>!c)}}>
+                              Categories
+                          </div> &nbsp; 
+                          / &nbsp; 
+                          <div 
+                            className={`transition-all duration-300 ${cat?'text-text/70':'text-text underline bg-primary/70 p-2 rounded'}`} 
+                            onClick={()=>{setCat(c=>!c)}}>
+                              Sub-Categories
+                          </div>
+                        </div>
+                    {cat?<table className="w-full transition-all duration-500">
                     <thead className="text-2xl">
                       <tr>
                         <th className="border-r border-text/40 border-b">S.no.</th>
@@ -85,9 +99,9 @@ if(category.state === 'hasValue'){
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                  </table>:
                   
-                  <table className="w-full mt-8">
+                  <table className="w-full transition-all duration-500 ">
                     <thead className="text-2xl">
                       <tr>
                         <th className="border-r border-text/40 border-b">S.no.</th>
@@ -127,7 +141,7 @@ if(category.state === 'hasValue'){
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                  </table>}
                   </div>
             </div>
           </div>

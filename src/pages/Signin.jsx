@@ -22,6 +22,11 @@ export const Signin = () => {
   const theme = useRecoilValue(themeState);
   const [send,setSend] =useState('');
   const role=useRecoilValue(rol);
+  const [visible ,setVisible] = useState(false);
+
+
+  let visibleInterval;
+
 
   useEffect(() => {
     console.log(role);
@@ -39,6 +44,21 @@ export const Signin = () => {
 
 
   }, []);
+
+
+
+  useEffect(()=>{
+    visibleInterval = setInterval(() => {
+        setVisible(true)
+    }, 800);
+
+    return ()=>{
+        clearInterval(visibleInterval);
+    }
+},[visible])
+
+
+
   useEffect(()=>{
     if (!validate(email)) {
       if (userName) {
@@ -173,9 +193,14 @@ export const Signin = () => {
             </div>
             <div>
               <h1 className='pt-4 font-bold text-2xl'>Hey, Hello 👋</h1>
-              <p className='text-text pb-2'>Enter the information you entered while registering</p>
+              <p className={`text-text pb-2 ${visible?'animate-fadeIn':'hidden'} `}>Enter the information you entered while registering</p>
             </div>
+            <div className={`${
+                            visible ? 'animate-fadeIn' : 'animate-fadeOut hidden'
+                            } transition-all duration-500`}
+                        >
             <Form type={'signin'} butText={'Login'} handleSubmit={handleSubmit}/>
+            </div>
             {/* <div className='flex px-2 mt-8'>
             <div className='flex mx-12 justify-around w-full'>
               <div className='p-1 rounded-full border border-text/30  hover:border-blue-500' >
@@ -210,6 +235,9 @@ export const Signin = () => {
                 }}>Create an account</span>
               </div>
             </div> */}
+            <div className={`text-text font-mono ${visible?'hidden animate-fadeOut':'animate-pulse'} font-extrabold text-5xl`}>
+                            Signing-in
+                        </div>
           </div>
         </div>
       </div>

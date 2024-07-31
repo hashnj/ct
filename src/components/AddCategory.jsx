@@ -12,12 +12,6 @@ const AddCategory = () => {
         isSubCategory: false
     });
     const [ac,setAddC]=useRecoilState(addC)
-    // const [subCategory, setSubCategory] = useState({
-    //     name: '',
-    //     description: '',
-    //     isSubCategory: false
-    // });
-
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         const inputValue = type === 'checkbox' ? checked : value;
@@ -50,14 +44,17 @@ const AddCategory = () => {
 
 
     return (
-    <div className='bg-backgrounds/10 absolute z-10  min-h-screen w-screen h-full flex text-text justify-center items-center'>
-        <form className="max-w-md mx-auto bg-background border-2 border-text/10 rounded-lg p-4" onSubmit={handleSubmit}>
-            <div className=' mb-5 mr-1 float-right flex '>
-                <div onClick={()=>{setAddC(false)}} className='border-text/10 border hover:bg-primary/70 active:bg-primary hover:text-background cursor-pointer bg-backgrounds/50 p-1 px-2 rounded-md text-lg font-semibold'>
+    <div className='backdrop-blur-sm absolute z-10  min-h-screen w-screen h-full flex text-text justify-center items-center'>
+        <form className="max-w-md mx-auto bg-background border-2 border-text/10 rounded-lg" onSubmit={handleSubmit}>
+            <div className='flex p-4 items-center flex-row-reverse justify-between border-b-2 border-text/10'>
+            <div className='flex '>
+                <div onClick={()=>{setAddC(false)}} className='hover:bg-text/10 hover:text-text cursor-pointer p-2 rounded-md text-xl '>
                     <ImCross/>
                 </div>
             </div>
-            <h2 className="text-xl font-bold mb-4">Add New Category</h2>
+            <h2 className="text-2xl font-bold ">Add New Category</h2>
+            </div>
+            <div className='p-4'>
             <input
                 className="w-full p-2 bg-backgrounds/50  mb-2 border-text/5 rounded"
                 type="text"
@@ -86,23 +83,26 @@ const AddCategory = () => {
                     value={category.parent}
                     placeholder="Parent Category Name"
                     onChange={handleChange}
-                /></>):''
+                />
+                </>
+                ):null
             }
-            <div className="mb-4">
+            <div className="mb-4 ml-1">
                 <label className="inline-flex  items-center">
                     <input
                         type="checkbox"
                         name="isSubCategory"
                         checked={category.isSubCategory}
                         onChange={handleChange}
-                        className="form-checkbox"
+                        className="bg-backgrounds/20 border-text/10 rounded"
                     />
                     <span className="ml-2">Is Sub-Category</span>
                 </label>
             </div>
-            <button className="w-full p-2 bg-primary font-semibold flex justify-center items-center rounded" type="submit">
-            <FaPlus className='size-5 pr-1'/>Add Category
+            <button className="px-4 p-2 bg-primary font-semibold group flex text-text  justify-center items-center rounded" type="submit">
+            <FaPlus className='size-5 pr-1 group-hover:animate-pulse'/>Add Category
             </button>
+            </div>
         </form>
     </div>
     );

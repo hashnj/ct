@@ -65,16 +65,19 @@ const AddProduct = () => {
     if (category.state === 'hasValue') {
 
     return (
-    <div className='absolute z-10 bg-backgrounds/10 min-h-screen w-screen h-full overflow-scrool no-scroll flex text-text justify-center items-center'>
-        <form className="max-w-md border-2 border-text/10 bg-background rounded-lg mx-auto p-6" onSubmit={handleSubmit}>
-        <div className=' mb-5 mr-1 flex float-right '>
-            <div onClick={()=>{setAddP(false)}} className='border-text/10 border hover:bg-primary/70 active:bg-primary hover:text-background cursor-pointer bg-backgrounds/50 p-1 px-2 rounded-md text-lg font-semibold'>
+    <div className='absolute z-10 backdrop-blur-sm min-h-screen w-screen h-full overflow-scrool no-scroll flex text-text justify-center items-center'>
+        <form className="max-w-md border-2 border-text/10 bg-background rounded-lg mx-auto " onSubmit={handleSubmit}>
+        <div className=' p-4 border-b-2 flex justify-between flex-row-reverse items-center border-text/10'>
+        <div className='flex float-right '>
+            <div onClick={()=>{setAddP(false)}} className='hover:bg-text/20 active:ring-2 ring-primary hover:text-text cursor-pointer p-2 rounded-md text-lg '>
                 <ImCross/></div>
         </div>
             
-            <h2 className="text-xl font-bold mb-4">Add New Product</h2>
+            <h2 className="text-2xl font-bold text-text">Add New Product</h2>
+            </div>
+            <div className='p-4 '>
             <input
-                className="w-full bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
+                className="w-full focus:ring-primary focus:border-none active:ring-primary focus:ring-2 bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
                 type="text"
                 name="name"
                 placeholder="Product Name"
@@ -83,7 +86,7 @@ const AddProduct = () => {
                 required
             />
             <textarea
-                className="w-full bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
+                className="w-full bg-backgrounds/50 focus:ring-primary focus:border-none focus:ring-2 active:ring-primary p-2 mb-2 border-text/5 rounded"
                 name="description"
                 placeholder="Description"
                 value={product.description}
@@ -92,7 +95,7 @@ const AddProduct = () => {
             />
             <div className='w-full flex justify-between items-center '>
             <input
-                className="w-[49%]  bg-backgrounds/50 p-2 mb-2  border-text/5 rounded"
+                className="w-[49%] focus:ring-primary focus:border-none focus:ring-2 active:ring-primary  bg-backgrounds/50 p-2 mb-2  border-text/5 rounded"
                 type="number"
                 name="mrp"
                 placeholder="MRP"
@@ -101,7 +104,7 @@ const AddProduct = () => {
                 required
             />
             <select
-                className="w-[49%]  bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
+                className="w-[49%] focus:ring-primary focus:border-none focus:ring-2 active:ring-primary  bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
                 type="text"
                 name="category"
                 placeholder="Select Category"
@@ -113,7 +116,7 @@ const AddProduct = () => {
             </select>
             </div>
             <input
-                className="w-full bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
+                className="w-full bg-backgrounds/50 focus:ring-primary focus:border-none focus:ring-2 active:ring-primary p-2 mb-2 border-text/5 rounded"
                 type="number"
                 name="price"
                 placeholder="Your Price"
@@ -122,7 +125,7 @@ const AddProduct = () => {
                 required
             />
             <input
-                className="w-full bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
+                className="w-full bg-backgrounds/50 p-2 mb-2 focus:ring-primary focus:ring-2 focus:border-none active:ring-primary border-text/5 rounded"
                 type="number"
                 name="stock"
                 placeholder="Stock Available"
@@ -131,7 +134,7 @@ const AddProduct = () => {
                 required
             />
             <input
-                className="w-full bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
+                className="w-full bg-backgrounds/50 focus:ring-primary focus:ring-2 focus:border-none active:ring-primary p-2 mb-2 border-text/5 rounded"
                 type="text"
                 name="image"
                 placeholder="Image Link"
@@ -139,9 +142,10 @@ const AddProduct = () => {
                 onChange={handleChange}
                 required
             />
-            <button className="w-full p-2 bg-primary flex justify-center items-center text-text rounded" type="submit">
-                <FaPlus className='size-5 pr-1'/> Add Product
+            <button className="px-4 group p-2 hover:bg-primary focus:ring-2 active:ring-4 active:ring-primary bg-primary/70 flex justify-center items-center mt-2 text-text rounded" type="submit">
+                <FaPlus className='size-5 pr-1 group-hover:animate-pulse transition-all '/> <div className='group-hover:underline underline-offset-2 font-semibold'>Add Product</div>
             </button>
+            </div>
         </form>
         </div>
     );

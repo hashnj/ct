@@ -19,6 +19,12 @@ export const Signup = () => {
     const theme = useRecoilValue(themeState);
     const [path,setPath]=useRecoilState(pathh);
     const [role,setRole]=useRecoilState(rolee);
+    const [visible ,setVisible] = useState(false);
+
+
+    let visibleInterval;
+
+
 
     useEffect(() => {
         if (error) {
@@ -48,6 +54,16 @@ export const Signup = () => {
     useEffect(() => {
         document.body.classList = theme;
     }, [theme]);
+
+    useEffect(()=>{
+        visibleInterval = setInterval(() => {
+            setVisible(true)
+        }, 800);
+
+        return ()=>{
+            clearInterval(visibleInterval);
+        }
+    },[visible])
 
     const validate = (v) => {
         const emailRegex = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$');
@@ -116,10 +132,15 @@ export const Signup = () => {
                         <div className='py-3 flex justify-center cursor-pointer text-primary text-4xl font-serif' onClick={() => nav('/dashboard')}> CoreCart <Cart/> </div>
                         <div>
                             <h1 className='py-4 font-bold text-2xl'>Hey, Hello 👋</h1>
-                            <p className='text-text/60'>{role==='Vendor'?'Enter Vendor Details:':role=='Admin'?'Enter Admin Details:':'Create a new user account:'}</p>
+                            <p className={`text-text/60 ${visible ? 'animate-fadeIn':'hidden'}`}>{role==='Vendor'?'Enter Vendor Details:':role=='Admin'?'Enter Admin Details:':'Create a new user account:'}</p>
                         </div>
+                        <div className={`${
+                            visible ? 'animate-fadeIn' : 'animate-fadeOut hidden'
+                            } transition-all duration-500`}
+                        >
                         <Form butText={'Create an Account'} type={'signup'} handleSubmit={handleSubmit} />
-                        <div className="text-center text-text w-full">
+                        </div>
+                        <div className={`text-center text-text w-full ${visible ? 'animate-fadeIn ':' hidden'}`}>
                         Register as : {role=== 'Customer' ?<button className="text-primary" onClick={()=>{
                             setPath('/auth/register/vendor')
                             setRole('Vendor')
@@ -138,6 +159,9 @@ export const Signup = () => {
                             setRole('Admin');
                     
                             }}>Admin</button> }
+                        </div>
+                        <div className={`text-text font-mono ${visible?'hidden animate-fadeOut':'animate-pulse'} font-extrabold text-5xl`}>
+                            Signing-up
                         </div>
                     </div>
                 </div>

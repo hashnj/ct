@@ -11,6 +11,7 @@ import { ShowCategories } from "../components/ShowCategories";
 import { addC, addP, Show } from "../store/listing";
 import AddCategory from "../components/AddCategory";
 import AddProduct from "../components/AddProduct";
+import { PnL } from "../components/PnL";
 
 export const Dashboard = () => {
     const detailsLoadable = useRecoilValueLoadable(detailsSelector);
@@ -20,6 +21,7 @@ export const Dashboard = () => {
     const [show,setShow]=useRecoilState(Show);
     const [ap, setAddP] = useRecoilState(addP);
   const [ac, setAddC] = useRecoilState(addC);
+  const [pnl, setPnl] = useState(false);
 
     useEffect(()=>{
         document.body.classList=theme;
@@ -53,16 +55,28 @@ export const Dashboard = () => {
     }
 
     return (
-        <div className={`flex flex-col justify-center relative items-center bg-backgrounds  text-text w-full min-h-screen ${show || ap || ac ?'overflow-hidden h-screen':'h-full'}`}>
+        <div className={`flex flex-col justify-center relative items-center bg-backgrounds  text-text w-full min-h-screen ${show || ap || ac || pnl ||del ?'overflow-hidden h-screen':'h-full'}`}>
             {show && <ShowCategories/>}
             {ap &&<AddProduct/>}
             {ac &&<AddCategory/>}
+            {pnl && 
+            <div className="w-screen min-h-screen h-full backdrop-blur-sm z-20 absolute top-0 flex justify-center items-center">
+            <div className="border-2 border-text/10 bg-background rounded-xl w-11/12 top-28  ">
+                <div className="text-xl p-6 border-b-2 border-text/10  font-bold flex justify-between">
+                    <div className="text-2xl">Products</div>
+                    <div className="p-2 rounded-lg text-text/40 hover:text-text hover:bg-text/10 " onClick={()=>{ setPnl(false)}}><ImCross/></div>
+                </div>
+                <div className="p-6 pt-0 overflow-scroll no-scrool"><PnL/></div>
+                </div>
+                </div>
+                }
             <Nav />
             <SideBar top='Dashboard' />
             <div className={`${active?'md:pl-72 ':''} transition-all  duration-300 w-full h-full pt-20  ${active?'mr-6':'px-5 sm:px-10 lg:mx-10 md:pl-24 md:pr-16'}  `}>
-                {del && <div onClick={()=>setDel(false)} className="fixed z-20 w-full h-full flex justify-center items-center">
+                {del && 
+                <div className="z-10 absolute w-screen h-screen flex justify-center items-center">
                     <div className="w-[400px] z-30 bg-backgrounds relative h-72 md:mr-20 mb-10 rounded-xl">
-                        <div className="absolute right-3 rounded-md text-3xl text-text/70 p-2 bg-background/50 hover:bg-background/70 hover:text-text hover:scale-95 top-2"><ImCross/></div>
+                        <div className="absolute right-3 rounded-md text-3xl text-text/70 p-2 bg-background/50 hover:bg-background/70 hover:text-text hover:scale-95 top-2" onClick={()=>{setDel(false)}} ><ImCross/></div>
                         <div className="w-full h-full flex justify-center items-center flex-col text-text/70 font-bold text-3xl">
                         <div>Are You Sure ????</div>
                         <div className="font-semibold text-text text-lg mt-4">
@@ -75,7 +89,7 @@ export const Dashboard = () => {
                     </div>
                 </div>}
                 
-            <div className="text-2xl font-bold font-serif pt-2 pb-4 pl-2">Admin DashBoard</div>
+            <div className="text-3xl font-bold font-serif pt-2 pb-4 pl-2">Admin DashBoard</div>
             <div className={`transition-all duration-300 w-full h-full  grid grid-cols-2 lg:frid-cols-3 xl:grid-cols-4 gap-5`}>
                 
                 <div className="bg-background shadow-[0_0_4px]  shadow-text/5 rounded-lg min-w-[200px] p-2 pt-4 pl-4">
@@ -90,7 +104,9 @@ export const Dashboard = () => {
                         </div>
                         <div className="flex absolute bottom-1 ">
                             <button className="md:px-4 p-3 font-thin text-text text-sm md:text-base float-end hover:text-text transition-all duration-300 rounded-md m-1 bg-text/10 hover:bg-primary" 
-                            onClick={()=>{}}>
+                            onClick={()=>{ 
+                                setPnl(true);
+                            }}>
                                 View Products
                                 </button>
                             <button className="md:px-4 p-3 font-thin text-text text-sm md:text-base hover:text-primary transition-all duration-300 rounded-md m-1 bg-text/10 hover:bg-primary/10" 
@@ -140,7 +156,7 @@ export const Dashboard = () => {
                         <div className="overflow-scroll  no-scrool mt-5 md:px-4 ">
                         <div className=" flex justify-around font-serif underline-offset-4 text-text pb-4 underline"><span>User Name</span> <span>Role</span> <span>Actions</span></div>
                         
-                            {data.users ? data.users.map((user,key) => <div className="flex justify-between text-text/40 text-base" key={key}><div className="w-1/3 md:flex justify-center">{user.userName}</div> <div className='w-1/3 md:flex justify-center pl-8'>{user.role}</div><div className="flex justify-center w-1/3 text-red-600 cursor-pointer" onClick={()=>setDel(true)}><AiFillDelete/></div></div> ):''}
+                            {data.users ? data.users.map((user,key) => <div className="flex font-thin justify-between text-text/80 text-lg" key={key}><div className="w-1/3 md:flex justify-center">{user.userName}</div> <div className='w-1/3 md:flex justify-center pl-8'>{user.role}</div><div className="flex justify-center w-1/3 text-red-600 cursor-pointer" onClick={()=>setDel(true)}><AiFillDelete/></div></div> ):''}
                         
                         </div>
                     </div>
