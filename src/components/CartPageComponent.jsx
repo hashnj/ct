@@ -2,10 +2,14 @@ import { ImCross } from "react-icons/im";
 import { useRecoilState } from 'recoil'
 import { cartState } from "../store/aCart";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const CartPageComponent = ({ title, description, image, price, id,mrp }) => {
   const [list,setList] = useRecoilState(cartState)
   const [quantity , setQuantity] = useState(1)
   const isactive = list.includes(id);
+
+  const nav = useNavigate();
+
   const plus = () => {setQuantity(q=>q+1)}
   const minus = () => {setQuantity(q=>q>1?q-1:q)}
   const removeItem=()=>{
@@ -14,7 +18,7 @@ const CartPageComponent = ({ title, description, image, price, id,mrp }) => {
 
   }
   return (
-  <div className="w-full cursor-default text-text border-double border-text grid  grid-col-3 sm:grid-cols-4 gap-2 my-3 justify-between p-2 items-center bg-backgrounds/90 rounded-md">
+  <div onClick={()=>{nav(`/product/${id}`)}} className="w-full cursor-default text-text border-double grid  grid-col-3 sm:grid-cols-4 gap-2 my-3 justify-between p-2 items-center bg-background border-2 border-text/50 hover:border-text/30 hover:scale-100 scale-[.99] transition-all duration-300  rounded-md">
     <div className="flex justify-center items-center col-span-3 sm:col-span-1">
       <div className="size-36 rounded-md flex justify-center items-center overflow-hidden">
         <img src={image} alt="" />
@@ -34,10 +38,10 @@ const CartPageComponent = ({ title, description, image, price, id,mrp }) => {
       {/* <div className="pr-2 text-primary font-bold drop-shadow-[1px_1px_1px_rgb(225,225,225)] text-xl">
         {mrp&& mrp<price ? <div className="">${mrp}</div> : ''}${price}
       </div> */}
-      <div className="flex h-10 justify-end w-full">
-        <button className="p-1 pl-2 h-full  text-xl bg-background rounded-l-md" onClick={minus}>-</button>
-        <input type="number" readOnly value={quantity} min={0} className=" cursor-default focus:ring-0 focus:border-0 h-full bg-background border-none px-[2px] w-8 py-1 text-center touch-none select-none " />
-        <button className="p-1 text-xl bg-background h-full rounded-r-md" onClick={plus}>+</button>
+      <div className="flex h-10 justify-end  w-full">
+        <button className="p-1 pl-2 h-full  text-xl bg-backgrounds font-bold rounded-l-md" onClick={minus}>-</button>
+        <input type="number" readOnly value={quantity} min={0} className=" cursor-default focus:ring-0 focus:border-0 h-full bg-backgrounds border-none px-[2px] w-8 py-1 text-center touch-none select-none " />
+        <button className="p-1 text-xl bg-backgrounds h-full rounded-r-md font-bold" onClick={plus}>+</button>
 
       </div>
       <div title="Remove" className="text-xl p-2 pb-0 pt-4 w-full flex items-end justify-end text-red-600">
