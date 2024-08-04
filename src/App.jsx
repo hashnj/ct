@@ -20,6 +20,7 @@ import WishPage from './pages/WishPage'
 import CartPage from './pages/CartPage'
 import ProductInfo from './pages/ProductInfo'
 import { Product } from './pages/Products'
+import { Checkout } from './components/Checkout'
 
 function App() {
   return(
@@ -37,6 +38,7 @@ function App() {
       <Route path='/your-cart' element={<CartPage />}/>
       <Route path='/products' element={<Product />}/>
       <Route path='/product/:id' element={<ProductInfo />}/>
+      <Route path='/checkout' element={<Checkout />}/>
       </Route>
       <Route path='/' element={<Main />} /> 
       {/* </Route> */}

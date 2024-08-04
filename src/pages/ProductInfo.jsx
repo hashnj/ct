@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { Nav } from '../components/Nav'
 import { FaRegHeart } from "react-icons/fa"
 import { Cart } from "../assets/Svg"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { products } from "../store/products"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import { wishListState } from "../store/wList"
@@ -17,6 +17,7 @@ const ProductInfo = () => {
     const { id } = useParams();
     const [list, setList] = useRecoilState(wishListState);
     const isactive = list.includes(id);
+    const nav = useNavigate();
 
     useEffect(()=>{
         document.body.classList=theme;
@@ -94,7 +95,7 @@ const ProductInfo = () => {
                                 handleClick()
                             }}><div>Wishlist &nbsp;</div> <FaRegHeart/></button>    
                             <button className="w-11/12 transition-all duration-700 p-3 lg:p-4 border border-primary/40 hover:border-primary m-2 rounded-xl flex justify-center items-center bg-text/5 ">Add to Cart &nbsp; <Cart size={6}/></button>    
-                            <button className="w-11/12 transition-all duration-700 p-3 lg:p-4 bg-primary/60 border border-primary/10 hover:bg-primary hover:border-primary m-2 rounded-lg">Buy Now</button>    
+                            <button className="w-11/12 transition-all duration-700 p-3 lg:p-4 bg-primary/60 border border-primary/10 hover:bg-primary hover:border-primary m-2 rounded-lg" onClick={()=>{nav('/checkout')}}>Buy Now</button>    
                         </div>
                     </div>   
 
