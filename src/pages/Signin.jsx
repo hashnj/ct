@@ -50,7 +50,7 @@ export const Signin = () => {
   useEffect(()=>{
     visibleInterval = setInterval(() => {
         setVisible(true)
-    }, 800);
+    }, 400);
 
     return ()=>{
         clearInterval(visibleInterval);

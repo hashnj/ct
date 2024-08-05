@@ -121,9 +121,9 @@ export const Signup = () => {
                             </svg>
                         </div>
                         <div>
-                            <div className='text-4xl font-bold text-gray-600 my-2'>Unlock <br /> Your Project</div>
+                            <div className='text-4xl font-bold text-gray-600 my-2'>Unlock <br /> Your Purchasing</div>
                             <div className='text-4xl font-semibold my-3'>Performance</div>
-                            <div className='text-2xl text-wrap mt-3'>You will never know everything. <br />But you will know more...</div>
+                            <div className='text-2xl text-wrap mt-3'>You will always GET everything. <br />But you will need more...</div>
                         </div>
                     </div>
                 </div>
@@ -131,36 +131,41 @@ export const Signup = () => {
                     <div className='lg:w-1/2 w-[300px]'>
                         <div className='py-3 flex justify-center cursor-pointer text-primary text-4xl font-serif' onClick={() => nav('/dashboard')}> CoreCart <Cart/> </div>
                         <div>
-                            <h1 className='py-4 font-bold text-2xl'>Hey, Hello 👋</h1>
+                            <h1 className='py-4 font-bold  text-2xl'>Hey, Hello 👋</h1>
+                            <div className={`flex flex-col p-1 text-text w-full ${visible ? 'animate-fadeIn ':' hidden'}`}>
+                                <div className="py-1">Register as : </div>
+                                <div className="bg-text/10 rounded-md flex justify-center transition-all  w-full">
+                        <button className={`w-full ${role=='Customer'?'bg-backgrounds/70':'text-sm hover:bg-background/60'} h-10 p-2 m-px transition-all  rounded-lg`} onClick={()=>{
+                            setPath('/')
+                            setRole('Customer');
+                    
+                        }}>
+                            Customer
+                        </button>
+                        <button className={`w-full ${role=='Vendor'?'bg-backgrounds/70':'text-sm hover:bg-background/60'} p-2 transition-all  rounded-lg m-px`} onClick={()=>{
+                            setPath('/auth/register/vendor')
+                            setRole('Vendor')
+                        }
+                        }>Vendor</button>
+                        <button className={`w-full ${role=='Admin'?'bg-backgrounds/70':'text-sm hover:bg-background/60'} p-2 transition-all  rounded-lg m-px`} onClick={()=>{
+                            setPath('/dashboard')
+                            setRole('Admin');
+                    
+                        }}>
+                            Admin
+                        </button> 
+                            </div>
+                        </div>
                             <p className={`text-text/60 ${visible ? 'animate-fadeIn':'hidden'}`}>{role==='Vendor'?'Enter Vendor Details:':role=='Admin'?'Enter Admin Details:':'Create a new user account:'}</p>
                         </div>
                         <div className={`${
-                            visible ? 'animate-fadeIn' : 'animate-fadeOut hidden'
+                            visible ? ' h-full' : ' h-0 hidden'
                             } transition-all duration-500`}
                         >
                         <Form butText={'Create an Account'} type={'signup'} handleSubmit={handleSubmit} />
                         </div>
-                        <div className={`text-center text-text w-full ${visible ? 'animate-fadeIn ':' hidden'}`}>
-                        Register as : {role=== 'Customer' ?<button className="text-primary" onClick={()=>{
-                            setPath('/auth/register/vendor')
-                            setRole('Vendor')
-                        }
-                        }>Vendor</button>:<button className="text-primary" onClick={()=>{
-                            setPath('/')
-                            setRole('Customer');
-                    
-                            }}>Customer</button>
-}/{role=='Admin'? <button className="text-primary" onClick={()=>{
-                            setPath('/auth/register/vendor')
-                            setRole('Vendor');
-                        }
-                        }>Vendor</button>:<button className="text-primary" onClick={()=>{
-                            setPath('/dashboard')
-                            setRole('Admin');
-                    
-                            }}>Admin</button> }
-                        </div>
-                        <div className={`text-text font-mono ${visible?'hidden animate-fadeOut':'animate-pulse'} font-extrabold text-5xl`}>
+                        
+                        <div className={`text-text font-mono ${visible?'hidden h-0':'h-full'} transition-all font-extrabold text-5xl`}>
                             Signing-up
                         </div>
                     </div>
