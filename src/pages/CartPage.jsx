@@ -20,7 +20,7 @@ const CartPage = () => {
   const [top, setTop] = useState(12);
 
   useEffect(() => {
-    document.body.classList = theme;
+    document.body.classList = theme + ' bg-background';
   }, [theme]);
 
   useEffect(() => {
