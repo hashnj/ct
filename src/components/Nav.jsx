@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { sideBar } from "../store/dash";
 import { authCheck } from "../store/auth";
-import { FaRegSun, FaSearch, FaSun } from "react-icons/fa";
+import { FaBars, FaSearch } from "react-icons/fa";
+import { ImCross } from "react-icons/im";
 import { Bell, FillSun, Gear, Moon, Out, Profile, Sun } from "../assets/Svg";
 import { Search } from "./Search";
 import { themeState } from "../store/atoms";
@@ -15,6 +16,8 @@ export const Nav = ({home}) => {
   const nav = useNavigate();
   const info = useRecoilValueLoadable(authCheck);
   const [theme,setTheme]=useRecoilState(themeState);
+  const [active, setActive] = useRecoilState(sideBar);
+
 
   useEffect(() => {
     document.body.classList = theme;
@@ -22,10 +25,15 @@ export const Nav = ({home}) => {
 
 
 if(info.state === 'hasValue'){
+  
   return (
     <div className={`flex justify-between z-20 bg-background w-full py-3 px-4 border-b fixed top-0 left-0 ${theme=='dark' ? 'border-gray-700' : 'border-gray-300'}`}>
       <div className="flex items-center">
-        <div className="text-4xl font-serif text-primary font-semibold cursor-pointer" onClick={()=>nav('/')}>CoreCart</div>
+      { info.contents.role != 'Customer' && <button onClick={()=>{setActive(!active)}} className='relative w-8 h-8  text-3xl text-primary '>
+                        <FaBars className={`${active?'opacity-0':''} absolute top-0 transition-all duration-300`}/>
+                        <ImCross className={`${active?'rotate-90':'opacity-0'} absolute top-0 transition-all duration-300`} />
+                    </button>}
+        <div className={`text-4xl relative pl-2 font-serif text-primary font-semibold cursor-pointer`} onClick={()=>nav('/')}>CoreCart</div>
       </div>
       {home && <div className="w-4/5 px-2 sm:px-4 md:px-12 lg:px-52 xl:px-72  mx-auto">
       <div className="w-full rounded-xl border-primary flex border">
@@ -103,7 +111,7 @@ if(info.state === 'hasValue'){
                     <Profile/>
                     </div>
                   <div>
-                    {console.log(info.contents.info)}
+                    {/* {console.log(info.contents.info)} */}
                       <div className="text-lg">{info.contents?.info?.userName || info.contents?.info?.userr?.userName}</div>
                       <div>{info.contents?.info?.email || info.contents?.info?.userr?.email}</div>
                     </div>

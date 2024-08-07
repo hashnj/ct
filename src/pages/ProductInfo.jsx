@@ -8,6 +8,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import { products } from "../store/products"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import { wishListState } from "../store/wList"
+import SideBar from "../components/SideBar"
+import { sideBar } from "../store/dash"
 
 const ProductInfo = () => {
 
@@ -18,6 +20,7 @@ const ProductInfo = () => {
     const [list, setList] = useRecoilState(wishListState);
     const isactive = list.includes(id);
     const nav = useNavigate();
+    const side = useRecoilValue(sideBar)
 
     useEffect(()=>{
         document.body.classList=theme;
@@ -56,7 +59,8 @@ const ProductInfo = () => {
     return(
     <div className="bg-background text-text w-full min-h-screen h-full ">
         <Nav />
-        <div className="px-12 pt-12 sm:pt-24  flex w-full h-full">
+        <SideBar/>
+        <div className={`px-12 pt-12 transition-all duration-300 sm:pt-24 ${side?'sm:pl-60 ':''} flex w-full h-full`}>
             <div className=" flex flex-col sm:flex-row p-2 sm:pt-8  w-full">
             <div className=" w-full h-full flex flex-col justify-center px-2 items-center">
                 <div className="flex justify-center sm:mt-24 transition-all duration-700  lg:mt-0 items-center h-2/3 lg:h-3/4 lg:w-1/2 rounded overflow-hidden w-4/5">

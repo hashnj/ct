@@ -25,12 +25,7 @@ export const SideBar = ({ top }) => {
         
         <div className={`fixed h-full z-10 ${active ? 'w-64 bg-background' : 'w-[50px] items-center bg-background/20'} text-text left-0 transition-all duration-300 flex flex-col ease-in-out top-0`}>
             <div className={`h-full z-10 ${active ? 'w-64 ' : 'w-[50px] items-center'} text-text transition-all duration-300 flex flex-col mt-[75px] px-1`}>
-                <div className={`flex ${active ? 'justify-end':'justify-center'} w-full px-2 py-3`}>
-                    <button onClick={handleToggle} className='text-3xl text-primary '>
-                        <FaBars />
-                    </button>
-                </div>
-                {active&& (role == 'Vendor' || role == 'Admin') && <div className='py-7 mx-auto text-2xl'>{top}</div>}
+                {active&& (role == 'Vendor' || role == 'Admin') && top && <div className='py-7 mx-auto text-2xl'>{top}</div>}
 
                 {top != 'Home' &&
                     <div onClick={() => nav('/')} className={`cursor-pointer border w-full my-1  border-text/30 py-2 flex justify-center bg-backgrounds rounded-lg hover:bg-primary hover:text-white transition-colors duration-200`}>

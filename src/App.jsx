@@ -20,7 +20,7 @@ import WishPage from './pages/WishPage'
 import CartPage from './pages/CartPage'
 import ProductInfo from './pages/ProductInfo'
 import { Product } from './pages/Products'
-import { Checkout } from './components/Checkout'
+import { Checkout } from './pages/Checkout'
 
 function App() {
   return(
