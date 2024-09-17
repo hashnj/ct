@@ -1,8 +1,8 @@
 import { atom, selector } from "recoil";
 
 export const cartState = atom({
-    key:'cart',
-    default:[]
+    key: 'cart',
+    default: []
 });
 
 export const getCart = selector({
@@ -19,18 +19,16 @@ export const getCart = selector({
 });
 
 export const cartUpdate = selector({
-    key: 'Update',
+    key: 'cartUpdate',
     get: async ({ get }) => {
         const list = get(cartState);
-        const req = await fetch('http://localhost:3000/products/cart', {
-            method: 'post',
+        await fetch('http://localhost:3000/products/cart', {
+            method: 'POST',
             headers: {
                 'Content-type': 'application/json',
                 'authorization': localStorage.getItem('token')
             },
             body: JSON.stringify({ list })
         });
-        const dta = await req.json();
-        return dta;
     }
 });

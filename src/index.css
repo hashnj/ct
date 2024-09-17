@@ -51,6 +51,14 @@ input::-webkit-inner-spin-button {
     scrollbar-width: none;  
 }
 
+.button{
+    background-color: rgb(132, 108, 249);
+    margin-top: 16px;
+    padding:8px;
+    border-radius: 6px;
+    height:40px;
+}
+
 :invalid {
     color: rgb(156, 163, 175);
   }

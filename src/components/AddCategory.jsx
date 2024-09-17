@@ -52,7 +52,7 @@ const AddCategory = () => {
                     <ImCross/>
                 </div>
             </div>
-            <h2 className="text-2xl font-bold ">Add New Category</h2>
+            <h2 className="text-2xl text-text font-bold ">Add New Category</h2>
             </div>
             <div className='p-4'>
             <input
@@ -94,13 +94,13 @@ const AddCategory = () => {
                         name="isSubCategory"
                         checked={category.isSubCategory}
                         onChange={handleChange}
-                        className="bg-backgrounds/20 border-text/10 rounded"
+                        className="bg-backgrounds/20 focus:ring-primary focus:accent-primary focus:bg-primary border-text/10 rounded"
                     />
-                    <span className="ml-2">Is Sub-Category</span>
+                    <span className="ml-2 font-thin text-text">Is Sub-Category</span>
                 </label>
             </div>
-            <button className="px-4 p-2 bg-primary font-semibold group flex text-text  justify-center items-center rounded" type="submit">
-            <FaPlus className='size-5 pr-1 group-hover:animate-pulse'/>Add Category
+            <button className="px-4 p-2 bg-primary font-semibold group flex text-text group justify-center items-center rounded" type="submit">
+            <FaPlus className='size-5 pr-1 group-hover:animate-pulse'/><div className='group-hover:underline'>Add Category</div>
             </button>
             </div>
         </form>

@@ -1,8 +1,8 @@
-import { detailsAtom } from "../store/detailsAtom";
+import { detailsSelector } from "../store/detailsAtom";
 import { useRecoilValue } from "recoil";
 
 
 const details=()=>{
-    return useRecoilValue(detailsAtom)
+    return useRecoilValue(detailsSelector);
 }
 export default details;

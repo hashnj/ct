@@ -104,16 +104,31 @@ const AddProduct = () => {
                 required
             />
             <select
-                className="w-[49%] focus:ring-primary focus:border-none focus:ring-2 active:ring-primary  bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
-                type="text"
-                name="category"
-                placeholder="Select Category"
-                value={product.category}
-                onChange={handleChange}
-                required
-            >
-                <option className='text-text/30 ' disabled selected value="">Select Category</option>
-            </select>
+            className="w-[49%] focus:ring-primary focus:border-none focus:ring-2 active:ring-primary bg-backgrounds/50 p-2 mb-2 border-text/5 rounded"
+            type="text"
+            name="category"
+            placeholder="Select Category"
+            value={product.category}
+            onChange={handleChange}
+            required
+        >
+            <option className="text-text/30" value="select">Select Category</option>
+    {
+        category.contents.categories.map((categoryItem) => (
+            <option key={categoryItem.id} value={categoryItem.name}>
+                {categoryItem.name}
+            </option>
+        ))
+    }
+    {
+        category.contents.subCategories.map((subCategoryItem) => (
+            <option key={subCategoryItem.id} value={subCategoryItem.name}>
+                {subCategoryItem.name}
+            </option>
+        ))
+    }
+</select>
+
             </div>
             <input
                 className="w-full bg-backgrounds/50 focus:ring-primary focus:border-none focus:ring-2 active:ring-primary p-2 mb-2 border-text/5 rounded"
@@ -142,8 +157,8 @@ const AddProduct = () => {
                 onChange={handleChange}
                 required
             />
-            <button className="px-4 group p-2 hover:bg-primary focus:ring-2 active:ring-4 active:ring-primary bg-primary/70 flex justify-center items-center mt-2 text-text rounded" type="submit">
-                <FaPlus className='size-5 pr-1 group-hover:animate-pulse transition-all '/> <div className='group-hover:underline underline-offset-2 font-semibold'>Add Product</div>
+            <button className="px-4 group p-2 hover:bg-primary focus:ring-2 active:ring-4 active:ring-primary bg-primary flex justify-center items-center mt-2 text-text rounded" type="submit">
+                <FaPlus className='size-5 pr-1 group-hover:animate-pulse transition-all '/> <div className='group-hover:underline font-semibold'>Add Product</div>
             </button>
             </div>
         </form>
