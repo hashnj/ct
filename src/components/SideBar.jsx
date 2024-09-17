@@ -33,9 +33,9 @@ export const SideBar = ({ top }) => {
                     {!active && <Tooltip id="home-tooltip" content="Home" />}
                 </div>}
 
-                {(role == 'Vendor' || role == 'Admin') && (
+                {(role == 'Vendor' || role == 'Admin' || role == 'Customer') && (
                     <div onClick={() => nav('/vendor')} className={`cursor-pointer border ${top == 'Vendor Dashboard' ? 'bg-primary text-text':''} border-text/30 w-full py-2 my-1 flex justify-center bg-backgrounds rounded-lg hover:bg-primary hover:text-white transition-colors duration-200`}>
-                        {active ? <><FaThLarge className='mr-2 text-xl' /> Vendor Dashboard</> : <FaThLarge />}
+                        {active ? <><FaThLarge className='mr-2 text-xl' /> Explore</> : <FaThLarge />}
                         {!active && <Tooltip id="vendor-tooltip" content="Vendor Dashboard" />}
                     </div>
                 )}

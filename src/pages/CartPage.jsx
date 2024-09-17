@@ -165,17 +165,12 @@ const CartPage = () => {
                 <div className="w-full flex justify-end font-thin text-text/80 text-sm">**Inclusive of all TAX</div>
                 <button 
                   className="bg-primary mt-4 p-2 w-full rounded-md overflow-hidden h-10 group"
-                  onClick={()=>{
+                  onClick={() => {
                     navigate('/checkout');
                   }}
                 >
-                  <div className="group-hover:-translate-y-8 transition-all duration-500 font-semibold">
-                    Check-Out
-                  </div>
-                  <div className="pt-1 transition-all duration-200 group-hover:-translate-y-8 font-extrabold">
-                    Check-Out
-                  </div>
-                  </button>
+                  <div className="text-background font-bold text-lg">Checkout</div>
+                </button>
               </div>
             </div>
           </div>
