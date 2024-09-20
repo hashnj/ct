@@ -42,10 +42,10 @@ if(category.state === 'hasError'){
 if(category.state === 'hasValue'){
     return (
         <div className="absolute z-10  cursor-default text-text top-0 p-36 w-screen h-screen flex justify-center items-center backdrop-blur-sm">
-            {ed && <div>
-                <div className="z-10" onClick={()=>{
+            {ed && <div className="min-h-screen min-w-screen w-full h-full ">sssss
+                <div className="z-20 w-screen h-screen" onClick={()=>{
                 setEd(false)
-            }}> </div> 
+            }}>  </div>
             <EditItem/></div>}
           <div className="bg-background border-2 border-text/10 absolute rounded-lg w-4/5 lg:w-3/5 h-4/5 overflow-hidden  ">
             <div className="text-2xl p-4 flex justify-between font-semibold  border-b-2 border-text/10 ">

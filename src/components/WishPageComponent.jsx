@@ -10,17 +10,17 @@ const WishPageComponent = ({ title, description, image, price,id }) => {
     setList(prev => isactive ? prev.filter(itemId => itemId !== id) : [...prev, id]);
   }
   return (
-    <div className="w-full grid my-3 grid-cols-4 justify-between p-6 items-center px-10 bg-text/50 rounded-md">
-      <div className="flex justify-center items-center">
-        <div className="size-16 flex justify-center items-center overflow-hidden rounded-full">
-          <img src={image} alt="" />
+    <div className="w-full grid my-3 grid-cols-4 p-6 items-center px-10 bg-text/25 rounded-md">
+      <div className="flex col-span-3 justify-start items-center">
+        <div className="flex justify-center items-center rounded-md overflow-hidden">
+          <img src={image} className="max-w-28 "  alt="" />
         </div>
-        <div className="flex pl-4 flex-col">
+        <div className="flex pl-6 text-text/70 flex-col">
           <span className="text-3xl font-extrabold">{title}</span>
           <span className="text-lg font-thin">{description}</span>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex col-span-1 justify-end">
         <div className="pr-2 text-primary w-24 font-bold drop-shadow-[1px_1px_1px_rgb(225,225,225)] text-xl">
           ${price}
         </div>

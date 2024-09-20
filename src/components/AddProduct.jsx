@@ -65,7 +65,7 @@ const AddProduct = () => {
     if (category.state === 'hasValue') {
 
     return (
-    <div className='absolute z-10 backdrop-blur-sm min-h-screen w-screen h-full overflow-scrool no-scroll flex text-text justify-center items-center'>
+    <div className='absolute z-10 backdrop-blur-sm min-h-screen w-screen h-full overflow-hidden no-scrool flex text-text justify-center items-center'>
         <form className="max-w-md border-2 border-text/10 bg-background rounded-lg mx-auto " onSubmit={handleSubmit}>
         <div className=' p-4 border-b-2 flex justify-between flex-row-reverse items-center border-text/10'>
         <div className='flex float-right '>

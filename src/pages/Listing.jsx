@@ -26,6 +26,8 @@ export const Listing = () => {
   const [loading, setLoading] = useState(false);
   // const [edt, setEdt] = useRecoilState(EditV);
   // const [edtc,setEdtc] = useRecoilState(EditC);
+  
+
   const category = useRecoilValueLoadable(categories);
   const active = useRecoilValue(sideBar);
   const theme = useRecoilValue(themeState)
@@ -61,6 +63,11 @@ export const Listing = () => {
         <div className="p-4 w-full  bg-background h-full rounded-xl overflow-scroll no-scrool">
           
           <PnL />
+          {ed && <div>
+                <div className="z-10" onClick={()=>{
+                setEd(false)
+            }}> </div> 
+            <EditItem/></div>}
         </div>
       </div>
     </div>

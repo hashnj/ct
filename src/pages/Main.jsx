@@ -50,10 +50,10 @@ export const Main = () => {
     }
 
     return (
-        <div className="flex flex-col min-h-screen h-full no-scroll justify-center items-center bg-backgrounds text-text w-full">
+        <div className="flex flex-col min-h-screen h-full no-scroll justify-center items-center bg-backgrounds z-20 text-text w-full">
             <Nav home={true} />
             <SideBar top="Home" />
-            <div className="fixed right-4 z-30 bottom-2">
+            <div className="fixed right-4 z-10 bottom-2">
                 <div className="h-20">
                     <WishList size={14} onMouseEnter={() => setIsShowing(true)} onMouseLeave={() => setIsShowing(false)} sub={true} />
                     {isShowing && (

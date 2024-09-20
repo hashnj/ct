@@ -1,5 +1,6 @@
 import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import auth from "../hooks/auth";
+import Footer from "./Footer";
 
 export const RequireAuth = ({ allowedRoles }) => {
     const nav=useNavigate();

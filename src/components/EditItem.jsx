@@ -94,9 +94,9 @@ export const EditItem = () => {
     };
 
     return (
-        <div className='bg-backgrounds/70  absolute top-0 left-0 min-h-screen w-screen h-full flex text-text justify-center items-center'>
-            <form className="max-w-md mx-auto z-30 bg-background rounded-lg p-4" onSubmit={handleSubmit}>
-                <div className='mb-5 -ml-1 flex '>
+        <div className='bg-backgrounds/70  absolute top-10  left-0 min-h-screen w-screen h-full flex text-text justify-center items-center'>
+            <form className="max-w-md mx-auto z-30 border border-text/20 bg-background rounded-lg p-4" onSubmit={handleSubmit}>
+                <div className='mb-5 -ml-1 flex justify-between items-center'>
                     <div onClick={() => {
                                     setItemType('product');
                                     setitemC({
@@ -116,18 +116,20 @@ export const EditItem = () => {
                                         })
                                         setEd(false)
                                     }} 
-                                    className='border-text/10 border hover:bg-primary/70 active:bg-primary hover:text-background cursor-pointer bg-backgrounds/50 p-1 px-2 rounded-md text-lg font-semibold'
+                                    className='border-text/10  border hover:bg-primary/70 active:bg-primary hover:text-background cursor-pointer bg-backgrounds/50 p-1 flex items-center px-2 rounded-md text-lg font-semibold'
                     >
-                        <FaArrowLeft/>
+                        <FaArrowLeft/> 
                     </div>
-                </div>
-                <h2 className="text-xl font-bold mb-4">Edit {itemType === 'product' ? 'Product' : 'Category'}</h2>
-                <div className="mb-4">
+                <div className="text-2xl font-bold ">Edit {itemType === 'product' ? 'Product' : 'Category'}</div>
+                    <div className=" flex flex-col justify-center ">
                     <label className="mr-4">Select Item Type:</label>
                     <select value={itemType} onChange={handleItemTypeChange} className="border-text/5 bg-backgrounds/50 rounded">
                         <option value="product">Product</option>
                         <option value="category">Category</option>
                     </select>
+                </div>
+                </div>
+                <div className='flex justify-between pb-2'>
                 </div>
                 {itemType === 'product' && (
                     <>

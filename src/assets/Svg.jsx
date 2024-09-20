@@ -5,14 +5,14 @@ export const Edit=()=>{
                                 </svg>
                                 }
 
-export const Cart=({size})=>{
-    const [si , setSize] = useState(10)
+export const Cart=({size,fil='#000000'})=>{
+    const [si , setSize] = useState(8)
     useEffect(()=>{
         if(size){
             setSize(size);
         }
     },[size])
-    return <svg viewBox="0 0 1024 1024" className={`size-8 text-primary`} version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+    return <svg viewBox="0 0 1024 1024" className={`w-${si} text-primary`} version="1.1" xmlns="http://www.w3.org/2000/svg" fill={fil}>
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
         <g id="SVGRepo_iconCarrier">

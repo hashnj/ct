@@ -113,7 +113,7 @@ const CartPage = () => {
         <div className='flex w-full justify-center text-4xl font-extrabold font-serif text-primary'>
           Cart
         </div>
-        <div className="overflow-y-scroll p-4 w-full grid grid-cols-2 md:grid-cols-3 ml-5 no-scroll">
+        <div className="overflow-y-scroll overflow-x-hidden p-4 w-full grid grid-cols-2 md:grid-cols-3 ml-5 no-scrool">
           {prod.contents.data.map((item, i) => {
             const cartItem = listt.find(cItem => cItem.product_id === item._id);
             return cartItem ? (
