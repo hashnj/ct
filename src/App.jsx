@@ -20,6 +20,7 @@ import ProductInfo from './pages/ProductInfo';
 import { Product } from './pages/Products';
 import { Checkout } from './pages/Checkout';
 import { Test } from './pages/Test';
+import { Success } from './pages/Success';
 
 function App() {
   return (
@@ -35,10 +36,11 @@ function App() {
             <Route element={<RequireAuth allowedRoles={['Customer', 'Admin', 'Vendor', 'Staff']} />}>
               <Route path="/your-profile" element={<Profile />} />
               <Route path="/wishlist" element={<WishPage />} />
-              <Route path="/your-cart" element={<CartPage />} />
+              <Route path="/cart" element={<CartPage />} />
               <Route path="/products" element={<Product />} />
               <Route path="/product/:id" element={<ProductInfo />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/order/:id" element={<Success />} />
             </Route>
             <Route element={<RequireAuth allowedRoles={['Vendor', 'Admin']} />}>
               <Route path="/vendor/info" element={<GetInfo />} />

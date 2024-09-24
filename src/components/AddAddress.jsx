@@ -2,10 +2,11 @@ import { useRecoilState } from "recoil";
 import { addAddress } from "../store/addAddress";
 import { useState } from "react";
 import { B_Url } from "../config";
+import { address } from "../store/address";
 
 export const AddAddress = () => {
   const [add, setAdd] = useRecoilState(addAddress);
-  const [adres, setAddress] = useState({ address: '', pin: '', city: '', state: '', country: '', type: 'home', def: false });
+  const [adres, setAddress] = useRecoilState(address);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +44,7 @@ export const AddAddress = () => {
       console.log(data);
 
       if (data) {
-        setAdd(false); // Close the form on successful submission
+        setAdd(false); 
       }
     } catch (error) {
       console.error('Error:', error);

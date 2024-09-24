@@ -6,25 +6,24 @@ import { useEffect } from "react";
 
 
 export const Cartt = ({ size, sub, id }) => {
-  const [list, setList] = useRecoilState(cartState); // Cart state
+  const [list, setList] = useRecoilState(cartState); 
   const ll = useRecoilValueLoadable(getCart);
   const w = useRecoilValueLoadable(cartUpdate);
   const nav = useNavigate();
-  let isactive = list?.some(i => i.product_id === id); // Check if item is in the cart
+  let isactive = list?.some(i => i.product_id === id); 
 
-  // Load the cart from backend when component mounts
   useEffect(() => {
     if (ll.state === 'hasValue' && ll.contents.qry) {
-      setList(ll.contents.qry[0].products); // Set cart state from backend response
+      setList(ll.contents.qry[0].products); 
     } else if (ll.state === 'hasError') {
       console.error("Error fetching cart", ll.contents);
     }
   }, [ll]);
 
-  // Update the cart in the backend whenever it changes
+  
   useEffect(() => {
     if (list.length) {
-      w.contents; // Trigger the cartUpdate selector
+      w.contents; 
     }
     setList(list)
   }, [list]);
@@ -39,8 +38,7 @@ export const Cartt = ({ size, sub, id }) => {
   };
 
   const handleNavigation = () => {
-    nav('/your-cart');
-    location.reload();
+    nav('/cart');
   };
 
   return (
