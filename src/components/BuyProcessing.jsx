@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValueLoadable } from "recoil";
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { buyM } from "../store/buy";
 import { ImCross } from "react-icons/im";
 import { products } from "../store/products";
@@ -12,6 +12,8 @@ import { addAddress } from "../store/addAddress";
 import { B_Url } from "../config";
 import { address } from "../store/address";
 import { cartState } from "../store/aCart";
+import { themeState } from "../store/atoms";
+import { cState } from "../store/cState";
 
 export const BuyProcessing = ( ) =>{
 
@@ -23,10 +25,14 @@ export const BuyProcessing = ( ) =>{
   const [add, setAdd] = useRecoilState(addAddress);
   const [ cart,setCart ] = useRecoilState(cartState);
   const [sa,setSelectedAddress] = useState('');
-
+  const theme =useRecoilValue(themeState)
   const prod = useRecoilValueLoadable(products);
+  const [ c, setC ] = useRecoilState(cState);
 
-  
+
+  useEffect(() => {
+    document.body.classList = theme + ' bg-background';
+  }, [theme]);
 
 
   if(prod.state === 'hasValue'){
@@ -37,7 +43,7 @@ export const BuyProcessing = ( ) =>{
   console.log(detailss);
   const address = detailss.address;
   useEffect(()=>{
-  console.log(address)
+  console.log(address ,product)
   },[add]);
 
   async function buyF(){
@@ -52,6 +58,36 @@ export const BuyProcessing = ( ) =>{
       body:JSON.stringify({quantity,product:product._id,price:product.price,address:{address:sa.rel,postal_code:sa.postal_code,city:sa.city,state:sa.state,country:sa.country}})
 
   });
+  console.log(product.name);
+
+  const data = await res.json();
+
+  if (data) {
+    const orderId = data.order._id; 
+    nav(`/order/${orderId}`);
+  }}
+  else{
+    console.log('select address');
+  }
+} catch (error) {
+  console.error("Error:", error);
+}
+}
+
+
+  async function buyC(){
+    try {
+      if(sa){
+      const res = await fetch(`${B_Url}/order/buy`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "authorization": localStorage.getItem('token')
+        },
+      body:JSON.stringify({quantity,product:product._id,price:product.price,address:{address:sa.rel,postal_code:sa.postal_code,city:sa.city,state:sa.state,country:sa.country}})
+
+  });
+  console.log(product.name);
 
   const data = await res.json();
 
@@ -90,20 +126,35 @@ async function cartF() {
         </div>
         <ImCross
           className="cursor-pointer text-3xl hover:text-primary/70 active:text-primary"
-          onClick={() => setBuy(false)} 
+          onClick={() => {
+            setBuy(false)
+            setC(false)
+          }} 
         />
       </div>
 
 
       <div className="overflow-y-auto no-scrool px-2 pt-0 h-[75%]">  
-        {/* <div className="pl-2 underline-offset-2 underline">Product:</div> */}
+        <div className="pl-2 underline-offset-2 text-xl underline">Product:</div>
 
-        <div className="flex justify-between px-1 py-3 text-2xl text-primary">
+        {c?(prod.contents.data.map((item, i) => {
+                  const isAdded = cart.some(i => i.product_id === item._id);
+                  return isAdded ? (
+                    <div key={item._id} className="flex text-xl w-full px-2 font-normal text-text/85 justify-between">
+                      <div className="w-1/3 text-primary text-2xl text-start">{item.name}</div>
+                      <div className="w-1/3 text-center">
+                        $ <span className="font-medium ">{item.price}</span>
+                      </div>
+                      <div className="text-end text-text/70 text-thin w-1/3">X {cart.find(cItem => cItem.product_id === item._id)?.quantity}</div>
+                    </div>
+                  ) : null;
+                })):
+                <div className="flex justify-between px-1 py-3 text-2xl text-primary">
           <div className=" text-3xl">{product.name}</div>
           <div>${product.price}</div>
-        </div>
+        </div>}
 
-        <div className="px-1 py-3 flex justify-between text-xl">
+        {c ? null: <div className="px-1 py-3 flex justify-between text-xl">
           <div>Quantity</div>
           <div className="flex h-10 justify-end z-20 w-full">
             <button
@@ -126,9 +177,9 @@ async function cartF() {
               +
             </button>
           </div>
-        </div>
+        </div>}
 
-        <div className="text-lg flex flex-col">
+        <div className="text-lg pt-4 flex flex-col">
           <div className={`${add ? 'block' : 'flex justify-between'}`}>
             <div className={`h-full mt-3 pl-1 text-xl underline-offset-2 ${add?'underline pb-1':''}`}>Add Address:</div>
             {add ? (
@@ -149,7 +200,7 @@ async function cartF() {
             <div className="h-px mx-1 mt-3 w-full border"></div>
           </div>
 
-          <div className="text-xl pl-1">Choose Address:</div>
+          <div className="underline-offset-2 text-xl underline pl-1">Choose Address:</div>
           <select
             name="address"
             id="ad"
@@ -178,13 +229,13 @@ async function cartF() {
             <div className="group-hover:-translate-y-8 transition-all duration-500" >Proceed to Pay</div>
             <div className="pt-2 transition-all duration-200 group-hover:-translate-y-8 font-extrabold">Proceed to Pay</div>
           </button>
-          <button 
+          {c?null:<button 
             className="bg-primary p-2 w-full my-1 rounded-md overflow-hidden h-10 group"
             onClick={cartF}
           >
             <div className="group-hover:-translate-y-8 transition-all duration-500">Proceed with Cart</div>
             <div className="pt-2 transition-all duration-200 group-hover:-translate-y-8 font-extrabold">Proceed with Cart</div>
-          </button>
+          </button>}
         </div>
       </div>
       <div className="font-thin text-text/40  flex justify-center ">(scrool down)</div>

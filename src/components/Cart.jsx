@@ -39,6 +39,7 @@ export const Cartt = ({ size, sub, id }) => {
 
   const handleNavigation = () => {
     nav('/cart');
+    location.reload();
   };
 
   return (

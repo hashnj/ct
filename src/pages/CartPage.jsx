@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { products } from "../store/products";
 import { themeState } from "../store/atoms";
 import { cartState, cartUpdate, getCart } from "../store/aCart";
+import { buyM } from "../store/buy";
+import { BuyProcessing } from "../components/BuyProcessing";
+import { cState } from "../store/cState";
 
 const CartPage = () => {
   const navigate = useNavigate();
@@ -18,6 +21,9 @@ const CartPage = () => {
   const [total, setTotal] = useState(0);
   const [listt, setList] = useRecoilState(cartState);
   const [top, setTop] = useState(12);
+  const [buy, setBuy] = useRecoilState(buyM);
+  const [ c, setC ] = useRecoilState(cState);
+
 
   useEffect(() => {
     document.body.classList = theme + ' bg-background';
@@ -102,7 +108,14 @@ const CartPage = () => {
 
   if (prod.state === 'hasValue' && !load && list.state === 'hasValue') {
     return (
-      <div className="bg-background rounded-md w-full absolute h-fit min-h-screen">
+      <div className="bg-background rounded-md text-text w-full absolute h-fit min-h-screen">
+        {buy && (
+  <div className="fixed  h-screen inset-0 flex justify-center items-center z-10 backdrop-blur-sm ">
+    <div className="max-w-xl w-4/5 md:w-3/5 max-h-5/6 h-5/6 border-2 border-text/10 relative bg-background rounded-lg shadow-lg">
+    <BuyProcessing/>
+    </div>
+  </div>
+)}
         <div 
           onClick={() => navigate('/')} 
           className='border-text/50 w-12 flex justify-center relative top-12 left-12 border hover:bg-primary/70 active:bg-primary hover:text-background cursor-pointer bg-primary p-1 px-2 rounded-md text-lg font-semibold'
@@ -166,7 +179,8 @@ const CartPage = () => {
                 <button 
                   className="bg-primary mt-4 p-2 w-full rounded-md overflow-hidden h-10 group"
                   onClick={() => {
-                    navigate('/checkout');
+                    setBuy(true);
+                    setC(true);
                   }}
                 >
                   <div className="text-background font-bold text-lg">Checkout</div>

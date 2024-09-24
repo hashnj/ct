@@ -21,13 +21,16 @@ import { Product } from './pages/Products';
 import { Checkout } from './pages/Checkout';
 import { Test } from './pages/Test';
 import { Success } from './pages/Success';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 function App() {
   return (
-    <Suspense fallback={<></>}>
+    <Suspense fallback={<div className="bg-background text-primary text-6xl w-screen h-screen flex justify-center items-center">
+                          <AiOutlineLoading3Quarters className="animate-spin" />
+                        </div>}>
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}> {/* Wrap all routes with Layout */}
+          <Route element={<Layout />}>
             <Route path="/" element={<Main />} /> 
             <Route path="/auth/register" element={<Signup />} />
             <Route path="/auth/register/vendor" element={<VendorSignup />} />
@@ -48,11 +51,12 @@ function App() {
               <Route path="/your-listings" element={<Listing />} />
             </Route>
             <Route element={<RequireAuth allowedRoles={['Admin', 'Staff']} />}>
-              {/* Add any staff-related routes here */}
+
             </Route>
             <Route element={<RequireAuth allowedRoles={['Admin']} />}>
+
               <Route path="/dashboard" element={<Dashboard />} />
-              {/* Add any admin-related routes here */}
+
             </Route>
             <Route path="/test" element={<Test />} />
             <Route path="*" element={<NotFound />} />
