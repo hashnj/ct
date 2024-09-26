@@ -4,7 +4,7 @@ import { WishList } from "./WishList"
 import { Cartt } from "./Cart"
 import { useNavigate } from "react-router-dom"
 
-export const ProductCard=({ image, title, description,mrp, price, id })=>{
+export const ProductCard=({ image, title, description,mrp , stock , price, id })=>{
     const [filter,setFilter]=useRecoilState(filterr)
     const nav=useNavigate();
     return (
@@ -16,14 +16,16 @@ export const ProductCard=({ image, title, description,mrp, price, id })=>{
                     nav(`/product/${id}`)
                     }}
                     className="peer group-focus:bg-background/20 rounded-t-lg w-full max-h-72 mx-auto  h-40 sm:h-56 md:h-72 lg:h-64 xl:h-72 " src={image} alt={title} />
-                <div className="group-hover:flex flex-col hidden  absolute -top-0 right-0 height-20 width-4">
+                <div className="group-hover:flex hidden absolute -top-0 right-0 height-20 width-4">
                 <div className="p-1">
                 <WishList size={10} sub={false} title={title} id={id} /> 
                 </div>
-                <div className="p-1">
-                <Cartt size={10} sub={false} id={id}/>
-                </div>
+                
             </div>
+            <div className="absolute group-hover:flex hidden right-0  bottom-20">
+                <div className="p-1">
+                <Cartt size={10} quty={stock} sub={false} id={id}/>
+                </div></div>
             <div
              onClick={()=>{
                 nav(`/product/${id}`)

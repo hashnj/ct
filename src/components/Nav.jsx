@@ -29,7 +29,7 @@ if(info.state === 'hasValue'){
   return (
     <div className={`flex justify-between z-20 bg-background w-full py-3 px-4 border-b fixed top-0 left-0 ${theme=='dark' ? 'border-gray-700' : 'border-gray-300'}`}>
       <div className="flex items-center">
-      { info.contents.role != 'Customer' && <button onClick={()=>{setActive(!active)}} className='relative w-8 h-8  text-3xl text-primary '>
+      { info.contents.role != 'Customer' && <button onClick={()=>{setActive(!active)}} className={`relative w-8 h-8  text-3xl text-primary hidden md:flex`}>
                         <FaBars className={`${active?'opacity-0':''} absolute top-0 transition-all duration-300`}/>
                         <ImCross className={`${active?'rotate-90':'opacity-0'} absolute top-0 transition-all duration-300`} />
                     </button>}

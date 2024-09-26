@@ -8,7 +8,7 @@ export const FilterComponent = () => {
   const theme = useRecoilValue(themeState);
   const [filter, setFilter] = useRecoilState(filterr);
   const [price, setPrice] = useState(51);
-  const [pricee, setPricee] = useState(5);
+  const [pricee, setPricee] = useState(59);
 
   useEffect(() => {
     document.body.classList = theme;
@@ -32,7 +32,7 @@ export const FilterComponent = () => {
             value={price} 
             min="0" 
             max="1000" 
-            className="w-full absolute z-2 mt-4 h-[1px] accent-primary no " 
+            className="w-full absolute z-2 mt-2 h-[3px] accent-primary no " 
             onChange={(e) => {
               setPrice(e.target.value)
               console.log(e.target.value,1);
@@ -43,9 +43,9 @@ export const FilterComponent = () => {
             value={pricee} 
             min="0" 
             max="1000" 
-            className="w-full absolute z-2 mt-3 h-[1px] accent-primary no " 
+            className="w-full absolute z-2 mt-2 h-[2px] accent-primary no " 
             onChange={(e) => {
-              setPrice(e.target.value)
+              setPricee(e.target.value)
               console.log(e.target.value,2);
              }} 
           />

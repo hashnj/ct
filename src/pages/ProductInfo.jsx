@@ -103,7 +103,7 @@ const ProductInfo = () => {
       >
         {buy && (
   <div className="fixed top-10 h-screen inset-0 flex justify-center items-center z-10 backdrop-blur-sm ">
-    <div className="max-w-xl w-4/5 md:w-3/5 max-h-5/6 border-2 border-text/10 relative bg-background rounded-lg shadow-lg">
+    <div className="max-w-xl w-4/5 md:w-3/5 h-5/6 border-2 border-text/10 relative bg-background rounded-lg shadow-lg">
     <BuyProcessing/>
     </div>
   </div>

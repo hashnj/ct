@@ -53,28 +53,13 @@ export const Main = () => {
         <div className="flex flex-col min-h-screen h-full no-scroll justify-center items-center bg-backgrounds z-20 text-text w-full">
             <Nav home={true} />
             <SideBar top="Home" />
-            <div className="fixed right-4 z-10 bottom-2">
-                <div className="h-20">
-                    <WishList size={14} onMouseEnter={() => setIsShowing(true)} onMouseLeave={() => setIsShowing(false)} sub={true} />
-                    {isShowing && (
-                        <div className="isShowing absolute z-10 right-16 top-1 bg-background border border-text/20 p-2 rounded-lg">
-                            WishList
-                        </div>
-                    )}
-                </div>
-                <div className="h-20">
-                    <Cartt size={14} sub={true} />
-                </div>
-            </div>
+            
             <div className={`w-full h-full pt-20 transition-all duration-300 ${active ? 'pl-64' : 'w-full'} no-scroll`}>
                 <div className={`w-full flex-col min-h-screen transition-all duration-300 flex h-full ${active ? '' : "px-5 sm:px-8 md:px-10 lg:px-20"}`}>
-                    <div className={`w-full pr-16 md:w-1/4 sticky top-20 rounded-md  ml-3 transition-all duration-300 my-1 mr-2  ${active ? 'mr-1 pr-72' : ''}`}>
-                        <div className="">
-                            {/* <Slider/> */}
-                        
-                        </div>
+                    <div className={`w-full pr-16 md:w-1/4 pl-4 sticky top-20 rounded-md  ml-3 transition-all duration-300 my-1 mr-2  ${active ? 'mr-1 pr-72' : ''}`}>
+                    
                     </div>
-                    <div className={`grid bg-backgrounds transition-all ${filter ? 'mt-20 w-full grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5' : 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'} px-1 rounded-md sm:px-2 md:px-4 duration-300 float-right min-h-screen h-full ${active ? 'grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4' : '2xl:grid-cols-4'}`}>
+                    {/* <div className={`grid bg-backgrounds transition-all ${filter ? 'mt-20 w-full grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5' : 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'} px-1 rounded-md sm:px-2 md:px-4 duration-300 float-right min-h-screen h-full ${active ? 'grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4' : '2xl:grid-cols-4'}`}>
                         {productData.map((product, index) => (
                             <ProductCard
                                 key={index}
@@ -87,7 +72,8 @@ export const Main = () => {
                                 id={product._id}
                             />
                         ))}
-                    </div>
+                    </div> */}
+                    <div className="text-3xl font-serif font-bold">Featured products</div>
                 </div>
             </div>
         </div>
@@ -96,7 +82,7 @@ export const Main = () => {
 
 
 
-{/* <div class="carousel" id="test2">
+ <div class="carousel" id="test2">
 	<input type="radio" name="item2" value="1" checked />
 	<div>
     <img src="https://th.bing.com/th/id/R.7383028831604862ec47fefee3e8f43f?rik=JvqjDCfPocchLg&riu=http%3a%2f%2fthewowstyle.com%2fwp-content%2fuploads%2f2015%2f01%2fimages-of-nature-4.jpg&ehk=%2b1REJDS0cEPD0z2IP%2fddCyP9IgFz6xVpp8fyQr78SJ0%3d&risl=&pid=ImgRaw&r=0" />
@@ -115,4 +101,4 @@ export const Main = () => {
 	<div>
 		<img src="https://th.bing.com/th/id/R.3d88a927f8529dcba03364b09d98adbe?rik=JYmQaMVSULpYQg&riu=http%3a%2f%2fthewowstyle.com%2fwp-content%2fuploads%2f2015%2f01%2fnature-images.jpg&ehk=BNPsuSOUR7ATZ3EpRwxx1xFl7LUbO3tYlu1wFLCBrCE%3d&risl=&pid=ImgRaw&r=0" />
 	</div>
-</div> */}
+</div> 

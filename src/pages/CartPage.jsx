@@ -53,7 +53,8 @@ const CartPage = () => {
       let total = 0;
       prod.contents.data.forEach(item => {
         const cartItem = listt.find(cItem => cItem.product_id === item._id);
-        if (cartItem) {
+        console.log(cartItem,item);
+        if (cartItem && item.stock>0) {
           total += parseFloat(item.price) * cartItem.quantity;
         }
       });
@@ -117,13 +118,13 @@ const CartPage = () => {
   </div>
 )}
         <div 
-          onClick={() => navigate('/')} 
+          onClick={() => navigate(-1)} 
           className='border-text/50 w-12 flex justify-center relative top-12 left-12 border hover:bg-primary/70 active:bg-primary hover:text-background cursor-pointer bg-primary p-1 px-2 rounded-md text-lg font-semibold'
         >
           <FaArrowLeft />
         </div>
 
-        <div className='flex w-full justify-center text-4xl font-extrabold font-serif text-primary'>
+        <div className='flex w-full justify-center cursor-default text-4xl font-extrabold font-serif text-primary'>
           Cart
         </div>
         <div className="overflow-y-scroll overflow-x-hidden p-4 w-full grid grid-cols-2 md:grid-cols-3 ml-5 no-scrool">
@@ -139,7 +140,7 @@ const CartPage = () => {
                   mrp={item.mrp}
                   id={item._id}
                   quty={item.stock}
-                  quantity={cartItem.quantity}  // Pass the quantity from cartItem
+                  quantity={cartItem.quantity}  
                   onIncrement={handleIncrement}
                   onDecrement={handleDecrement}
                 />
@@ -164,7 +165,14 @@ const CartPage = () => {
                       <div className="w-1/3 text-center">
                         $ <span className="font-medium ">{item.price}</span>
                       </div>
-                      <div className="text-end w-1/3">X {listt.find(cItem => cItem.product_id === item._id)?.quantity}</div>
+                      <div className=" text-end  w-1/3">
+                      <div className="">
+                        X {item.stock<1?(<> 0<div className="text-xs font-thin text-red-400">
+                        (out of stock)
+                      </div></>):listt.find(cItem => cItem.product_id === item._id)?.quantity}
+                      </div>                      
+                      {/* {item.stock<1?:null} */}
+                      </div>
                     </div>
                   ) : null;
                 })}

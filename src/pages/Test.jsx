@@ -3,7 +3,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import Footer from '../components/Footer';
 import { useRecoilValue } from 'recoil';
 import { themeState } from '../store/atoms';
-import { Success } from './Success';
+import { Nav } from '../components/Nav';
+import { SecondNav } from '../components/SecondNav';
+
 
 export const Test = () => {
   const theme = useRecoilValue(themeState);
@@ -13,7 +15,10 @@ export const Test = () => {
 
   return (
     <div className="flex bg-text w-full h-screen flex-col items-center">
-      <div><Success/></div>
+      <div className='w-full pr-2'>
+        {/* <Nav/> */}
+        <SecondNav/>
+        </div>
     </div>
   );
 };

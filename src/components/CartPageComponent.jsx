@@ -55,19 +55,22 @@ const CartPageComponent = ({ title, description, image, price, id, mrp, quty, qu
           </div>
         </div>
       </div>
-      <div className="flex flex-col h-full justify-around">
+      <div className="flex flex-col h-full justify-around items-end">
         <div className="flex h-10 justify-end z-20 w-full">
           <button className="p-1 pl-2 h-full text-xl bg-backgrounds font-bold rounded-l-md" onClick={minus}>-</button>
           <input 
             type="number" 
             readOnly 
-            value={quantity}  
+            value={quty<1?0:quantity}  
             min={1} 
             className="cursor-default focus:ring-0 focus:border-0 h-full bg-backgrounds border-none px-[2px] w-8 py-1 text-center touch-none select-none" 
           />
           <button className="p-1 text-xl bg-backgrounds h-full rounded-r-md font-bold" onClick={plus}>+</button>
         </div>
-        <div title="Remove" className="text-xl p-2 z-20 pb-0 pt-4 w-full flex items-end justify-end text-red-600">
+        { quty<1 &&
+        <div className="text-red-600 bg-red-500/20 text-center p-1 rounded sm:w-2/3">Out of Stock</div>
+}
+        <div title="Remove" className={`text-xl p-2 z-20 pb-0  ${quty<1 && 'pb-2 pt-0'}  w-full flex items-end justify-end text-red-600`}>
           <ImCross className="cursor-pointer" onClick={removeItem} />
         </div>
       </div>

@@ -23,7 +23,7 @@ export const SideBar = ({ top }) => {
     if(role=='Vendor' || role=='Admin'){
     return (
         
-        <div className={`fixed  z-10 ${active ? 'w-64 bg-background h-full' : 'w-[50px] items-center bg-background/20'} text-text left-0 transition-all duration-300 flex flex-col ease-in-out top-0`}>
+        <div className={`fixed  z-10 ${active ? 'w-64 bg-background h-full' : 'w-[50px] items-center bg-background/20'} text-text left-0 transition-all duration-300 hidden md:flex flex-col ease-in-out top-0`}>
             <div className={`h-full z-10 ${active ? 'w-64 ' : 'w-[50px] items-center'} text-text transition-all duration-300 flex flex-col mt-[75px] px-1`}>
                 {active&& (role == 'Vendor' || role == 'Admin') && top && <div className='py-7 mx-auto text-2xl'>{top}</div>}
 

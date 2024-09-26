@@ -56,7 +56,7 @@ const WishPage = () => {
         return (
             <div className="bg-background rounded-md w-full min-h-screen h-full">
                 <div 
-                    onClick={() => navigate('/')} 
+                    onClick={() => navigate(-1)} 
                     className="border-text/50 w-12 flex justify-center relative top-12 left-12 border hover:bg-primary/70 active:bg-primary hover:text-background cursor-pointer bg-primary p-1 px-2 rounded-md text-lg font-semibold"
                 >
                     <FaArrowLeft />

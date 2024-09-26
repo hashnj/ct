@@ -88,7 +88,8 @@ export const Product=()=>{
                                 description={product.description}
                                 vendor={product.vendor_id?.business_name || "Admin"}
                                 price={product.price}
-                                mrp={product.mrp}
+                                mrp={product.mrp} 
+                                stock={product.stock}
                                 id={product._id}
                             />
                         ))}

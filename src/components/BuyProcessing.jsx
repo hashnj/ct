@@ -19,12 +19,12 @@ export const BuyProcessing = ( ) =>{
 
   const nav = useNavigate();
 
-  const [buy, setBuy] = useRecoilState(buyM);
+  const [ buy, setBuy ] = useRecoilState(buyM);
   const { id } = useParams();
-  const [quantity,setQuantity] = useState(1);
-  const [add, setAdd] = useRecoilState(addAddress);
+  const [ quantity, setQuantity ] = useState(1);
+  const [ add, setAdd ] = useRecoilState(addAddress);
   const [ cart,setCart ] = useRecoilState(cartState);
-  const [sa,setSelectedAddress] = useState('');
+  const [ sa,setSelectedAddress ] = useState('');
   const theme =useRecoilValue(themeState)
   const prod = useRecoilValueLoadable(products);
   const [ c, setC ] = useRecoilState(cState);
@@ -40,10 +40,8 @@ export const BuyProcessing = ( ) =>{
   const detailss = details();
   const ath = auth();
   const user = detailss?.users.filter((i) => i._id == ath.userId);
-  console.log(detailss);
   const address = detailss.address;
   useEffect(()=>{
-  console.log(address ,product)
   },[add]);
 
   async function buyF(){
@@ -63,6 +61,7 @@ export const BuyProcessing = ( ) =>{
   const data = await res.json();
 
   if (data) {
+    setBuy(false)
     const orderId = data.order._id; 
     nav(`/order/${orderId}`);
   }}
@@ -78,20 +77,21 @@ export const BuyProcessing = ( ) =>{
   async function buyC(){
     try {
       if(sa){
-      const res = await fetch(`${B_Url}/order/buy`, {
+      const res = await fetch(`${B_Url}/order/cart`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
           "authorization": localStorage.getItem('token')
         },
-      body:JSON.stringify({quantity,product:product._id,price:product.price,address:{address:sa.rel,postal_code:sa.postal_code,city:sa.city,state:sa.state,country:sa.country}})
+      body:JSON.stringify({address:{address:sa.rel,postal_code:sa.postal_code,city:sa.city,state:sa.state,country:sa.country}})
 
   });
-  console.log(product.name);
 
   const data = await res.json();
 
   if (data) {
+    console.log(data);
+    setBuy(false);
     const orderId = data.order._id; 
     nav(`/order/${orderId}`);
   }}
@@ -105,7 +105,7 @@ export const BuyProcessing = ( ) =>{
 
 async function cartF() {
   const includes = cart.some(item => item.product_id === product._id); 
-  
+  setC(true);
   setCart(prev => 
     includes 
       ? prev.map(item => item.product_id === product._id 
@@ -149,10 +149,10 @@ async function cartF() {
                     </div>
                   ) : null;
                 })):
-                <div className="flex justify-between px-1 py-3 text-2xl text-primary">
-          <div className=" text-3xl">{product.name}</div>
-          <div>${product.price}</div>
-        </div>}
+                (<div className="flex justify-between px-1 py-3 text-2xl text-primary">
+          <div className=" text-3xl">{product?.name}</div>
+          <div>${product?.price}</div>
+        </div>)}
 
         {c ? null: <div className="px-1 py-3 flex justify-between text-xl">
           <div>Quantity</div>
@@ -224,7 +224,7 @@ async function cartF() {
         <div className="flex justify-end flex-col p-2 mt-6">
           <button 
             className="bg-primary p-2 w-full my-1 rounded-md overflow-hidden h-10 group"
-            onClick={buyF}
+            onClick={c?buyC:buyF}
           >
             <div className="group-hover:-translate-y-8 transition-all duration-500" >Proceed to Pay</div>
             <div className="pt-2 transition-all duration-200 group-hover:-translate-y-8 font-extrabold">Proceed to Pay</div>
