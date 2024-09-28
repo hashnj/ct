@@ -54,28 +54,33 @@ export const Cartt = ({ size, sub, quty, id }) => {
 
   return (
     <div className="flex w-14 flex-col justify-center items-center" onClick={() => { sub ? handleNavigation() : handleIncrement(); }}>
-      <div className={`peer text-gray-800 p-2 hover:text-gray-950/80 size-${size} text-4xl flex items-center justify-center rounded-full`}>
+      <div className={`peer text-gray-800 p-2 hover:text-gray-500/80 size-${size} text-4xl flex items-center justify-center rounded-full`}>
         {!sub && !isActive 
           ? <FaCartPlus className={`active:scale-75 size-${size} hover:scale-95`} title="Add to Cart" /> 
-          : <div className="pr-3 ">{ sub ? <FaCartArrowDown className="hover:scale-95 active:scale-75" /> :
-              <div className="flex h-8 justify-end  z-20 pr-2 w-full">
-                <button className="px-1 pl-2 h-full text-xl bg-background/95 text-primary font-bold rounded-l-xl" onClick={(e) => { e.stopPropagation(); handleDecrement(); }}>-</button>
+          : <div className="pr-1 ">{ sub ? <FaCartArrowDown className="hover:scale-95 active:scale-75" /> :
+              <div>
+              <div className="flex h-8 justify-end  z-20 pr-8 w-full">
+                <div className=" h-full text-xl bg-background/95 text-primary border border-text/20 font-bold rounded-l-xl"><button className="rounded-full px-3 pb-1 pt-0 hover:bg-text/20" onClick={(e) => { e.stopPropagation(); handleDecrement(); }}>-</button></div>
                 <input 
                   type="number" 
                   readOnly 
                   value={quty < 1 ? 0 : quantity}  
                   min={1} 
-                  className="cursor-default focus:ring-0 focus:border-0 h-full bg-text/80 text-background border-none px-[2px] w-8 text-center touch-none select-none" 
+                  className="cursor-default focus:ring-0 focus:border-0 h-full bg-text/60 text-background border-none px-[2px] w-8 text-center touch-none select-none" 
                 />
-                <button className="px-1 text-xl bg-background/95 text-primary h-full rounded-r-xl font-bold" onClick={(e) => { e.stopPropagation(); handleIncrement(); }}>+</button>
+                <div className="text-xl bg-background/95 text-primary border border-text/20 h-full rounded-r-xl font-bold" ><button className="rounded-full px-2  pb-1 pt-0 hover:bg-text/20" onClick={(e) => { e.stopPropagation(); handleIncrement(); }}>+</button></div>
+                
+              </div>
+              {quty < 1 ?
+              <div className="text-xs text-center -m-2 pt-2 text-red-600">Out Of Stock</div>:null}
               </div>
 }
             </div>
         }
       </div>
-      <div className={`hidden ${sub ? 'peer-hover:flex' : ''} text-text text-base`}>
+      {/* <div className={`hidden ${sub ? 'peer-hover:flex' : ''} text-text text-base`}>
         Cart
-      </div>
+      </div> */}
     </div>
   );
 };

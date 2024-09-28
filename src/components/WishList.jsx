@@ -35,10 +35,10 @@ export const WishList = ({ size, sub, title, id }) => {
 
   return (
     <div className="flex w-14 flex-col justify-center items-center" onClick={sub ? handleNavigate : handleClick}>
-      <div className={`bg-text/30 peer text-red-600 hover:bg-text/40 p-2 text-4xl flex items-center justify-center rounded-full size-${size}`}>
+      <div className={` peer text-red-600 p-2 text-4xl flex items-center justify-center rounded-full size-${size}`}>
         {!sub && isactive ? <FaHeart className="active:scale-75 hover:scale-95" /> : <FaRegHeart className="active:scale-75 hover:scale-95" title="Wishlist" />}
       </div>
-      {sub && <div className="hidden peer-hover:flex text-text text-base">Wishlist</div>}
+      {/* {sub && <div className="hidden peer-hover:flex text-text text-base">Wishlist</div>} */}
     </div>
   );
 };
