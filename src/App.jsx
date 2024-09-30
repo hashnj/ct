@@ -1,7 +1,7 @@
-import { Suspense } from 'react';
+import { createContext, Suspense, useEffect, useState } from 'react';
 import './App.css';
 import { Signup } from './pages/Signup';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import { Dashboard } from './pages/Dashboard';
 import { Signin } from './pages/Signin';
 import { NotFound } from './pages/NotFound';
@@ -22,15 +22,43 @@ import { Checkout } from './pages/Checkout';
 import { Test } from './pages/Test';
 import { Success } from './pages/Success';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import Footer from './components/Footer';
+
+
+const MyContext = createContext();
+
 
 function App() {
+  const [isLoading, setIsloading] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(()=>{
+    setTimeout(() => {
+      
+      setIsloading(false);
+    }, 300);
+  },[])
+
+  const value = {
+    windowWidth,
+  };
   return (
     <Suspense fallback={<div className="bg-background text-primary text-6xl w-screen h-screen flex justify-center items-center">
                           <AiOutlineLoading3Quarters className="animate-spin" />
                         </div>}>
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}>
+          <Route element={<>
+            <MyContext.Provider value={value}>
+          {isLoading === true && (
+            <div className="bg-background text-primary text-6xl w-screen h-screen flex justify-center items-center">
+              <AiOutlineLoading3Quarters className="animate-spin" />
+            </div>
+          )}
+          <Outlet />
+          <Footer />
+        </MyContext.Provider>
+        </>}>
             <Route path="/" element={<Main />} /> 
             <Route path="/auth/register" element={<Signup />} />
             <Route path="/auth/register/vendor" element={<VendorSignup />} />
@@ -68,3 +96,4 @@ function App() {
 }
 
 export default App;
+export { MyContext };

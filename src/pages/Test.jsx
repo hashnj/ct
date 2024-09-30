@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { themeState } from '../store/atoms';
 import { Nav } from '../components/Nav';
 import { SecondNav } from '../components/SecondNav';
+import CatSlider from '../components/CatSlider';
 
 
 export const Test = () => {
@@ -14,10 +15,11 @@ export const Test = () => {
   }, [theme]);
 
   return (
-    <div className="flex bg-text w-full h-screen flex-col items-center">
-      <div className='w-full pr-2'>
+    <div className="flex bg-background w-screen h-screen flex-col items-center">
+      <div className='w-full '>
         {/* <Nav/> */}
-        <SecondNav/>
+        <CatSlider/>
+
         </div>
     </div>
   );
