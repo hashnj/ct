@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState, useContext } from 'react';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import React, { useEffect, useState, useContext } from 'react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import { MyContext } from '../App';
@@ -16,34 +18,18 @@ const CatSlider = () => {
     '#fff3ff', '#f2fce4', '#feefea', '#fffceb', '#feefea', '#ecffec'
   ]);
 
-  const slider = useRef();
-
-  // const settings = {
-  //   dots: false,
-  //   infinite: false,
-  //   speed: 500,
-  //   slidesToShow: context.windowWidth > 1200 ? 10 : context.windowWidth > 768 ? 5 : 3,
-  //   slidesToScroll: 2,
-  //   fade: false,
-  //   arrows: context.windowWidth > 992, 
-  //   autoplay: context.windowWidth > 992 ? 2000 : false,
-  //   centerMode: context.windowWidth > 992
-  // };
-
-
-  var settings = {
+  const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
+    slidesToShow: 5,
+    slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 4,
+          slidesToScroll: 1,
           infinite: true,
           dots: true
         }
@@ -51,21 +37,25 @@ const CatSlider = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 1
         }
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1
         }
       }
-    ]
+    ],
+    fade: false,
+    arrows: true,
+    autoplay: 2000,
+    centerMode: context.windowWidth > 992 ? true : false
+  
   };
-
 
   useEffect(() => {
     if (prod.state === 'hasValue') {
@@ -104,16 +94,16 @@ const CatSlider = () => {
   if (prod.state === 'hasValue') {
     return (
       <div className="bg-background text-text w-full ">
-        <div className="slider-container" ref={slider}>
+        <div className="slider-container w-full relative" >
           <h2 className="text-2xl font-bold mb-4">Featured Categories</h2>
-          <Slider {...settings} className="">
+          <Slider {...settings} className="w-full">
             {categoryData.length > 0 && categoryData.map((category, index) => (
-              <div className="item" key={category.category_id}>
+              <div className="item px-2" key={category.category_id}>
                 <Link to={`/cat/${category.category_name.toLowerCase()}`} className="block">
-                  <div className="info mx-auto flex flex-col items-center justify-center p-4 transition-all duration-300 ease-in-out" style={{ background: itemBg[index % itemBg.length] }}>
-                    <img src={category.image} width="80" alt={`${category.category_name} category`} />
-                    <h5 className=" capitalize text-black mt-3 font-semibold">{category.category_name}</h5>
-                    <p className="text-sm opacity-80 mb-0">{category.product_count} items</p>
+                  <div className="info mx-auto flex flex-col items-center justify-center rounded-xl p-4 transition-all duration-300 ease-in-out" style={{ background: itemBg[index % itemBg.length] }}>
+                    <img src={category.image} className="rounded-2xl" alt={`${category.category_name} category`} />
+                    <h5 className="capitalize text-black mt-3 font-semibold">{category.category_name}</h5>
+                    <p className="text-sm opacity-80 text-black mb-0">{category.product_count} items</p>
                   </div>
                 </Link>
               </div>

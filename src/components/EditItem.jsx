@@ -11,6 +11,7 @@ export const EditItem = () => {
         parent: '',
         name: '',
         description: '',
+        cat_img: '',
         price: '',
         stock: '',
         image: '',
@@ -27,6 +28,7 @@ export const EditItem = () => {
                 ...item,
                 category: itemC.name || '',
                 parent: itemC.parent || '',
+                cat_img: itemC.cat_img || '',
                 description: itemC.description || '',
                 isSubCategory: itemC.isSubCategory || false
             });
@@ -86,7 +88,17 @@ export const EditItem = () => {
                 body:JSON.stringify({item,itemC})
             })
             const data=await req.json();
-            console.log(data);}
+            console.log(data);
+            if(data.message=='updated'){
+                setitemC({
+                    name: '',
+                    description: '',
+                    cat_img:''
+                });
+                setEd(false)
+                location.reload();
+            }
+        }
             catch(e){
                 console.log(e);
             }
@@ -218,6 +230,15 @@ export const EditItem = () => {
                             onChange={handleChange}
                             required
                         />
+                        <input
+                className="w-full p-2 bg-backgrounds/50  mb-2 border-text/5 rounded"
+                type="text"
+                name="cat_img"
+                placeholder="Category Image"
+                value={item.cat_img}
+                onChange={handleChange}
+                required
+            />
                         <label htmlFor="description">Description:</label>
                         <textarea
                             className="w-full p-2 mb-2 bg-backgrounds/50 border-text/5 rounded"

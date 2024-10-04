@@ -8,6 +8,7 @@ const AddCategory = () => {
     const [category, setCategory] = useState({
         name: '',
         description: '',
+        cat_img:'',
         parent:'',
         isSubCategory: false
     });
@@ -36,6 +37,7 @@ const AddCategory = () => {
             setCategory({
                 name: '',
                 description: '',
+                cat_img:''
             });
             setAddC(false)
             location.reload();
@@ -61,6 +63,15 @@ const AddCategory = () => {
                 name="name"
                 placeholder="Category Name"
                 value={category.name}
+                onChange={handleChange}
+                required
+            />
+            <input
+                className="w-full p-2 bg-backgrounds/50  mb-2 border-text/5 rounded"
+                type="text"
+                name="cat_img"
+                placeholder="Category Image"
+                value={category.cat_img}
                 onChange={handleChange}
                 required
             />

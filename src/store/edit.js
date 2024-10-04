@@ -10,6 +10,7 @@ export const EditV=atom({
         price: '',
         stock: '',
         image: '',
+        cat_img: '',
     }
 });
 
@@ -20,6 +21,7 @@ export const EditC=atom({
         name:"",
         description:"",
         isSubCategory:false,
-        parent:''
+        parent:'',
+        cat_img: '',
     }
 });
