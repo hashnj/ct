@@ -48,7 +48,7 @@ export const PnL=()=>{
                 if (userInfo == 'Admin') {
                     setProductDat(productData);
                 } else if (userInfo == 'Vendor' ) {
-                    setProductDat(productData.filter(d => d.vendor_id.business_name == info.contents.info.vendor.business_name));
+                    setProductDat(productData.filter(d => d.vendor_id?.business_name == info.contents.info.vendor.business_name));
                 }
                 console.log(productDat);
             } else if (info.state === 'hasError') {
@@ -75,40 +75,59 @@ export const PnL=()=>{
         
         <div className="text-xl text-text font-semibold">
                 <div className="mt-5">
-                    <table className={`w-full ${active?'text-xs md:text-lg lg:text-xl':'text-sm md:text-base lg:text-xl'}`}>
-                        <thead>
-                        <tr className="border-b border-text/10 p-1">
-                            <th className="border-r border-text/10">S.no.</th>
-                            <th className="border-r border-text/10">Product Name</th>
-                            <th className="border-r border-text/10">Vendor</th>
-                            <th className="border-r border-text/10">Category</th>
-                            <th className="border-r border-text/10">Sub-Cat.</th>
-                            <th className="border-r border-text/10">description</th>
-                            <th className="border-r border-text/10">Stock</th>
-                            <th className="border-r border-text/10">Price($)</th>
-                            <th className="">Image</th>
-                            <th className="border-l border-text/10">Edit</th>
+                    <div className={`w-full ${active?'text-xs md:text-lg lg:text-xl':'text-sm md:text-base lg:text-xl'}`}>
+                        
+                        {/* <div className="border-b flex justify-around  p-1">
+                            <div className="w-full pl-3 ">S.no.</div>
+                            <div className="w-full ">Product</div>
+                            <div className="w-full ">Vendor</div>
+                            <div className="w-full pr-1 ">Category</div>
+                            <div className="w-full ">Sub-Cat.</div>
+                            <div className="w-full pr-1 ">description</div>
+                            <div className="w-full ">Stock</div>
+                            <div className="w-full ">Price($)</div>
+                            <div className="w-full">Image</div>
+                            <div className="">Edit</div>
                             
-                        </tr>
-                        </thead>
-                        <tbody className="border-b border-text/10">
+                        </div> */}
                         {productDat.map((d,i)=>
-                        <tr key={i}>
-                        {console.log(d)}
-                            <td className="border-r border-text/10 text-center">{i+1}.</td>
-                            <td className="border-r border-text/10 pl-2">{d.name}</td>
-                            <td className="border-r border-text/10 pl-2">{d.vendor_id?.business_name || "Admin"}</td>
-                            <td className="border-r border-text/10 pl-2">{d.category_id.name}</td>
-                            <td className="border-r border-text/10 pl-2">{d.category_id.name}</td>
-                            <td className="border-r border-text/10 pl-2">{d.description} </td> 
-                            <td className="border-r border-text/10 text-center p-2">{d.stock} </td> 
-                            <td className="border-r border-text/10 text-center p-2">{d.price}</td>
-                            <td className="p-2 justify-center items-center">
-                                <div>{<a target="_blank" href={d.images}><img className="size-12 md:size-14 mx-auto " src={d.images} alt={d.name}/></a>}
+                        <div key={i} className="flex hover:border-text/60 transition-all  my-2 py-1 border text-wrap border-text/20 rounded-lg items-center w-full">
+                            <div className=" w-full text-center">{i+1}.</div>
+                            <div className="w-full  pl-2">{d.name}</div>
+                            <div className="w-full  pl-2">{d.vendor_id?.business_name || "Corecart"}</div>
+                            <div className="w-full  pl-2">{d.category_id.name}</div>
+                            <div className="w-full  pl-2">{d.category_id.name}</div>
+                            <div className="w-full text-wrap pl-2">{d.description} </div> 
+                            <div className="w-full  text-center p-2">
+                                    <div>
+                                        Stock:
+                                    </div>
+                                    <div>
+                                        {d.stock}
+                                    </div>
+                                 </div> 
+                            <div className="w-full  text-center p-2">
+                            <div>
+                                        MRP:
+                                    </div>
+                                    <div>
+                                        ${d.mrp}
+                                    </div></div>
+                            <div className="w-full  text-center p-2">
+                            <div>
+                                        Price:
+                                    </div>
+                                    <div>
+                                        ${d.price}
+                                    </div></div>
+                            <div className="w-full p-2 justify-center items-center">
+                                <div className="">{<a target="_blank" href={d.images}><img className="size-12 md:size-14 mx-auto " src={d.images} alt={d.name}/></a>}
                                 </div>
-                                </td>
+                                </div>
+                                {console.log(d)}
+                                
 
-                            <td className="border-l  border-text/10  "><div className="bg-primary cursor-pointer rounded-md min size-6 m-auto" onClick={()=>{
+                            <div className="w-full   "><div className="bg-primary cursor-pointer rounded-md min size-6 m-auto" onClick={()=>{
                                 setEdt(
                                     (prev)=>({...prev,category:d.category_id.name,name:d.name,description:d.description,price:d.price,stock:d.stock,image:d.images})
                                 )
@@ -116,11 +135,10 @@ export const PnL=()=>{
                             }}>
                                 <Edit/>
                                 </div>
-                            </td>
-                        </tr>
+                            </div>
+                            </div>
                         )}
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
                 </div>
             

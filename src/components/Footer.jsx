@@ -6,9 +6,10 @@ import {
   FaInstagram,
   FaTwitterSquare,
 } from 'react-icons/fa';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { themeState } from '../store/atoms';
 import { Cart } from '../assets/Svg';
+import { sideBar } from '../store/dash';
 
 const SocialIcon = ({ icon: Icon }) => (
   <Icon className="social-icon hover:text-primary/50" size={30} />
@@ -29,6 +30,7 @@ const Footer = () => {
     { type: 'section', title: 'Legal', items: ['Claim', 'Policy', 'Terms'] },
   ];
 
+  const [active, setActive] = useRecoilState(sideBar);
 
   const theme = useRecoilValue(themeState);
   useEffect(() => {
@@ -37,7 +39,7 @@ const Footer = () => {
 
 
   return (
-    <div className='bg-backgrounds mx-auto py-14 px-6 grid lg:grid-cols-3 gap-8 z-30 text-text/90'>
+    <div className={`bg-backgrounds transition-all duration-300 mx-auto py-14 px-6 grid lg:grid-cols-3 gap-8 z-30 text-text/90 ${active ? 'pl-72':''}`}>
       <div>
         <div className='flex w-full'>
         <h1 className=' text-3xl lg:text-4xl xl:text-5xl pr-2 font-bold text-primary'>CORECART</h1>

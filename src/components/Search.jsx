@@ -34,11 +34,11 @@ export const Search=({})=>{
                     placeholder="Search products..."
                 />
                 {filteredSuggestions.length > 0 && (
-                    <div className="absolute top-full mt-1 w-full bg-backgrounds max-w-fit rounded-xl shadow-md">
+                    <div className="absolute text-backgrounds p-1 border-2 border-primary/50 mt-1 w-4/5 bg-text  rounded-xl shadow-md">
                         {filteredSuggestions.map((suggestion, index) => (
                             <div
                                 key={index}
-                                className="py-2 px-4 cursor-pointer hover:bg-backgrounds/30 hover:text-primary"
+                                className="py-2 px-4 cursor-pointer border-b hover:bg-text/40 hover:rounded-xl hover:text-primary"
                                 onClick={() => setQuery(suggestion)}
                             >
                                 {suggestion}

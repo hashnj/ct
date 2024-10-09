@@ -11,12 +11,12 @@ export const Cartt = ({ size, sub, quty, id }) => {
   const nav = useNavigate();
   
   const isActive = list?.some(i => i.product_id === id); 
-  const product = list.find(item => item.product_id === id);
+  const product = list?.find(item => item.product_id === id);
   const quantity = product ? product.quantity : 1;
 
   useEffect(() => {
     if (ll.state === 'hasValue' && ll.contents.qry) {
-      setList(ll.contents.qry[0].products); 
+      setList(ll.contents.qry[0]?.products); 
     } else if (ll.state === 'hasError') {
       console.error("Error fetching cart", ll.contents);
     }

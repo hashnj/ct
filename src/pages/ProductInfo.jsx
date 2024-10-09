@@ -156,7 +156,7 @@ const ProductInfo = () => {
                   <div className="text-primary/60 font-extrabold text-4xl">
                     ${product.price}
                   </div>
-                  {product.price < product.mrp && (
+                  {product.price > product.mrp && (
                     <div className="flex justify-center items-end pl-2 text-xl text-red-600 line-through">
                       ${product.mrp}
                     </div>

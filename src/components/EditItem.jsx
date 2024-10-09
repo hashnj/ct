@@ -12,6 +12,7 @@ export const EditItem = () => {
         name: '',
         description: '',
         cat_img: '',
+        mrp:'',
         price: '',
         stock: '',
         image: '',
@@ -25,7 +26,6 @@ export const EditItem = () => {
         if (itemC.name) {
             setItemType('category');
             setItem({
-                ...item,
                 category: itemC.name || '',
                 parent: itemC.parent || '',
                 cat_img: itemC.cat_img || '',
@@ -35,17 +35,17 @@ export const EditItem = () => {
         } else {
             setItemType('product');
             setItem({
-                ...item,
                 category: eitem.category || '',
                 name: eitem.name || '',
                 description: eitem.description || '',
-                mrp:eitem.mrp||'', 
-                sell_price: eitem.price || '',
+                mrp: eitem.mrp || '', 
+                price: eitem.price || '',
                 stock: eitem.stock || '',
                 image: eitem.image || '',
             });
         }
     }, [itemC, eitem]);
+    
 
     const handleItemTypeChange = (e) => {
         setItemType(e.target.value);
@@ -107,7 +107,7 @@ export const EditItem = () => {
 
     return (
         <div className='bg-backgrounds/70  absolute top-10  left-0 min-h-screen w-screen h-full flex text-text justify-center items-center'>
-            <form className="max-w-md mx-auto z-30 border border-text/20 bg-background rounded-lg p-4" onSubmit={handleSubmit}>
+            <form className="max-w-md mx-auto z-40 border border-text/20 bg-background rounded-lg p-4" onSubmit={handleSubmit}>
                 <div className='mb-5 -ml-1 flex justify-between items-center'>
                     <div onClick={() => {
                                     setItemType('product');
@@ -181,7 +181,7 @@ export const EditItem = () => {
                             name="mrp" 
                             step="0.01"
                             placeholder="MRP"
-                            value={item.mpr}
+                            value={item.mrp}
                             onChange={handleChange}
                             required
                         />

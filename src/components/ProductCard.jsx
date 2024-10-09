@@ -36,7 +36,7 @@ export const ProductCard=({ image, title, description,mrp , vendor, stock , pric
                 
                 <div className="font-bold text-text text-xl flex justify-between mx-2 ">
                     <div className="flex flex-col items-start">
-                    <div className="ml-2">{title}</div>
+                    <div className="ml-2 capitalize">{title}</div>
                     <div className="flex justify-between mx-2">
                 <p className="text-text/60  text-base mb-1">{description.substr(0,12)}{description.length>12?'...':''}</p>
                 </div>
