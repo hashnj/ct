@@ -4,14 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { sideBar } from "../store/dash";
 import { authCheck } from "../store/auth";
-import { FaBars, FaSearch } from "react-icons/fa";
+import { FaBars, FaCartArrowDown, FaHeart, FaSearch } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
-import { Bell, FillSun, Gear, Moon, Out, Profile, Sun } from "../assets/Svg";
+import { Bell, Cart, FillSun, Gear, Moon, Out, Profile, Sun } from "../assets/Svg";
 import { Search } from "./Search";
 import { themeState } from "../store/atoms";
 
 export const Nav = ({home}) => {
-  // const [dark, setDark] = useState(false);
   const [sidebar, setSidebar] = useRecoilState(sideBar);
   const nav = useNavigate();
   const info = useRecoilValueLoadable(authCheck);
@@ -20,7 +19,7 @@ export const Nav = ({home}) => {
 
 
   useEffect(() => {
-    document.body.classList = theme;
+    document.body.classList = theme + ' bg-backgrounds';
   }, [theme]);
 
 
@@ -43,7 +42,7 @@ if(info.state === 'hasValue'){
       </div>}
       <div className="flex items-center  space-x-4">
         <Menu as="div" className="relative hidden md:block">
-          <MenuButton className={`rounded-full bg-background p-2 text-primary`}>
+          <MenuButton className={`p-2 text-primary `}>
           <FillSun/>
           </MenuButton>
           <Transition
@@ -88,8 +87,11 @@ if(info.state === 'hasValue'){
           </Transition>
         </Menu>
 
-        <div className="bg-background hidden md:block p-2 rounded-full cursor-pointer">
-        <Bell/>
+        <div className="bg-background hidden md:block p-2 text-xl rounded-full cursor-pointer" onClick={()=>{nav('/cart')}}>
+        <FaCartArrowDown/>
+        </div>
+        <div className="bg-background hidden text-red-600 md:block p-2 text-xl rounded-full cursor-pointer" onClick={()=>{nav('/wishlist')}}>
+        <FaHeart/>
         </div>
         <Menu as="div" className="relative">
           <MenuButton className={`rounded-full hover:bg-primary/80 bg-primary p-2 text-text/80`}>

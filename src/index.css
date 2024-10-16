@@ -63,5 +63,23 @@ input::-webkit-inner-spin-button {
     color: rgb(156, 163, 175);
   }
 
+  @keyframes puls {
+    50% {
+      opacity: .1;
+    }
+  }
+  .animate-puls {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes spn {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .animate-spn {
+    animation: spin 1s cubic-bezier(.22,.8,.7,.1) infinite;
+  }
+
 
 

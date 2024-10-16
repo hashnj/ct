@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import { B_Url } from "../config";
 
 export const auth = atom({
     key: 'auth',
@@ -10,7 +11,7 @@ export const authCheck = selector({
     get: async ({ get }) => {
         try {
             // const status = get(auth);
-            const res = await fetch('http://localhost:3000/user/auth',{
+            const res = await fetch(`${B_Url}/user/auth`,{
                 method:'post',
                 headers:{
                     'Content-type': 'application/json',
@@ -18,14 +19,14 @@ export const authCheck = selector({
                 }
             });
             const data = await res.json();
-            // console.log(data);
+            console.log(data);
             if (data.success) {
-                // console.log(data);
+                console.log(data);
                 return data;
             }
             return false;
         } catch (error) {
-            console.error("Error fetching auth status:", error);
+            console.log("Error fetching auth status:", error);
             return false;
         }
     }

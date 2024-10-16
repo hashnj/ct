@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRecoilState, useRecoilValueLoadable } from 'recoil';
 import { reviewsAtom, reviewsSelector, hasBoughtSelector } from '../store/reviews';
 import axios from 'axios';
+import { B_Url } from '../config';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const Reviews = ({ productId }) => {
@@ -42,7 +43,7 @@ const Reviews = ({ productId }) => {
 const handleReviewSubmit = async () => {
   try {
     const { data } = await axios.post(
-      `http://localhost:3000/reviews/${productId}`,
+      `${B_Url}/reviews/${productId}`,
       { comment: newComment, rating: newRating },
       { headers: { Authorization: `${localStorage.getItem('token')}` } }
     );

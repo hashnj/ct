@@ -51,7 +51,7 @@ const CartPage = () => {
   const calculateSubTotal = useCallback(() => {
     if (prod.state === 'hasValue' && list.state === 'hasValue') {
       let total = 0;
-      prod.contents.data.forEach(item => {
+      prod.contents.data?.forEach(item => {
         const cartItem = listt.find(cItem => cItem.product_id === item._id);
         console.log(cartItem,item);
         if (cartItem && item.stock>0) {
@@ -128,7 +128,7 @@ const CartPage = () => {
           Cart
         </div>
         <div className="overflow-y-scroll overflow-x-hidden p-4 w-full grid grid-cols-2 md:grid-cols-3 ml-5 no-scrool">
-          {prod.contents.data.map((item, i) => {
+          {prod.contents.data?.map((item, i) => {
             const cartItem = listt.find(cItem => cItem.product_id === item._id);
             return cartItem ? (
               <div key={item._id} className="mr-7 ml-2 col-span-2 grid-cols-1">
@@ -157,7 +157,7 @@ const CartPage = () => {
                   <div className="font-extrabold text-center text-text w-1/3">Price</div>
                   <div className="font-extrabold text-end text-text w-1/3">Quty.</div>
                 </div>
-                {prod.contents.data.map((item, i) => {
+                {prod.contents.data?.map((item, i) => {
                   const isAdded = listt.some(i => i.product_id === item._id);
                   return isAdded ? (
                     <div key={item._id} className="flex w-full px-2 font-normal text-text/85 justify-between">

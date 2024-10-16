@@ -3,6 +3,8 @@ import { useRecoilState } from 'recoil';
 import { edit } from '../store/listing';
 import { EditC, EditV } from '../store/edit';
 import { FaArrowLeft } from 'react-icons/fa';
+import { B_Url } from '../config';
+
 
 export const EditItem = () => {
     const [itemType, setItemType] = useState('product');
@@ -62,7 +64,7 @@ export const EditItem = () => {
         if (itemType === 'product') {
             // console.log('Product edited: ', { ...item, ...eitem });
             try{
-            const req=await fetch(`http://localhost:3000/products`,{
+            const req=await fetch(`${B_Url}/products`,{
                 method:'put',
             headers:{
                 'Content-type':'application/json',
@@ -79,7 +81,7 @@ export const EditItem = () => {
     } else {
             console.log('Category edited: ', { ...item, ...itemC });
             try{
-            const req= await fetch('http://localhost:3000/categories',{
+            const req= await fetch(`${B_Url}/categories`,{
                 method:'put',
                 headers:{
                     'Content-type':'application/json',

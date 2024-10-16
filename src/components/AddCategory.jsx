@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import { addC } from '../store/listing';
 import { ImCross } from 'react-icons/im';
 import { FaPlus } from 'react-icons/fa';
+import { B_Url } from '../config';
 
 const AddCategory = () => {
     const [category, setCategory] = useState({
@@ -23,7 +24,7 @@ const AddCategory = () => {
         e.preventDefault();
 
         // console.log('Category submitted: ', category);
-        const send=await fetch('http://localhost:3000/categories',{
+        const send=await fetch(`${B_Url}/categories`,{
             method:'post',
             headers:{
                 'Content-type':'application/json',

@@ -49,7 +49,7 @@ const WishPage = () => {
     }
 
     if (prod.state === 'hasError' || list.state === 'hasError') {
-        return <div>Error loading products</div>;
+        return <div className="bg-background text-text text-6xl w-screen h-screen flex justify-center items-center">Error loading products</div>;
     }
 
     if (prod.state === 'hasValue' && list.state === 'hasValue' && !load) {
@@ -65,7 +65,7 @@ const WishPage = () => {
                     WishList
                 </div>
                 <div className="px-12 py-14 min-h-1/2 overflow-y-scroll no-scrool">
-                    {prod.contents.data.map((item) => {
+                    {prod.contents.data?.map((item) => {
                         const isWishlisted = wishList?.includes(item._id);
                         console.log(isWishlisted, wishList, item._id);
                         return isWishlisted ? (
@@ -77,7 +77,7 @@ const WishPage = () => {
                                 image={item.images}
                                 id={item._id}
                             />
-                        ) : null;
+                        ) : (<div>Wishlisted Products will be shown here...</div>);
                     })}
                 </div>
             </div>

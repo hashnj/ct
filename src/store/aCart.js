@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import { B_Url } from "../config";
 
 export const cartState = atom({
     key: 'cart',
@@ -8,7 +9,7 @@ export const cartState = atom({
 export const getCart = selector({
     key: 'getCart',
     get: async ({ get }) => {
-        const req = await fetch('http://localhost:3000/products/cart', {
+        const req = await fetch(`${B_Url}/products/cart`, {
             headers: {
                 'authorization': localStorage.getItem('token')
             }
@@ -22,7 +23,7 @@ export const cartUpdate = selector({
     key: 'cartUpdate',
     get: async ({ get }) => {
         const list = get(cartState);
-        await fetch('http://localhost:3000/products/cart', {
+        await fetch(`${B_Url}/products/cart`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',

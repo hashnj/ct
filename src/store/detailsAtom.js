@@ -1,10 +1,11 @@
 import { selector } from "recoil";
+import { B_Url } from "../config";
 
 export const detailsSelector = selector({
     key: 'detailsSelector',
     get: async ({ get }) => {
         try {
-            const res = await fetch('http://localhost:3000/data', {
+            const res = await fetch(`${B_Url}/data`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',

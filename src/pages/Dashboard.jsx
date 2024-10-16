@@ -12,6 +12,8 @@ import { addC, addP, Show } from "../store/listing";
 import AddCategory from "../components/AddCategory";
 import AddProduct from "../components/AddProduct";
 import { PnL } from "../components/PnL";
+import { B_Url } from '../config';
+
 
 export const Dashboard = () => {
     const detailsLoadable = useRecoilValueLoadable(detailsSelector);
@@ -46,7 +48,7 @@ export const Dashboard = () => {
     // console.log(data);
 
     const handelDelete=async ()=>{
-        const req=await fetch('http://localhost:3000/user/del',{
+        const req=await fetch(`${B_Url}/user/del`,{
             headers:{
                 'authorization':localStorage.getItem('token')
             },

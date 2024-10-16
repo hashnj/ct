@@ -15,7 +15,7 @@ import { themeState } from "../store/atoms";
 import { Slider } from "../components/Slider";
 import ProdSlider from "../components/ProdSlider";
 import { Search } from "../components/Search";
-import { FaArrowRight, FaSearch } from "react-icons/fa";
+import { FaArrowRight, FaCartArrowDown, FaSearch } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
 import { Cart } from "../assets/Svg";
@@ -31,6 +31,7 @@ export const Main = () => {
     const [bestDiscountProduct, setBestDiscountProduct] = useState(null);
 
     const [isVisible, setIsVisible] = useState(false);
+    const [load,setLoad] = useState(false);
 
   
 
@@ -55,12 +56,19 @@ export const Main = () => {
         }
       }, [popup]);
 
+      let tOut;
+
     useEffect(() => {
+        setLoad(true);
         if (data.state === 'hasValue') {
-            console.log(data);
+            
             const filteredProducts = data.contents.data?.filter((prod) => parseFloat(prod.price) < parseFloat(prod.mrp));
             setProductData(filteredProducts);
-
+            if(data.contents.data){
+            tOut=setTimeout(() => {
+                setLoad(false);    
+            }, 3000);
+        }
             
             if (filteredProducts?.length > 0) {
                 const productWithBestDiscount = filteredProducts.reduce((maxDiscountProd, currentProd) => {
@@ -74,6 +82,9 @@ export const Main = () => {
                 setBestDiscountProduct(productWithBestDiscount); 
             }
         }
+        return () => {
+            clearTimeout(tOut);
+        };
     }, [data]);
     
     
@@ -146,22 +157,24 @@ export const Main = () => {
                                             
                                         </div>
                                         </div>
-                                        <div className="flex mt-4 h-10 flex-row-reverse justify-end">
+                                        <div className="flex mt-4 flex-row-reverse justify-end">
                                         
-                                        <div className="w-full mx-2 ">
+                                        <div className="w-full mx-1 ">
                                             <button 
-                                                className="flex p-2 justify-center w-full h-auto mt-2 hover:scale-95 transition-all duration-300 group bg-primary rounded-md"
+                                                className="flex p-3 justify-center w-full h-auto mt-2 hover:scale-95 transition-all duration-300 group bg-primary/80 hover:bg-primary rounded-md"
                                                 onClick={()=>{nav(`/product/${bestDiscountProduct._id}`)}}
                                                 >
-                                                <div className="font-bold my-auto">Shop Now </div> <div className="my-auto text-black group-hover:animate-pulse pl-1"><FaArrowRight/></div>
+                                                <div className="font-bold my-auto">Shop Now </div> <div className="my-auto text-background group-hover:scale-125 group-hover:pl-2  transition-all duration-300 pl-1"><FaArrowRight/></div>
                                             </button>
                                         </div>
                                         <div className="w-full mx-2">
-                                            <button className="flex p-2 w-full h-fit justify-center font-bold mx-2 mt-2 hover:scale-95 transition-all duration-300 group bg-primary rounded-md"
+                                            <button className="flex p-3 w-full h-fit justify-center font-bold mt-2 hover:scale-95 transition-all duration-300 group bg-primary/80 hover:bg-primary rounded-md"
                                                 onClick={()=>{}}
                                                 >
-                                                    <div className="my-auto">Add to cart</div>
-                                                    <Cart/>
+                                                    <div >Add to cart</div>
+                                                    <div className="my-auto pl-1 text-background text-xl group-hover:scale-125 transition-all duration-300">
+                                                    <FaCartArrowDown/>
+                                                    </div>
                                             </button>
                                         </div>
                                         </div>
@@ -189,7 +202,7 @@ export const Main = () => {
                             </div>
                             <div className=""><img src="https://www.startfreshaccounting.com.au/wp-content/uploads/2022/06/e-commerce-online-stores.png" alt="" /></div>
                         </div>
-                        {!data?(
+                        {!load ? (
                             <>
                             <div className="text-3xl py-6 underline-offset-4 underline font-serif font-bold">Featured products</div>
                         <div>
@@ -219,8 +232,9 @@ export const Main = () => {
                         </div>
                         </>):(
                             <>
-                            <div className=" w-full p-8 text-xl flex justify-center items-center">
-                                No Products available 
+                            <div className=" w-full p-8 text-xl flex flex-col justify-center items-center">
+                                <AiOutlineLoading3Quarters className="animate-spn text-primary text-4xl " />
+                                <div className="flex">Loading Products <div className="animate-puls ">...</div></div> 
                             </div>
                         </>)}
                         

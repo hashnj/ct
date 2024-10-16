@@ -4,6 +4,7 @@ import { useRecoilState, useRecoilValueLoadable } from 'recoil';
 import { FaArrowLeft, FaPlus } from 'react-icons/fa';
 import { ImCross } from 'react-icons/im';
 import { categories } from '../store/products';
+import { B_Url } from '../config';
 
 const AddProduct = () => {
     const [product, setProduct] = useState({
@@ -28,7 +29,7 @@ const AddProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log('Product submitted: ', product);
-        const send=await fetch('http://localhost:3000/products/add',{
+        const send=await fetch(`${B_Url}/products/add`,{
             method:'post',
             headers:{
                 'Content-type':'application/json',

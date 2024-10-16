@@ -1,9 +1,10 @@
 import { selector } from "recoil";
+import { B_Url } from "../config";
 
 export const products=selector({
     key:'products',
     get:async ({get})=>{
-        const res = await fetch('http://localhost:3000/products/',{
+        const res = await fetch(`${B_Url}/products/`,{
             headers:{
                 'authorization':localStorage.getItem('token')
             }
@@ -16,7 +17,7 @@ export const products=selector({
 export const categories=selector({
     key:'category',
     get:async ({get})=>{
-        const res = await fetch('http://localhost:3000/categories/',{
+        const res = await fetch(`${B_Url}/categories/`,{
             headers:{
                 'authorization':localStorage.getItem('token')
             }

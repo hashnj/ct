@@ -7,6 +7,7 @@ import { eMail, pAssword, pHone, rol, themeState, username } from "../store/atom
 import { useRecoilValue } from "recoil";
 import { auth } from "../store/auth";
 import { Cart } from "../assets/Svg";
+import { B_Url } from "../config";
 
 export const Signin = () => {
   const nav = useNavigate();
@@ -135,7 +136,7 @@ export const Signin = () => {
       }
       console.log(body);
       try{
-      const req = await fetch('http://localhost:3000/user/login', {
+      const req = await fetch(`${B_Url}/user/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

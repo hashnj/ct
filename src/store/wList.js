@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import { B_Url } from "../config";
 
 export const wishListState = atom({
     key: 'wishList',
@@ -8,7 +9,7 @@ export const wishListState = atom({
 export const getWList = selector({
     key: 'getList',
     get: async ({ get }) => {
-        const req = await fetch('http://localhost:3000/products/wish', {
+        const req = await fetch(`${B_Url}/products/wish`, {
             method:'get',
             headers: {
                 'authorization': localStorage.getItem('token')
@@ -23,7 +24,7 @@ export const wList = selector({
     key: 'active',
     get: async ({ get }) => {
         const list = get(wishListState);
-        const req = await fetch('http://localhost:3000/products/wish', {
+        const req = await fetch(`${B_Url}/products/wish`, {
             method: 'post',
             headers: {
                 'Content-type': 'application/json',

@@ -1,5 +1,6 @@
 import { atom, selectorFamily } from 'recoil';
 import axios from 'axios';
+import { B_Url } from '../config';
 
 
 export const reviewsAtom = atom({
@@ -11,7 +12,7 @@ export const reviewsSelector = selectorFamily({
   key: 'reviewsSelector',
   get: (productId) => async ({ get }) => {
     try {
-      const { data } = await axios.get(`http://localhost:3000/reviews/${productId}`);
+      const { data } = await axios.get(`${B_Url}/reviews/${productId}`);
       return data;
     } catch (error) {
       console.error('Error fetching reviews:', error);
@@ -24,7 +25,7 @@ export const hasBoughtSelector = selectorFamily({
   key: 'hasBoughtSelector',
   get: (productId) => async () => {
     try {
-      const { data } = await axios.get(`http://localhost:3000/reviews/hasBought/${productId}`, {
+      const { data } = await axios.get(`${B_Url}/reviews/hasBought/${productId}`, {
         headers: { Authorization: `${localStorage.getItem('token')}` },
       });
       return data; 

@@ -6,6 +6,7 @@ import { Form } from "../components/Form";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { eMail, pAssword, pathh, pHone, rolee, term, themeState, username } from "../store/atoms";
 import { Cart } from "../assets/Svg";
+import { B_Url } from "../config";
 
 export const Signup = () => {
     const nav = useNavigate();
@@ -87,7 +88,7 @@ export const Signup = () => {
                 password,
                 role
             }
-            const req = await fetch('http://localhost:3000/user/signup', {
+            const req = await fetch(`${B_Url}/user/signup`, {
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json'

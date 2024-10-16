@@ -48,7 +48,7 @@ export const Listing = () => {
   }, [show, category.state, category.contents]);
 
   useEffect(()=>{
-    document.body.classList=theme
+    document.body.classList=theme + ' bg-backgrounds'
   },[theme])
 
   return (
@@ -56,7 +56,7 @@ export const Listing = () => {
       <Nav />
       <SideBar top="Your-Listings" />
       <ToastContainer />
-      <div className={`h-full transition-all pt-20 md:pl-6 duration-300 w-full ${active?' sm:w-3/5 lg:w-5/6 sm:ml-64 ' : 'sm:w-11/12 '}  text-text `}>
+      <div className={`h-full transition-all pt-20 md:pl-6 p-2 duration-300 w-full ${active?' sm:w-3/5 lg:w-5/6 ml-64' : 'w-10/12 '}  text-text `}>
         <div className="text-primary font-serif ml-4 mt-2 text-2xl md:text-3xl">
             Your Products And Listings
           </div>

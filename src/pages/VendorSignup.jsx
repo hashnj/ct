@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { aDress, eMail, pAssword, pHone, term, themeState, username } from "../store/atoms";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { B_Url } from "../config";
 
 export const VendorSignup=()=>{
 
@@ -68,7 +69,7 @@ export const VendorSignup=()=>{
             const body = { userName, email, phone,password,address,role:'Vendor'};
             console.log(body);
             console.log(localStorage.getItem('token'))
-            const req = await fetch('http://localhost:3000/user/signup', {
+            const req = await fetch(`${B_Url}/user/signup`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
