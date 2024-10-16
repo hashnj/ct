@@ -12,7 +12,12 @@ export const ProductCard=({ image, title, description,mrp , vendor, stock , pric
         <div 
          className={`max-w-xs rounded-lg max-h-fit border border-text/20 mx-auto w-full bg-background group cursor-pointer  overflow-hidden hover:shadow-primary/40 hover:shadow-[0_0_10px] m-4 `}>
             <div className="my-auto relative group">
-            {price<mrp? <div className="bg-red-700 px-2 absolute z-10  rounded-br-2xl  text-white/80 py-1 my-auto">SALE</div>:''}
+            {parseFloat(price) < parseFloat(mrp) ? (
+  <div className="bg-red-700 px-2 absolute z-10  rounded-br-2xl  text-white/80 py-1 my-auto">
+    {["Sale", "Hot", "Deal"][Math.floor(Math.random() * 3)]}
+  </div>
+) : ''}
+
                 <img onClick={()=>{
                     nav(`/product/${id}`)
                     }}
@@ -49,8 +54,8 @@ export const ProductCard=({ image, title, description,mrp , vendor, stock , pric
                 
                 </div>
                 <div className="flex ml-4 mb-1">
-                            <p className={`text-primary  ${mrp>price?'line-through text-red-500 pt-1 pr-[6px]  text-base':'text-xl'}  `}>${mrp>price ? mrp : price}</p>
-                            {price<mrp ?  <p className={`text-primary text-xl `}>${price}</p>:''}
+                            <p className={`text-primary  ${parseFloat(mrp)>parseFloat(price)?'line-through text-red-500 pt-1 pr-[6px]  text-base':'text-xl'}  `}>${parseFloat(mrp)>parseFloat(price) ? mrp : price}</p>
+                            {parseFloat(price)<parseFloat(mrp) ?  <p className={`text-primary text-xl `}>${price}</p>:''}
                     </div>
                 
             </div>

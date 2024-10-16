@@ -28,7 +28,7 @@ export const Main = () => {
     const data = useRecoilValueLoadable(products);
     const theme = useRecoilValue(themeState);
     const [isShowing, setIsShowing] = useState(false);
-    const [bestDiscountProduct, setBestDiscountProduct] = useState(null); // New state for product with highest discount
+    const [bestDiscountProduct, setBestDiscountProduct] = useState(null);
 
     const [isVisible, setIsVisible] = useState(false);
 
@@ -57,20 +57,21 @@ export const Main = () => {
 
     useEffect(() => {
         if (data.state === 'hasValue') {
-            const filteredProducts = data.contents.data.filter((prod) => prod.price < prod.mrp);
+            console.log(data);
+            const filteredProducts = data.contents.data?.filter((prod) => parseFloat(prod.price) < parseFloat(prod.mrp));
             setProductData(filteredProducts);
 
             
-            if (filteredProducts.length > 0) {
+            if (filteredProducts?.length > 0) {
                 const productWithBestDiscount = filteredProducts.reduce((maxDiscountProd, currentProd) => {
                     const currentDiscount = currentProd.mrp - currentProd.price;
                     // console.log(currentDiscount);
                     const maxDiscount = maxDiscountProd.mrp - maxDiscountProd.price;
-                    console.log(maxDiscount);
+                    // console.log(maxDiscount);
                     return currentDiscount > maxDiscount ? currentProd : maxDiscountProd;
                 }, filteredProducts[0]);
 
-                setBestDiscountProduct(productWithBestDiscount); // Store the product with the highest discount
+                setBestDiscountProduct(productWithBestDiscount); 
             }
         }
     }, [data]);
@@ -91,13 +92,13 @@ export const Main = () => {
     }
 
     if (data.state === 'hasValue') {
-        console.log(bestDiscountProduct)
+        // console.log(bestDiscountProduct)
         return (
             <div className={`flex flex-col min-h-screen h-full no-scroll justify-center items-center bg-backgrounds z-20 text-text w-full ${isVisible ? 'fixed':''}`}>
                 <Nav home={false} />
                 <SideBar top="Home" />
 
-                <div className={`w-full h-full pt-20 transition-all duration-300 ${active ? 'pl-72 pr-8' : 'w-full'} no-scroll`}>
+                <div className={`w-full h-full pt-20 transition-all duration-300 px-2 ${active ? 'md:pl-72 ' : 'w-full'} no-scroll`}>
                     <div className={`w-full flex-col min-h-screen transition-all  duration-300 flex h-full ${active ? '' : "px-5 sm:px-8 md:px-10 lg:px-20"} `}>
                         {popup && bestDiscountProduct && ( 
                             <div 
@@ -108,15 +109,15 @@ export const Main = () => {
                                 }}
                                 >
                                 <div 
-                                    className={`bg-background z-30 rounded-xl p-8 fixed top-32 lg:top-1/4 left-12 w-4/5 sm:left-24 md:left-1/4 sm:w-2/3  md:w-1/2 border  transition-all duration-300 ${
+                                    className={`bg-background  z-30  rounded-xl p-8 fixed top-32 lg:top-1/4 left-12 w-4/5 sm:left-24 md:left-1/4 sm:w-2/3  md:w-1/2 border border-text/50  transition-all duration-300 ${
                                                 isVisible ? "translate-y-0 opacity-100" : "translate-y-2/4 opacity-0"}`}
                                     onClick={(e)=>e.stopPropagation()}
                                 >
-                                <div className="lg:flex lg:flex-row-reverse w-full">
-                                <div className="w-full  my-auto">
+                                <div className="lg:flex h-full lg:flex-row-reverse w-full">
+                                <div className="w-full h-full my-auto">
                                         <img className=" rounded-xl md:rounded-none" src={bestDiscountProduct.images[0]} alt="" />
                                     </div>
-                                    <div className="flex w-full py-2 flex-col">
+                                    <div className="flex w-full my-auto justify-between h-full py-2 flex-col">
                                         <div className="text-primary text-lg">Deal of the Day</div>
                                         <div className="text-2xl font-bold pb-4 px-2">
                                             {bestDiscountProduct.name} 
@@ -145,18 +146,18 @@ export const Main = () => {
                                             
                                         </div>
                                         </div>
-                                        <div className="flex flex-row-reverse justify-end">
+                                        <div className="flex mt-4 h-10 flex-row-reverse justify-end">
                                         
-                                        <div className="w-full mx-1">
+                                        <div className="w-full mx-2 ">
                                             <button 
-                                                className="flex p-2 justify-center w-full h-12 mt-2 hover:scale-95 transition-all duration-300 group bg-primary rounded-md"
+                                                className="flex p-2 justify-center w-full h-auto mt-2 hover:scale-95 transition-all duration-300 group bg-primary rounded-md"
                                                 onClick={()=>{nav(`/product/${bestDiscountProduct._id}`)}}
                                                 >
                                                 <div className="font-bold my-auto">Shop Now </div> <div className="my-auto text-black group-hover:animate-pulse pl-1"><FaArrowRight/></div>
                                             </button>
                                         </div>
-                                        <div className="w-full mx-1">
-                                            <button className="flex p-2 w-full justify-center font-bold mx-1 mt-2 hover:scale-95 transition-all duration-300 group bg-primary rounded-md"
+                                        <div className="w-full mx-2">
+                                            <button className="flex p-2 w-full h-fit justify-center font-bold mx-2 mt-2 hover:scale-95 transition-all duration-300 group bg-primary rounded-md"
                                                 onClick={()=>{}}
                                                 >
                                                     <div className="my-auto">Add to cart</div>
@@ -169,8 +170,9 @@ export const Main = () => {
                                     
                                 </div>
                                 <div 
-                                    className="absolute hover:scale-95 hover:text-text/80 transition-all duration-300 top-4 text-text/60 right-4 font-thin text-xl "
-                                    onClick={()=>setPopup(false)}
+                                    className="absolute hover:scale-95 hover:text-text/80 transition-all duration-300 top-4 text-text/60 right-4 font-thin cursor-pointer text-xl "
+                                    onClick={()=>{setPopup(false);
+                                        setIsVisible(false);}}
                                 >
                                     <ImCross />
                                 </div>
@@ -179,7 +181,7 @@ export const Main = () => {
                         )}
                         <div className={` h-96 bg-white p-4 md:px-8 justify-between rounded-lg transition-all duration-300 flex `}>
                             <div className={`flex flex-col w-full sm:w-1/2 h-full justify-center`}>
-                                <div className={`pl-4 text-4xl transition-all duration-300 text-primary font-bold  ${active ? "md:h-1/3" : ""} `}>Get your all E-commerce needs met at CoreCart</div>
+                                <div className={`md:pl-4 text-4xl transition-all duration-300 text-primary font-bold pb-3  ${active ? "" : ""} `}>Get your all E-commerce needs met at CoreCart</div>
                                 <div className="w-full rounded-xl text-black border-primary text-xl flex border">
                                     <div className="w-12 flex justify-center items-center  pointer-events-none"> <FaSearch /></div>
                                     <Search />
@@ -187,16 +189,19 @@ export const Main = () => {
                             </div>
                             <div className=""><img src="https://www.startfreshaccounting.com.au/wp-content/uploads/2022/06/e-commerce-online-stores.png" alt="" /></div>
                         </div>
-                        <div className="text-3xl py-6 underline-offset-4 underline font-serif font-bold">Featured products</div>
+                        {!data?(
+                            <>
+                            <div className="text-3xl py-6 underline-offset-4 underline font-serif font-bold">Featured products</div>
                         <div>
                             <ProdSlider />
                         </div>
-                        <div>
+                        <div className="w-full flex flex-col"> 
                             <div className="text-3xl py-6 underline-offset-4 underline font-serif font-bold">
                                 Exclusive Deals
                             </div>
-                            <div className={`grid bg-backgrounds gap-3 transition-all grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 px-1 rounded-md sm:px-2 md:px-4 duration-300 float-right min-h-screen h-full ${active ? 'grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4' : '2xl:grid-cols-4'}`}>
-                                {productData.map((product, index) => (
+                            <div className={`grid bg-backgrounds gap-x-3 gap-y-0 transition-all mx-auto px-1 rounded-md sm:px-2 md:px-4 duration-300 float-right min-h-screen h-full ${active ? 'grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5' : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'}`}>
+                                {productData?.map((product, index) => (
+                                    <div key={index} className="animate-fadeInUp transition-all duration-300">
                                     <ProductCard
                                         key={index}
                                         image={product.images}
@@ -208,9 +213,17 @@ export const Main = () => {
                                         stock={product.stock}
                                         id={product._id}
                                     />
+                                    </div>
                                 ))}
                             </div>
                         </div>
+                        </>):(
+                            <>
+                            <div className=" w-full p-8 text-xl flex justify-center items-center">
+                                No Products available 
+                            </div>
+                        </>)}
+                        
                     </div>
                 </div>
             </div>

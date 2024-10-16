@@ -31,9 +31,18 @@ const ProdSlider = () => {
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 856,
         settings: {
           slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 1
         }
@@ -56,7 +65,7 @@ const ProdSlider = () => {
   useEffect(() => {
     if (prod.state === 'hasValue') {
       const data = prod.contents.data;
-      const prodMap = data.reduce((acc, product) => {
+      const prodMap = data?.reduce((acc, product) => {
         const prodId = product._id;
         const prodName = product.name;
         const prodImage = product.images[0];
@@ -73,7 +82,9 @@ const ProdSlider = () => {
         return acc;
       }, {});
 
+      if(data){
       setProdData(Object.values(prodMap));
+      }
     }
   }, [prod.state, prod.contents]);
 

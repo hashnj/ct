@@ -1,8 +1,8 @@
-import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { useRecoilState, useRecoilValueLoadable, useRecoilValue } from "recoil";
 import { themeState } from "../store/atoms";
 import { useEffect, useState } from "react";
 import { Nav } from "../components/Nav";
-import { FaHeart, FaPlus, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Cart } from "../assets/Svg";
 import { useNavigate, useParams } from "react-router-dom";
 import { products } from "../store/products";
@@ -13,10 +13,9 @@ import { sideBar } from "../store/dash";
 import { cartState, cartUpdate, getCart } from "../store/aCart";
 import details from "../hooks/details";
 import auth from "../hooks/auth";
-import { ImCross } from "react-icons/im";
-import { B_Url } from "../config";
 import { BuyProcessing } from "../components/BuyProcessing";
 import { buyM } from "../store/buy";
+import Reviews from "../components/Reviews";
 
 const ProductInfo = () => {
   const theme = useRecoilValue(themeState);
@@ -25,52 +24,40 @@ const ProductInfo = () => {
   const [list, setList] = useRecoilState(wishListState);
   const car = useRecoilValueLoadable(getCart);
   const [cart, setCart] = useRecoilState(cartState);
-  const w = useRecoilValueLoadable(cartUpdate);
-  const isactive = list.includes(id);
-  const nav = useNavigate();
-  const side = useRecoilValue(sideBar);
   const [buy, setBuy] = useRecoilState(buyM);
+  const side = useRecoilValue(sideBar);
+
+  const navigate = useNavigate();
   const detailss = details();
   const ath = auth();
-  const user = detailss?.users.filter((i) => i._id == ath.userId);
-  
-
-
+  const user = detailss?.users.find((i) => i._id === ath.userId);
+  const isactive = list.includes(id);
 
   useEffect(() => {
-    document.body.classList = theme;
+    document.body.className = theme;
   }, [theme]);
 
   useEffect(() => {
     if (car.state === "hasValue" && car.contents.qry) {
-      setCart(car.contents.qry[0].products);
+      setCart(car?.contents?.qry[0]?.products);
     } else if (car.state === "hasError") {
-      console.error("Error fetching cart", car.contents);
+      console.error("Error fetching cart:", car.contents);
     }
-  }, [car]);
+  }, [car, setCart]);
 
-  useEffect(() => {
-    if (cart.length) {
-      w.contents; // Trigger backend update
-    }
-  }, [cart]);
-
-  const handleClick = () => {
+  const handleWishlistToggle = () => {
     setList((prev) =>
       isactive ? prev.filter((itemId) => itemId !== id) : [...prev, id]
     );
   };
 
-  const handleClickCart = () => {
-    const isAdded = cart?.some((cartItem) => cartItem.product_id === id);
-
-    setCart((prev) => {
-      if (isAdded) {
-        return prev.filter((cartItem) => cartItem.product_id !== id);
-      } else {
-        return [...prev, { product_id: id, quantity: 1 }];
-      }
-    });
+  const handleCartToggle = () => {
+    const isAdded = cart.some((item) => item.product_id === id);
+    setCart((prev) =>
+      isAdded
+        ? prev.filter((item) => item.product_id !== id)
+        : [...prev, { product_id: id, quantity: 1 }]
+    );
   };
 
   if (prod.state === "loading") {
@@ -89,11 +76,10 @@ const ProductInfo = () => {
     );
   }
 
-  
-
   if (prod.state === "hasValue") {
-    const product = prod.contents.data.find((product) => product._id === id);
-    const isactivee = cart.some((item) => item.product_id === product._id); 
+    const product = prod.contents.data.find((p) => p._id === id);
+    const isInCart = cart?.some((item) => item.product_id === id);
+
 
     return (
       <div
@@ -116,10 +102,10 @@ const ProductInfo = () => {
         <div
           className={`px-12 pt-12 transition-all duration-300 sm:pt-24 ${
             side ? "sm:pl-60 " : ""
-          } flex w-full h-full`}
+          } flex flex-col w-full h-full`}
         >
-          <div className="flex flex-col sm:flex-row p-2 sm:pt-8 w-full">
-            <div className="w-full h-full flex flex-col justify-center px-2 items-center">
+          <div className="flex flex-col sm:flex-row sm:p-2 pt-8 w-full">
+            <div className="w-full h-full flex flex-col justify-center m-auto sm:px-2 items-center">
               <div className="flex justify-center sm:mt-24 transition-all duration-700 lg:mt-0 items-center h-2/3 lg:h-3/4 lg:w-1/2 rounded overflow-hidden w-4/5">
                 <img src={product.images[0]} alt={product.name} />
               </div>
@@ -166,10 +152,10 @@ const ProductInfo = () => {
                 <div className="mt-8">
                   <div className="flex flex-col text-xl items-center mb-6 justify-center">
                     <button
-                      className="w-11/12 transition-all flex p-3 lg:p-4 bg-red-600 hover:bg-red-500 active:bg-red-700 m-2 justify-center items-center rounded-xl"
-                      onClick={handleClick}
+                      className="sm:w-11/12 w-full transition-all flex p-3 lg:p-4 bg-red-600 hover:bg-red-500 active:bg-red-700 m-2 justify-center items-center rounded-xl"
+                      onClick={handleWishlistToggle}
                     >
-                      <div>Wishlist{isactive ? "ed" : ""} &nbsp;</div>
+                      <div className="">Wishlist{isactive ? "ed" : ""} &nbsp;</div>
                       {isactive ? (
                         <FaHeart className="scale-105 transition-all" />
                       ) : (
@@ -177,14 +163,14 @@ const ProductInfo = () => {
                       )}
                     </button>
                     <button
-                      className="w-11/12 transition-all duration-700 p-3 lg:p-4 border border-primary/40 hover:border-primary m-2 rounded-xl flex justify-center items-center bg-text/5"
-                      onClick={handleClickCart}
+                      className="w-full sm:w-11/12 transition-all duration-700 p-3 lg:p-4 border border-primary/40 hover:border-primary m-2 rounded-xl flex justify-center items-center bg-text/5"
+                      onClick={handleCartToggle}
                     >
-                      Add{isactivee ? "ed" : ""} to Cart &nbsp;{" "}
+                      Add{isInCart ? "ed" : ""} to Cart &nbsp;{" "}
                       <Cart size={8} />
                     </button>
                     <button
-                      className="w-11/12 transition-all duration-700 p-3 lg:p-4 bg-primary/60 border border-primary/10 hover:bg-primary hover:border-primary m-2 rounded-lg"
+                      className="w-full sm:w-11/12 transition-all duration-700 p-3 lg:p-4 bg-primary/60 border border-primary/10 hover:bg-primary hover:border-primary m-2 rounded-lg"
                       onClick={() => setBuy(true)}
                     >
                       Buy Now
@@ -193,6 +179,9 @@ const ProductInfo = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div>
+            <Reviews productId={id}/>
           </div>
         </div>
       </div>

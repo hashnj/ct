@@ -60,9 +60,9 @@ export const EditItem = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (itemType === 'product') {
-            console.log('Product edited: ', { ...item, ...eitem });
+            // console.log('Product edited: ', { ...item, ...eitem });
             try{
-            const req=await fetch("http://localhost:3000/products/",{
+            const req=await fetch(`http://localhost:3000/products`,{
                 method:'put',
             headers:{
                 'Content-type':'application/json',

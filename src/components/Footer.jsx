@@ -23,7 +23,6 @@ const Footer = () => {
     { type: 'icon', icon: FaTwitterSquare },
     { type: 'icon', icon: FaGithubSquare },
     { type: 'icon', icon: FaDribbbleSquare },
-    // Footer sections
     { type: 'section', title: 'Solutions', items: ['Analytics', 'Marketing', 'Commerce', 'Insights'] },
     { type: 'section', title: 'Support', items: ['FAQ','Shipping','Returns','Order Status','Payment Options'] },
     { type: 'section', title: 'Company', items: ['About Us', 'Get App', 'Careers', 'Affiliate Programs'] },
@@ -46,7 +45,7 @@ const Footer = () => {
         <Cart size={12} fil={theme == 'dark' ? '#fff' :''}/>
         </div>
         <p className='py-4 font-thin'>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id odit ullam iste repellat consequatur libero reiciendis, blanditiis accusantium.
+          CoreCart is the Best E-Commerce platform out there , that is easy to use, asthetically pleasing and a vendor first platform.
         </p>
         <div className='flex justify-between md:w-[75%] my-6'>
 

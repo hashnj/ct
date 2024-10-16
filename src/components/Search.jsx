@@ -8,7 +8,7 @@ export const Search=({})=>{
         const product =useRecoilValueLoadable(products)
         
         if(product.state === 'hasValue'){
-            const suggestions = product.contents.data.map(item => {return item.name})
+            const suggestions = product?.contents?.data?.map(item => {return item.name})
 
         const handleChange = (e) => {
             const value = e.target.value;

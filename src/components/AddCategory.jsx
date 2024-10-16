@@ -22,7 +22,7 @@ const AddCategory = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log('Category submitted: ', category);
+        // console.log('Category submitted: ', category);
         const send=await fetch('http://localhost:3000/categories',{
             method:'post',
             headers:{
@@ -32,7 +32,7 @@ const AddCategory = () => {
             body:JSON.stringify({category})
         })
         const data=await send.json();
-        console.log(data);
+        // console.log(data);
         if(data){
             setCategory({
                 name: '',

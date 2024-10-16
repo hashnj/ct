@@ -27,7 +27,7 @@ const AddProduct = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Product submitted: ', product);
+        // console.log('Product submitted: ', product);
         const send=await fetch('http://localhost:3000/products/add',{
             method:'post',
             headers:{
@@ -37,7 +37,7 @@ const AddProduct = () => {
             body:JSON.stringify({product})
         })
         const data=await send.json();
-        console.log(data);
+        // console.log(data);
         if(data){
             setProduct({
                 category: '',

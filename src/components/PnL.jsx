@@ -90,9 +90,10 @@ export const PnL=()=>{
                             <div className="">Edit</div>
                             
                         </div> */}
-                        {productDat.map((d,i)=>
+                        {productDat ? (productDat?.map((d,i)=>
                         <div key={i} className="flex hover:border-text/60 transition-all  my-2 py-1 border text-wrap border-text/20 rounded-lg items-center w-full">
                             <div className=" w-full text-center">{i+1}.</div>
+                            {console.log(d)}
                             <div className="w-full  pl-2">{d.name}</div>
                             <div className="w-full  pl-2">{d.vendor_id?.business_name || "Corecart"}</div>
                             <div className="w-full  pl-2">{d.category_id.name}</div>
@@ -127,7 +128,8 @@ export const PnL=()=>{
                                 {console.log(d)}
                                 
 
-                            <div className="w-full   "><div className="bg-primary cursor-pointer rounded-md min size-6 m-auto" onClick={()=>{
+                            <div className="w-full   ">
+                                <div className="bg-primary cursor-pointer rounded-md min size-6 m-auto" onClick={()=>{
                                 setEdt(
                                     (prev)=>({...prev,category:d.category_id.name,name:d.name,description:d.description,price:d.price,stock:d.stock,image:d.images})
                                 )
@@ -137,7 +139,13 @@ export const PnL=()=>{
                                 </div>
                             </div>
                             </div>
-                        )}
+                        )):(
+                        <>
+                        <div className="text-xl w-full flex justify-center items-center">
+                            No Products available Currently...
+                            <div></div>
+                        </div>
+                        </>)}
                     </div>
                 </div>
                 </div>

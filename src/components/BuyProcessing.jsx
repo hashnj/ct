@@ -56,7 +56,7 @@ export const BuyProcessing = ( ) =>{
       body:JSON.stringify({quantity,product:product._id,price:product.price,address:{address:sa.rel,postal_code:sa.postal_code,city:sa.city,state:sa.state,country:sa.country}})
 
   });
-  console.log(product.name);
+  // console.log(product.name);
 
   const data = await res.json();
 
@@ -90,7 +90,7 @@ export const BuyProcessing = ( ) =>{
   const data = await res.json();
 
   if (data) {
-    console.log(data);
+    // console.log(data);
     setBuy(false);
     const orderId = data.order._id; 
     nav(`/order/${orderId}`);
@@ -206,7 +206,7 @@ async function cartF() {
             id="ad"
             className="w-full focus:ring-primary mt-2 focus:border-none active:ring-primary focus:ring-2 bg-backgrounds p-2 mb-2 border-text/5 hover:text-primary rounded"
             onChange={(e)=>{
-              console.log(address[e.target.value]);
+              // console.log(address[e.target.value]);
               setSelectedAddress(address[e.target.value])
             }}
           >

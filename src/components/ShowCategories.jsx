@@ -87,7 +87,8 @@ if(category.state === 'hasValue'){
                           <td className="border-r border-b p-2 border-text/40 text-center">{i + 1}.</td>
                           <td className="border-r border-b border-text/40 text-center">{cat.name}</td>
                           <td className="text-center border-r border-b border-text/40">{cat.description}</td>
-                          <td className="text-center border-b border-text/40"><div className="bg-primary size-6 mx-auto cursor-pointer rounded" onClick={()=>{
+                          <td className="text-center border-b border-text/40">
+                          <div className="bg-primary size-6 mx-auto cursor-pointer rounded" onClick={()=>{
                             setEdtc({
                               name:cat.name,
                               description:cat.description,
